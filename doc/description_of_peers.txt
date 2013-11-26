@@ -1,3 +1,7 @@
+=============
+FROM THE SPEC
+=============
+
 HOST CACHE - Maintains a list of connected peers.
 * Supplies a list networked Super Peer IDs.
 * Registers a Peer on the network.
@@ -20,23 +24,34 @@ PEER
   * Follows the document-request-model to forward requests for files it does not have.
 
 
+==========
+BEHAVIOURS
+==========
+
+HOST CACHE BEHAVIOUR
+* Receive register; send register response
+
 ORDINARY PEER BEHAVIOUR
 * Send Connect
 * Send file list
-* Request file
-* Send file
+* Send search for file
+* Receive search response; send request for file.
+* Receive request for file; send file response.
+* Receive file response
 
 SUPER PEER BEHAVIOUR < ORDINARY PEER BEHAVIOUR
-* Receive connection
+* Receive connection; send connection response (succ/fail)
 * Receive file list
-* Receive search request
+* Receive search request; send search_response
 
 
-CONNECT (SUPER, ORDINARY)
+SEND REGISTER (SUPER, ORDINARY)
   if (myAgent.notRegistered()) {
     // send request_register message to host cache
     // wait for registration successful message
   }
+
+RECEIVE REGISTER RESPONSE
   until (myAgent.peerCount() >= myAgent.MIN_NEIGHBOURS) {
     if (myAgent.peerList().empty()) {
       // ask host cache for neighbours
@@ -59,22 +74,26 @@ SEND FILE LIST (ORDINARY)
     myAgent.setNeedsToSendFiles(false);
   }
 
-REQUEST FILE (SUPER, ORDINARY)
-  if (myAgent.isConnected()) {
+SEARCH FILE (SUPER, ORDINARY)
+  if (myAgent.isConnected() && myAgent.needsToSearch()) {
     // send search_file message to super peer
-    // wait for search_response message
-    if msg.isSuccess() {
-      // get ID of peer with file from payload
-      // send request_file message to peer
-      // wait for file_response message from peer
-      // (receiving the file response message simulated file transfer)
-      finished = true;
-    }
+    myAgent.setNeedsToSearch(false)
+
+RECEIVE SEARCH RESPONSE (SUPER, ORDINARY)
+  // receive search_response message
+  if (msg.isSuccess()) {
+    // get ID of peer with file from payload
+    // send request_file message to peer
+    myAgent.setNeedsToSearch(false);
   }
 
-SEND FILE (SUPER, ORDINARY)
+RECEIVE REQUEST FILE (SUPER, ORDINARY)
   // receive request_file message from peer
   // send file_response message to peer
+
+RECEIVE FILE RESPONSE (SUPER, ORDINARY)
+  // receive file_response message from peer
+  myAgent.setNeedsToSearch(false)
 
 RECEIVE CONNECTION (SUPER)
   // receive request_connection message
@@ -87,22 +106,19 @@ RECEIVE CONNECTION (SUPER)
 
 RECEIVE FILE LIST (SUPER)
   // receive files_list message
-  // store peer and the list of files
-  // 
+  // store peer and its list of files
+
+RECEIVE SEARCH REQUEST (SUPER)
+  // receive search_request message
+  // search file list for file
+  if (fileFound) {
+    // send peer search_response message
 
 
 
 
 
 
-
-
-S
-
-  * 
-
-SUPER PEER BEHAVIOUR
-* 
 
 
 PEER STATES
