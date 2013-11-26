@@ -26,6 +26,9 @@ public class HostCache {
     return peers;
   }
 
+  /**
+   * @return The count of peers registered in the host service.
+   */
   public int peerCount() {
     return peers.size();
   }

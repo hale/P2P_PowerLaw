@@ -1,0 +1,20 @@
+HOST CACHE - Maintains a list of connected peers.
+* Supplies a list networked Super Peer IDs.
+* Registers a Peer on the network.
+
+PEER
+* Joins the network by registering with the Host Cache.
+* Gives the Super Peer its list of shared files.
+* Requests the Super Peer for a shared file.
+* Simulates transferal of a file from/to another Peer.
+
+  NORMAL PEER
+  * Connects to one Super Peer from a list of IDs given by the Host Cache.
+  * Connects to another Super Peer in the event of disconnection.
+
+  SUPER PEER
+  * Can be connected to by other Peers.
+  * Connects to several Super Peers from a list of IDs given by the Host Cache.
+  * Maintains a list of shared files for each connected Normal Peer.
+  * Responds to requests by searching it's list of shared files.
+  * Follows the document-request-model to forward requests for files it does not have.
