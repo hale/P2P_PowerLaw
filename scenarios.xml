@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<Scenario name="2" description="Every peer wants one file which no-one has">
+  <Peers>
+    <Peer bandwith="13" count="5">
+      <SharedFiles>
+      </SharedFiles>
+      <WantedFiles>
+        <File name="Ubuntu.iso"></File>
+      </WantedFiles>
+    </Peer>
+    <Peer bandwidth="6" count="25">
+      <SharedFiles>
+      </SharedFiles>
+      <WantedFiles>
+        <File name="Ubuntu.iso"></File>
+      </WantedFiles>
+    </Peer>
+  </Peers>
+</Scenario>

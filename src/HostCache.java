@@ -1,13 +1,14 @@
+import jade.core.AID;
+import jade.core.Agent;
+
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
- * Created with IntelliJ IDEA.
- * User: philiphale
- * Date: 26/11/2013
- * Time: 11:30
- * To change this template use File | Settings | File Templates.
  */
-public class HostCache {
+public class HostCache extends Agent {
+
+  public static String NAME = "HOST_CACHE";
   private ArrayList<String> peers;
 
   public HostCache() {
