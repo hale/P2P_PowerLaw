@@ -4,12 +4,12 @@ HOST CACHE - Maintains a list of connected peers.
 
 PEER
 * Joins the network by registering with the Host Cache.
-* Gives the Super Peer its list of shared files.
 * Requests the Super Peer for a shared file.
 * Simulates transferal of a file from/to another Peer.
 
   NORMAL PEER
   * Connects to one Super Peer from a list of IDs given by the Host Cache.
+  * Gives the Super Peer its list of shared files.
   * Connects to another Super Peer in the event of disconnection.
 
   SUPER PEER
@@ -18,3 +18,121 @@ PEER
   * Maintains a list of shared files for each connected Normal Peer.
   * Responds to requests by searching it's list of shared files.
   * Follows the document-request-model to forward requests for files it does not have.
+
+
+ORDINARY PEER BEHAVIOUR
+* Send Connect
+* Send file list
+* Request file
+* Send file
+
+SUPER PEER BEHAVIOUR < ORDINARY PEER BEHAVIOUR
+* Receive connection
+* Receive file list
+* Receive search request
+
+
+CONNECT (SUPER, ORDINARY)
+  if (myAgent.notRegistered()) {
+    // send request_register message to host cache
+    // wait for registration successful message
+  }
+  until (myAgent.peerCount() >= myAgent.MIN_NEIGHBOURS) {
+    if (myAgent.peerList().empty()) {
+      // ask host cache for neighbours
+      // wait for neighbours message
+      // assign list of neighbours from message payload
+    }
+    // send request_connection to the next peer in the list
+    // wait for connection_response message from that peer
+    // if message fail, next()
+    // else_if message success, add peer to list of connected peers.
+  }
+  myAgent.setConnected(true);
+
+SEND FILE LIST (ORDINARY)
+  if (myAgent.peerCount() == 0) {
+    myAgent.setNeedsToSendFiles(true);
+  }
+  if (myAgent.isConnected() && myAgent.needsToSendFiles())
+    // send files_list message to connected peer.
+    myAgent.setNeedsToSendFiles(false);
+  }
+
+REQUEST FILE (SUPER, ORDINARY)
+  if (myAgent.isConnected()) {
+    // send search_file message to super peer
+    // wait for search_response message
+    if msg.isSuccess() {
+      // get ID of peer with file from payload
+      // send request_file message to peer
+      // wait for file_response message from peer
+      // (receiving the file response message simulated file transfer)
+      finished = true;
+    }
+  }
+
+SEND FILE (SUPER, ORDINARY)
+  // receive request_file message from peer
+  // send file_response message to peer
+
+RECEIVE CONNECTION (SUPER)
+  // receive request_connection message
+  if (myAgent.peerList().size() < myAgent.maxPeers()) {
+    // send connection_response success
+    // add peer to peerList()
+  else {
+    // send connection_response fail message
+  }
+
+RECEIVE FILE LIST (SUPER)
+  // receive files_list message
+  // store peer and the list of files
+  // 
+
+
+
+
+
+
+
+
+S
+
+  * 
+
+SUPER PEER BEHAVIOUR
+* 
+
+
+PEER STATES
+* Waiting for peers
+* Connecting to peers
+* Sending file list (ORDINARY)
+
+NORMAL PEER BEHAVIOURS
+
+REGISTER
+* Ask Host Cache to join network.
+
+ASK FOR PEERS
+* Ask Host Cache for Peers.
+* Mark as "Waiting for peers".
+
+RECEIVE SUPER PEERS BEHAVIOUR
+* Nothing unless "Waiting for peers".
+* Receive a message with list of Super Peers
+* Remember this list.
+* Mark as "Waiting for connection"
+
+CONNECT TO PEER BEHAVIOUR
+* 
+
+* Ask one of the Super Peers given earlier if we can connect. Mark as "Wait for connection request response"
+* Receive a ConnectionResponseFailure message. Remove that peer from the list. Mark as "Waiting for connection".
+* List of Super Peers is empty.  
+* Receive a ConnectionResponseSuccess message. Mark as "Waiting for peers"
+
+
+BEGIN -> Waiting for Connection -> Waiting for Connection Request Response -> 
+BEGIN -> Waiting for Connection -> Waiting for Connection Request Response -> Waiting for Connection -> 
