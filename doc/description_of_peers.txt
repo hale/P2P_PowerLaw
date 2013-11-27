@@ -82,6 +82,7 @@ SEND REQUEST NEIGHBOURS
     // send request_neighbours
   }
 
+
 RECEIVE NEIGHBOURS RESPONSE
     // receive neighbours_response message
     knownPeers.add(message.peers())

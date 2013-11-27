@@ -23,8 +23,13 @@ will occur during initialization of the system.
 
 The Host Cache is the entry-point for the network with two responsibilities.
 Firstly, to maintain a list of connected peers. Secondly, to supply peers with a
-list of Super Peers which they can attempt to connect to. These behaviours can
-be summarised by the following piece of pseudocode:
+list of Super Peers which they can attempt to connect to
+
+Theses behaviours can be summarised by the following piece of pseudocode. It
+will run when the Host Cache receives a message identified as `Neighbours
+Request'.
+
+\subsubsection{Receive `Neighbours Request`}
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
@@ -43,18 +48,22 @@ be summarised by the following piece of pseudocode:
 \caption{Receive `Neighbours Request'}
 \end{algorithm}
 
-This procedure will run when the Host Cache receives a message identified as
-"Receive Neighbours".
-
 \subsection{Peers}
 
 Here we will explain the different types of behaviours implemented by both Super
 and Ordinary Peers. Some of these behaviours are shared between all peers, but
 their effects will differ depending on whether the peer is Super or Ordinary.
 This is a design decision which compromises simplicity of the described
-behaviours with simplicity of the system as a whole.\footnote{The idea is analogous to the contradiction between two rules of software
-engineering: The Law of Demeter which aims to minimise method chaining, and the
-idea of class cohesion which gives an object well-bounded behaviour.}
+behaviours with simplicity of the system as a whole.\footnote{The idea is
+analogous to the contradiction between two rules of software engineering: The
+Law of Demeter which aims to minimise method chaining, and the idea of class
+cohesion which gives an object well-bounded behaviour.}
+
+This behaviour is responsible for maintaining a list of Super Peers that the
+peer can connect to.  One consequence of this design is that the peers will
+always have a list of potential peers to connect to, even when they already have
+their maximum number of connected peers. Additionally, $knownPeers \cap
+connectedPeers \neq \emptyset$.
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
@@ -62,11 +71,66 @@ idea of class cohesion which gives an object well-bounded behaviour.}
   \KwData{$knownPeers$: A list of neighbours known but not connected to the
   peer}
   \KwData{$hostCache$: Address of the Host Cache}
-  \If{$knownPeers$ is empty}{
+  \If{$knownPeers = \emptyset$}{
     \SendFn{hostCache, `Neighbours Request'}
   }
 \caption{Send `Neighbours Request'}
 \end{algorithm}
+
+\begin{algorithm}[H]
+  \SetKwInOut{Input}{input}
+  \Input{Message Name: `Neighbours Response' \\ Neighbours: $peers$ \\ Message
+  Sender: $sender$}
+  \KwData{$knownPeers$: A list of neighbours known but not connected to the
+  peer}
+  \KwData{$hostCache$: Address of the Host Cache}
+  \If{$sender = hostCache$}{
+    $knownPeers \cap  peers$\;
+  }
+\caption{Receive `Neighbours Response'}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \SetKwInOut{Input}{input}
+  \SetKwFunction{SendFn}{send}
+  \SetKwFunction{LenFn}{length}
+  \KwData{$knownPeers$: A list of neighbours known but not connected to the
+  peer}
+  \KwData{$connectPendingPeers$: Peers that have been sent a connection request}
+  \KwData{$minPeers$: Required number of connected peers.}
+  \If{$knownPeers \neq \emptyset $ {and} \LenFn{$connectPendingPeers \cap
+  connectedPeers$}$ < minPeers$}{
+    \SendFn{$ \exists p \in knownPeers$, `Connect Request'}
+  }
+\caption{Send `Connect Request'}
+\end{algorithm}
+
+
+
+
+
+
+
+
+
+\subsection{Message Definitions}
+
+\begin{itemize}
+  \item{Neighbours Request}
+  \item{Neighbours Response}
+  \item{Search Request}
+  \item{Search Response}
+  \item{File Request}
+  \item{File Response}
+  \item{File List}
+  \item{Connect Request}
+  \item{Connect Response}
+\end{itemize}
+
+
+
+
+
 
 
 
