@@ -1,6 +1,10 @@
 \documentclass[a4paper,oneside]{article}
 
-\usepackage[linesnumbered,ruled,vlined,dotocloa]{algorithm2e}
+\usepackage[linesnumbered,vlined,boxed]{algorithm2e}
+\SetAlgorithmName{Behaviour}{behaviour}{List of Behaviours}
+
+\usepackage{minitoc}
+\setcounter{secttocdepth}{5}
 
 \author{Philip Hale}
 \title{CS3017 Assessment: A Power-Law Peer-to-Peer System}
@@ -8,6 +12,9 @@
 \begin{document}
 
 \maketitle
+
+\dosecttoc
+\faketableofcontents
 
 \include{peer_behaviour}
 

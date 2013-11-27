@@ -34,7 +34,7 @@ HOST CACHE
 ALL PEERS
 * Send request neighbours
 * Receive neighbours response
-* Receive register response
+* Send connect request
 * Send search for file
 * Receive search response; send request for file.
 * Receive request for file; send file response.
@@ -44,7 +44,7 @@ ORDINARY PEERS
 * Send file list
 
 SUPER PEERS
-* Receive connection; send connection response (succ/fail)
+* Receive connect request; send connection response (succ/fail)
 * Receive file list
 * Receive search request; send search_response
 * Receive search response, send search response
@@ -73,7 +73,8 @@ SEND FILE LIST (ORDINARY)
 
 RECEIVE SEARCH RESULT
   // receive search_response message
-  needsToSearch = false
+  // remove file from wanted files list
+  // add file to shared file list
 
 == ALL PEERS ==
 
@@ -81,7 +82,6 @@ SEND REQUEST NEIGHBOURS
   if (knownPeers.empty()) {
     // send request_neighbours
   }
-
 
 RECEIVE NEIGHBOURS RESPONSE
     // receive neighbours_response message
@@ -102,10 +102,9 @@ RECEIVE CONNECT RESPONSE
     connectedPeers.add(peer)
   }
 
-SEARCH FILE
-  if (!connectedPeers.empty() && needsToSearch) {
-    // send search_file message to connected peer
-    needsToSearch = false
+SEND FILE SEARCH
+  if (!connectedPeers.empty() && !wantedFiles.empty()) {
+    // send search_file message to connected peer, for any wanted file
 
 RECEIVE REQUEST FILE
   // receive request_file message from peer
@@ -139,7 +138,7 @@ RECEIVE SEARCH REQUEST
     // document routing?
   }
 
-RECEIVE SEARCH RESULT
+RECEIVE SEARCH RESPONSE
   // receive search_response message
   peer = msg.requesters.pop()
   if (peer == null) {
