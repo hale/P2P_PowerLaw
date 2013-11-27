@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.11.13)  27 NOV 2013 23:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.11.13)  27 NOV 2013 23:53
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -215,7 +215,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )))
-(./report.aux (./peer_behaviour.aux))
+(./report.aux (./peer_behaviour.aux) (./protocols.aux))
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -301,29 +301,37 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 377.
 ) [8]
-Package epstopdf Info: Source file: <protocols_auml.eps>
-(epstopdf)                    date: 2013-11-27 23:00:56
-(epstopdf)                    size: 13144 bytes
-(epstopdf)             Output file: <protocols_auml-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-11-27 23:00:55
-(epstopdf)                    size: 6025 bytes
-(epstopdf)             Command: <epstopdf --outfile=protocols_auml-eps-converte
-d-to.pdf protocols_auml.eps>
-(epstopdf)             \includegraphics on input line 26.
-runsystem(epstopdf --outfile=protocols_auml-eps-converted-to.pdf protocols_auml
-.eps)...executed.
+\openout2 = `protocols.aux'.
 
-Package epstopdf Info: Result file: <protocols_auml-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-11-27 23:00:58
-(epstopdf)                    size: 6025 bytes.
 
-<protocols_auml-eps-converted-to.pdf, id=43, 325.215pt x 90.3375pt>
-File: protocols_auml-eps-converted-to.pdf Graphic file (type pdf)
+(./protocols.tex
+Package epstopdf Info: Source file: <protocol_connect.eps>
+(epstopdf)                    date: 2013-11-27 23:52:58
+(epstopdf)                    size: 15660 bytes
+(epstopdf)             Output file: <protocol_connect-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-11-27 23:53:05
+(epstopdf)                    size: 6302 bytes
+(epstopdf)             Command: <epstopdf --outfile=protocol_connect-eps-conver
+ted-to.pdf protocol_connect.eps>
+(epstopdf)             \includegraphics on input line 15.
+Package epstopdf Info: Output file is already uptodate.
 
-<use protocols_auml-eps-converted-to.pdf>
-Package pdftex.def Info: protocols_auml-eps-converted-to.pdf used on input line
- 26.
-(pdftex.def)             Requested size: 325.2142pt x 90.33727pt.
+<protocol_connect-eps-converted-to.pdf, id=43, 426.59375pt x 225.84375pt>
+File: protocol_connect-eps-converted-to.pdf Graphic file (type pdf)
+
+<use protocol_connect-eps-converted-to.pdf>
+Package pdftex.def Info: protocol_connect-eps-converted-to.pdf used on input li
+ne 15.
+(pdftex.def)             Requested size: 426.5927pt x 225.84319pt.
+
+Overfull \hbox (81.5927pt too wide) in paragraph at lines 15--16
+[] 
+ []
+
+) [9
+
+
+ <./protocol_connect-eps-converted-to.pdf>]
 Package minitoc Info: I0009
 (minitoc)             Listing minitoc auxiliary files. 
 (minitoc)             Creating the report.maf file.
@@ -332,34 +340,33 @@ Package minitoc Info: I0009
 Package minitoc(hints) Info: I0019
 (minitoc(hints))             No hints have been written 
 (minitoc(hints))             in the report.log file..
- [9
-
- <./protocols_auml-eps-converted-to.pdf>] (./report.aux (./peer_behaviour.aux))
- ) 
+ (./report.aux
+(./peer_behaviour.aux) (./protocols.aux)) ) 
 Here is how much of TeX's memory you used:
- 4574 strings out of 493308
- 63891 string characters out of 6137815
- 163678 words of memory out of 5000000
- 7789 multiletter control sequences out of 15000+600000
+ 4582 strings out of 493308
+ 64006 string characters out of 6137815
+ 164037 words of memory out of 5000000
+ 7790 multiletter control sequences out of 15000+600000
  9939 words of font info for 35 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  42i,15n,34p,300b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
-/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
-/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
-xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
-ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
-2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/201
-3/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (9 pages, 204569 bytes).
+</usr/local/texlive/2013/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2013/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2013/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmtt10.pfb>
+Output written on report.pdf (9 pages, 206118 bytes).
 PDF statistics:
  100 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream

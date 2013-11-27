@@ -1,0 +1,100 @@
+#!/usr/local/bin/wish
+set epsfile "protocol_connect.eps"
+
+
+# code from http://wiki.tcl.tk/1416
+proc roundRect { w x0 y0 x3 y3 radius args } {
+    set r [winfo pixels $w $radius]
+    set d [expr { 2 * $r }]
+
+    # Make sure that the radius of the curve is less than 3/8
+    # size of the box!
+
+    set maxr 0.75
+
+    if { $d > $maxr * ( $x3 - $x0 ) } {
+        set d [expr { $maxr * ( $x3 - $x0 ) }]
+    }
+    if { $d > $maxr * ( $y3 - $y0 ) } {
+        set d [expr { $maxr * ( $y3 - $y0 ) }]
+    }
+
+    set x1 [expr { $x0 + $d }]
+    set x2 [expr { $x3 - $d }]
+    set y1 [expr { $y0 + $d }]
+    set y2 [expr { $y3 - $d }]
+
+    set cmd [list $w create polygon]
+    lappend cmd $x0 $y0
+    lappend cmd $x1 $y0
+    lappend cmd $x2 $y0
+    lappend cmd $x3 $y0
+    lappend cmd $x3 $y1
+    lappend cmd $x3 $y2
+    lappend cmd $x3 $y3
+    lappend cmd $x2 $y3
+    lappend cmd $x1 $y3
+    lappend cmd $x0 $y3
+    lappend cmd $x0 $y2
+    lappend cmd $x0 $y1
+    lappend cmd -smooth 1
+    return [eval $cmd $args]
+ }
+canvas .c
+frame .f
+button .f.quit -text "Quit" -command finishup
+pack .f -side top
+pack .f.quit -fill x -side left
+pack .c -side bottom -fill both -expand 1
+focus .c
+proc finishup {} {
+        global epsfile
+        set bb [.c bbox all]
+        if {[llength $bb] == 0} return
+        set x1 [lindex $bb 0]
+        set y1 [lindex $bb 1]
+        set w [expr [lindex $bb 2]-$x1]
+        set h [expr [lindex $bb 3]-$y1]
+        .c postscript -file $epsfile  -x $x1 -y $y1 -height $h -width $w
+	exit
+}
+# agent HC (HCache )
+.c create rectangle 65 5 145 25
+.c create text 105 15 -text "HCache "
+# agent P (Peer )
+.c create rectangle 185 5 265 25
+.c create text 225 15 -text "Peer "
+# agent SP (SPeer )
+.c create rectangle 305 5 385 25
+.c create text 345 15 -text "SPeer "
+# message P HC Req. Neighbours
+.c create line 225 50 105 50 -arrow last
+.c create text 165 42 -text "Req. Neighbours"
+# message HC P Neighbours
+.c create line 105 70 225 70 -arrow last
+.c create text 165 62 -text "Neighbours"
+# message P SP Req. Connect
+.c create line 225 95 345 95 -arrow last
+.c create text 285 87 -text "Req. Connect"
+# message SP P Yes
+.c create line 345 115 225 115 -arrow last
+.c create text 285 107 -text "Yes"
+.c create rectangle 5 70 425 135 -width 2
+.c create polygon 5 70 70 70 70 83 63 90 5 90 -fill {} -outline black -width 2
+.c create text 37.5 80 -text "success"
+# message P SP Req. Connect
+.c create line 225 180 345 180 -arrow last
+.c create text 285 172 -text "Req. Connect"
+# message SP P No
+.c create line 345 200 225 200 -arrow last
+.c create text 285 192 -text "No"
+.c create rectangle 5 155 425 220 -width 2
+.c create polygon 5 155 70 155 70 168 63 175 5 175 -fill {} -outline black -width 2
+.c create text 37.5 165 -text "failure"
+
+# Create life lines
+.c create line 105 25 105 225 
+.c create line 345 25 345 225 
+.c create line 225 25 225 225 
+# uncomment for automatic printout and quit
+finishup

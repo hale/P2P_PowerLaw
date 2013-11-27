@@ -1,8 +1,0 @@
-agent HC HCache
-agent OP OPeer
-agent SP SPeer
-message OP HC Req. Neighbours
-message HC OP Send Neighbours
-backup
-message OP SP Req. Connect
-

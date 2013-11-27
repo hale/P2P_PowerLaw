@@ -1,0 +1,16 @@
+# Protocol for joining the network
+agent HC HCache
+agent P Peer
+agent SP SPeer
+message P HC Req. Neighbours
+message HC P  Neighbours
+backup
+box success
+  message P SP Req. Connect
+  message SP P  Yes
+end success
+box failure
+  message P SP Req. Connect
+  message SP P No
+end failure
+
