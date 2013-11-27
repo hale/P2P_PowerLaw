@@ -28,91 +28,126 @@ PEER
 BEHAVIOURS
 ==========
 
-HOST CACHE BEHAVIOUR
-* Receive register; send register response
+HOST CACHE
+* Receive request neighbours; send neighbours response
 
-ORDINARY PEER BEHAVIOUR
-* Send Connect
-* Send file list
+ALL PEERS
+* Send request neighbours
+* Receive neighbours response
+* Receive register response
 * Send search for file
 * Receive search response; send request for file.
 * Receive request for file; send file response.
 * Receive file response
 
-SUPER PEER BEHAVIOUR < ORDINARY PEER BEHAVIOUR
+ORDINARY PEERS
+* Send file list
+
+SUPER PEERS
 * Receive connection; send connection response (succ/fail)
 * Receive file list
 * Receive search request; send search_response
+* Receive search response, send search response
+* Receive search request; send search request
 
+== HOST CACHE ==
 
-SEND REGISTER (SUPER, ORDINARY)
-  if (myAgent.notRegistered()) {
-    // send request_register message to host cache
-    // wait for registration successful message
+RECEIVE NEIGHBOURS REQUEST (HOST_CACHE)
+  // receive neighbours_request
+  if_not peerList.contains(peer) {
+    // decide if peer is ordinary or super
+    addPeer(peer, isSuper);
   }
+  // send neighbours_response with list of super peers
 
-RECEIVE REGISTER RESPONSE
-  until (myAgent.peerCount() >= myAgent.MIN_NEIGHBOURS) {
-    if (myAgent.peerList().empty()) {
-      // ask host cache for neighbours
-      // wait for neighbours message
-      // assign list of neighbours from message payload
-    }
-    // send request_connection to the next peer in the list
-    // wait for connection_response message from that peer
-    // if message fail, next()
-    // else_if message success, add peer to list of connected peers.
-  }
-  myAgent.setConnected(true);
+== ORDINARY PEERS ==
 
 SEND FILE LIST (ORDINARY)
-  if (myAgent.peerCount() == 0) {
-    myAgent.setNeedsToSendFiles(true);
+  if_not (hasConnectedPeer) {
+    setNeedsToSendFiles(true);
   }
-  if (myAgent.isConnected() && myAgent.needsToSendFiles())
+  if (needsToSendFiles && hasConnectedPeer) 
     // send files_list message to connected peer.
-    myAgent.setNeedsToSendFiles(false);
+    setNeedsToSendFiles(false);
   }
 
-SEARCH FILE (SUPER, ORDINARY)
-  if (myAgent.isConnected() && myAgent.needsToSearch()) {
-    // send search_file message to super peer
-    myAgent.setNeedsToSearch(false)
-
-RECEIVE SEARCH RESPONSE (SUPER, ORDINARY)
+RECEIVE SEARCH RESULT
   // receive search_response message
-  if (msg.isSuccess()) {
-    // get ID of peer with file from payload
-    // send request_file message to peer
-    myAgent.setNeedsToSearch(false);
+  needsToSearch = false
+
+== ALL PEERS ==
+
+SEND REQUEST NEIGHBOURS
+  if (knownPeers.empty()) {
+    // send request_neighbours
   }
 
-RECEIVE REQUEST FILE (SUPER, ORDINARY)
+RECEIVE NEIGHBOURS RESPONSE
+    // receive neighbours_response message
+    knownPeers.add(message.peers())
+    }
+
+SEND CONNECT REQUEST
+  if (!knownPeers.empty() && (connectedPeers + connectPendingPeers).size < MIN_PEERS) {
+    peer = (connectedPeers - connectPendingPeers).next()
+    // send request_connection to peer
+    connectPendingPeers.add(peer)
+  }
+
+RECEIVE CONNECT RESPONSE
+  // receive connection_response message
+  connectPendingPeers.remove(peer)
+  if (connectSucceed) {
+    connectedPeers.add(peer)
+  }
+
+SEARCH FILE
+  if (!connectedPeers.empty() && needsToSearch) {
+    // send search_file message to connected peer
+    needsToSearch = false
+
+RECEIVE REQUEST FILE
   // receive request_file message from peer
   // send file_response message to peer
 
-RECEIVE FILE RESPONSE (SUPER, ORDINARY)
+RECEIVE FILE
   // receive file_response message from peer
-  myAgent.setNeedsToSearch(false)
+  setNeedsToSearch(false)
 
-RECEIVE CONNECTION (SUPER)
+== SUPER PEERS ==
+
+RECEIVE CONNECTION
   // receive request_connection message
-  if (myAgent.peerList().size() < myAgent.maxPeers()) {
-    // send connection_response success
-    // add peer to peerList()
-  else {
-    // send connection_response fail message
+  if (peerList.size() < MAX_PEERS) {
+    peerList.add(peer)
+    // send connection_response message
   }
 
-RECEIVE FILE LIST (SUPER)
+RECEIVE FILE LIST
   // receive files_list message
   // store peer and its list of files
 
-RECEIVE SEARCH REQUEST (SUPER)
+RECEIVE SEARCH REQUEST
   // receive search_request message
+  msg.addRequester(msg.sender())
   // search file list for file
   if (fileFound) {
-    // send peer search_response message
+    // send msg.sender() search_response message
+  } else {
+    // send search_request to each connected super peer
+    // document routing?
+  }
+
+RECEIVE SEARCH RESULT
+  // receive search_response message
+  peer = msg.requesters.pop()
+  if (peer == null) {
+    needsToSearch = false
+  else {
+    // send request_file message to peer
+  }
+
+
 
 
 

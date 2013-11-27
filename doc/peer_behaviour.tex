@@ -1,0 +1,72 @@
+\section{Peer Behaviour}
+
+The system consists of three types of agent: Super Peers, Ordinary Peers and a
+single Host Cache.  The Host Cache is implemented as an agent in order to unify
+the connection behaviour between elements of the system.  In other words, peers
+can connect to the Host Cache using the same mechanisms that are required to
+connect to each other.
+
+It can be helpful to think of the identity of an agent as defined by the kinds
+of behaviours it can support. What we mean here by a behaviour is the ability to
+respond in some way to a particular situation or event.  Some behaviours
+continually monitor the state of the agent in the network, whereas others
+are triggered by incoming messages from other agents.
+
+The process of specifying and identifying different messages is explained in
+another section.
+
+Super Peers and Ordinary Peers implement a common set of behaviours. For
+the sake of simplicity, the designation of peers into Super and Ordinary sets
+will occur during initialization of the system.
+
+\subsection{Host Cache}
+
+The Host Cache is the entry-point for the network with two responsibilities.
+Firstly, to maintain a list of connected peers. Secondly, to supply peers with a
+list of Super Peers which they can attempt to connect to. These behaviours can
+be summarised by the following piece of pseudocode:
+
+\begin{algorithm}[H]
+  \SetKwInOut{Input}{input}
+  \SetKwFunction{ReplyFn}{reply}
+  \Input{Message Name: `Neighbours Request' \\ Message Sender: $peer$}
+  \KwData{$peerList$: A hash of peers with value true if peer is super}
+  \If{peer list doesn't contain $peer$}{
+    add $peer$ to $peerList$\;
+  }
+  \For{$peer \in peerList$}{
+    \If{$peerList[peer] = true$}{
+      $neighbours \leftarrow peer$\;
+    }
+  }
+  \ReplyFn{`Neighbours Response', neighbours}
+\caption{Receive `Neighbours Request'}
+\end{algorithm}
+
+This procedure will run when the Host Cache receives a message identified as
+"Receive Neighbours".
+
+\subsection{Peers}
+
+Here we will explain the different types of behaviours implemented by both Super
+and Ordinary Peers. Some of these behaviours are shared between all peers, but
+their effects will differ depending on whether the peer is Super or Ordinary.
+This is a design decision which compromises simplicity of the described
+behaviours with simplicity of the system as a whole.\footnote{The idea is analogous to the contradiction between two rules of software
+engineering: The Law of Demeter which aims to minimise method chaining, and the
+idea of class cohesion which gives an object well-bounded behaviour.}
+
+\begin{algorithm}[H]
+  \SetKwInOut{Input}{input}
+  \SetKwFunction{SendFn}{send}
+  \KwData{$knownPeers$: A list of neighbours known but not connected to the
+  peer}
+  \KwData{$hostCache$: Address of the Host Cache}
+  \If{$knownPeers$ is empty}{
+    \SendFn{hostCache, `Neighbours Request'}
+  }
+\caption{Send `Neighbours Request'}
+\end{algorithm}
+
+
+
