@@ -9,6 +9,10 @@ public class Message implements Serializable {
   private Object payload;
   private boolean success;
 
+  public Message(MessageType type) {
+    this.type = type;
+  }
+
   public Message(MessageType type, boolean success) {
     this.type = type;
     this.success = success;

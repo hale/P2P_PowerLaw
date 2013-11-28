@@ -17,9 +17,9 @@
 \contentsline {subsubsection}{\numberline {1.4.2}Receive `File list'}{6}
 \contentsline {subsubsection}{\numberline {1.4.3}Receive `Search Response'}{7}
 \contentsline {subsubsection}{\numberline {1.4.4}Receive `Search Request'}{7}
-\contentsline {section}{\numberline {2}Message Definitions}{8}
-\contentsline {section}{\numberline {3}Protocols}{9}
-\contentsline {subsection}{\numberline {3.1}Joining the network}{9}
-\contentsline {subsection}{\numberline {3.2}Send file-list}{9}
-\contentsline {subsection}{\numberline {3.3}Searching for Files}{10}
-\contentsline {subsection}{\numberline {3.4}Acquiring Files}{10}
+\contentsline {section}{\numberline {2}Protocols}{9}
+\contentsline {subsection}{\numberline {2.1}Joining the network}{9}
+\contentsline {subsection}{\numberline {2.2}Send file-list}{9}
+\contentsline {subsection}{\numberline {2.3}Searching for Files}{10}
+\contentsline {subsection}{\numberline {2.4}Acquiring Files}{10}
+\contentsline {section}{\numberline {3}Message Definitions}{11}

@@ -5,6 +5,7 @@
 
 \usepackage{minitoc}
 \setcounter{secttocdepth}{5}
+\setcounter{tocdepth}{1}
 
 \usepackage{graphicx}
 \usepackage{epstopdf}
@@ -17,9 +18,10 @@
 \maketitle
 
 \dosecttoc
-\faketableofcontents
+\tableofcontents
 
 \include{peer_behaviour}
 \include{protocols}
+\include{messages}
 
 \end{document}
