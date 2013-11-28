@@ -1,13 +1,16 @@
+package agents;
+
+import behaviours.ReceiveNeighboursRequestBehaviour;
 import jade.content.AgentAction;
-import jade.content.Concept;
 import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
-import jade.content.onto.OntologyException;
 import jade.content.onto.basic.Action;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
+import ontology.P2POntology;
+import ontology.P2PVocabulary;
 
 import java.util.ArrayList;
 import java.util.HashMap;

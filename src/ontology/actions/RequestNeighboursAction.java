@@ -1,7 +1,9 @@
+package ontology.actions;
+
 import jade.content.AgentAction;
 
 /**
- * Peers ask the Host Cache for Super Peer neighbours to connect to.
+ * Peers ask the Host Cache for Super Peers to connect to.
  */
 public class RequestNeighboursAction implements AgentAction {
 

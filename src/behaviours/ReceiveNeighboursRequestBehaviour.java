@@ -1,7 +1,10 @@
+package behaviours;
+
+import ontology.actions.RequestNeighboursAction;
+import agents.HostCache;
 import jade.content.Concept;
 import jade.content.ContentElement;
 import jade.content.lang.Codec;
-import jade.content.onto.Ontology;
 import jade.content.onto.OntologyException;
 import jade.content.onto.basic.Action;
 import jade.core.AID;
@@ -10,8 +13,6 @@ import jade.core.behaviours.SimpleBehaviour;
 //import jade.domain.introspection.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.ACLMessage;
-
-import java.util.ArrayList;
 
 /**
  * The Host Cache continually waits for a REQUEST_NEIGHBOURS message.
@@ -23,7 +24,7 @@ public class ReceiveNeighboursRequestBehaviour extends SimpleBehaviour {
   private boolean finished = false;
   private HostCache hostCache = (HostCache) myAgent;
 
-  protected ReceiveNeighboursRequestBehaviour(Agent a) {
+  public ReceiveNeighboursRequestBehaviour(Agent a) {
     super(a);
   }
 

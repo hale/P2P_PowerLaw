@@ -1,3 +1,5 @@
+package ontology;
+
 /**
  * Part of the P2P Ontology
  *

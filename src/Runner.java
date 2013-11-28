@@ -1,3 +1,4 @@
+import agents.HostCache;
 import jade.core.Agent;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
@@ -30,8 +31,8 @@ public class Runner extends Agent {
 
       for (int i = 0; i < peerCount; i++) {
 
-        AgentController peerController = container.createNewAgent( Peer.NAME + i, Peer.class.getName(), peerArgs);
-        peerController.start();
+//        AgentController peerController = container.createNewAgent( Peer.NAME + i, Peer.class.getName(), peerArgs);
+//        peerController.start();
       }
 
     } catch (StaleProxyException e) {
