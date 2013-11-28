@@ -20,3 +20,6 @@
 \contentsline {section}{\numberline {2}Message Definitions}{8}
 \contentsline {section}{\numberline {3}Protocols}{9}
 \contentsline {subsection}{\numberline {3.1}Joining the network}{9}
+\contentsline {subsection}{\numberline {3.2}Send file-list}{9}
+\contentsline {subsection}{\numberline {3.3}Searching for Files}{10}
+\contentsline {subsection}{\numberline {3.4}Acquiring Files}{10}

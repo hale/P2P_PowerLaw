@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.11.13)  27 NOV 2013 23:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.11.13)  28 NOV 2013 16:01
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -283,9 +283,9 @@ Package minitoc Info: I0033
 \openout3 = `report.mtc'.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 32.
+(Font)              <9> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 32.
+(Font)              <5> on input line 4.
  (./report.stc1) [2
 
 ]
@@ -305,33 +305,124 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 
 
 (./protocols.tex
+\openout3 = `report.mtc'.
+
+\openout3 = `report.mtc'.
+
+ (./report.stc3)
 Package epstopdf Info: Source file: <protocol_connect.eps>
-(epstopdf)                    date: 2013-11-27 23:52:58
-(epstopdf)                    size: 15660 bytes
+(epstopdf)                    date: 2013-11-28 16:01:53
+(epstopdf)                    size: 15665 bytes
 (epstopdf)             Output file: <protocol_connect-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-11-27 23:53:05
-(epstopdf)                    size: 6302 bytes
+(epstopdf)                    date: 2013-11-28 16:01:52
+(epstopdf)                    size: 0 bytes
 (epstopdf)             Command: <epstopdf --outfile=protocol_connect-eps-conver
 ted-to.pdf protocol_connect.eps>
-(epstopdf)             \includegraphics on input line 15.
-Package epstopdf Info: Output file is already uptodate.
+(epstopdf)             \includegraphics on input line 20.
+runsystem(epstopdf --outfile=protocol_connect-eps-converted-to.pdf protocol_con
+nect.eps)...executed.
+
+Package epstopdf Info: Result file: <protocol_connect-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-11-28 16:01:54
+(epstopdf)                    size: 6536 bytes.
 
 <protocol_connect-eps-converted-to.pdf, id=43, 426.59375pt x 225.84375pt>
 File: protocol_connect-eps-converted-to.pdf Graphic file (type pdf)
 
 <use protocol_connect-eps-converted-to.pdf>
 Package pdftex.def Info: protocol_connect-eps-converted-to.pdf used on input li
-ne 15.
+ne 20.
 (pdftex.def)             Requested size: 426.5927pt x 225.84319pt.
 
-Overfull \hbox (81.5927pt too wide) in paragraph at lines 15--16
-[] 
+Overfull \hbox (96.5927pt too wide) in paragraph at lines 20--21
+[][] 
  []
 
-) [9
+Package epstopdf Info: Source file: <protocol_send_file_list.eps>
+(epstopdf)                    date: 2013-11-28 16:01:53
+(epstopdf)                    size: 11715 bytes
+(epstopdf)             Output file: <protocol_send_file_list-eps-converted-to.p
+df>
+(epstopdf)                    date: 2013-11-28 15:59:06
+(epstopdf)                    size: 5036 bytes
+(epstopdf)             Command: <epstopdf --outfile=protocol_send_file_list-eps
+-converted-to.pdf protocol_send_file_list.eps>
+(epstopdf)             \includegraphics on input line 26.
+runsystem(epstopdf --outfile=protocol_send_file_list-eps-converted-to.pdf proto
+col_send_file_list.eps)...executed.
+
+Package epstopdf Info: Result file: <protocol_send_file_list-eps-converted-to.p
+df>
+(epstopdf)                    date: 2013-11-28 16:01:54
+(epstopdf)                    size: 5036 bytes.
+<protocol_send_file_list-eps-converted-to.pdf, id=44, 204.765pt x 70.2625pt>
+File: protocol_send_file_list-eps-converted-to.pdf Graphic file (type pdf)
+
+<use protocol_send_file_list-eps-converted-to.pdf>
+Package pdftex.def Info: protocol_send_file_list-eps-converted-to.pdf used on i
+nput line 26.
+(pdftex.def)             Requested size: 204.76448pt x 70.26231pt.
+ [9
 
 
- <./protocol_connect-eps-converted-to.pdf>]
+ <./protocol_connect-eps-converted-to.pdf> <./protocol_send_file_list-eps-conve
+rted-to.pdf>]
+Package epstopdf Info: Source file: <protocol_file_search.eps>
+(epstopdf)                    date: 2013-11-28 16:01:53
+(epstopdf)                    size: 15738 bytes
+(epstopdf)             Output file: <protocol_file_search-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2013-11-28 15:59:06
+(epstopdf)                    size: 5628 bytes
+(epstopdf)             Command: <epstopdf --outfile=protocol_file_search-eps-co
+nverted-to.pdf protocol_file_search.eps>
+(epstopdf)             \includegraphics on input line 35.
+runsystem(epstopdf --outfile=protocol_file_search-eps-converted-to.pdf protocol
+_file_search.eps)...executed.
+
+Package epstopdf Info: Result file: <protocol_file_search-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2013-11-28 16:01:54
+(epstopdf)                    size: 5628 bytes.
+
+<protocol_file_search-eps-converted-to.pdf, id=58, 426.59375pt x 255.95625pt>
+File: protocol_file_search-eps-converted-to.pdf Graphic file (type pdf)
+
+<use protocol_file_search-eps-converted-to.pdf>
+Package pdftex.def Info: protocol_file_search-eps-converted-to.pdf used on inpu
+t line 35.
+(pdftex.def)             Requested size: 426.5927pt x 255.95561pt.
+
+Overfull \hbox (96.5927pt too wide) in paragraph at lines 35--36
+[][] 
+ []
+
+Package epstopdf Info: Source file: <protocol_acquire_file.eps>
+(epstopdf)                    date: 2013-11-28 16:01:53
+(epstopdf)                    size: 12163 bytes
+(epstopdf)             Output file: <protocol_acquire_file-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2013-11-28 15:59:06
+(epstopdf)                    size: 4487 bytes
+(epstopdf)             Command: <epstopdf --outfile=protocol_acquire_file-eps-c
+onverted-to.pdf protocol_acquire_file.eps>
+(epstopdf)             \includegraphics on input line 42.
+runsystem(epstopdf --outfile=protocol_acquire_file-eps-converted-to.pdf protoco
+l_acquire_file.eps)...executed.
+
+Package epstopdf Info: Result file: <protocol_acquire_file-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2013-11-28 16:01:55
+(epstopdf)                    size: 4487 bytes.
+<protocol_acquire_file-eps-converted-to.pdf, id=59, 204.765pt x 90.3375pt>
+File: protocol_acquire_file-eps-converted-to.pdf Graphic file (type pdf)
+
+<use protocol_acquire_file-eps-converted-to.pdf>
+Package pdftex.def Info: protocol_acquire_file-eps-converted-to.pdf used on inp
+ut line 42.
+(pdftex.def)             Requested size: 204.76448pt x 90.33727pt.
+) [10 <./protocol_file_search-eps-converted-to.pdf> <./protocol_acquire_file-ep
+s-converted-to.pdf>]
 Package minitoc Info: I0009
 (minitoc)             Listing minitoc auxiliary files. 
 (minitoc)             Creating the report.maf file.
@@ -340,36 +431,36 @@ Package minitoc Info: I0009
 Package minitoc(hints) Info: I0019
 (minitoc(hints))             No hints have been written 
 (minitoc(hints))             in the report.log file..
- (./report.aux
-(./peer_behaviour.aux) (./protocols.aux)) ) 
+
+(./report.aux (./peer_behaviour.aux) (./protocols.aux)) ) 
 Here is how much of TeX's memory you used:
- 4582 strings out of 493308
- 64006 string characters out of 6137815
+ 4599 strings out of 493308
+ 64671 string characters out of 6137815
  164037 words of memory out of 5000000
- 7790 multiletter control sequences out of 15000+600000
+ 7802 multiletter control sequences out of 15000+600000
  9939 words of font info for 35 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  42i,15n,34p,300b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2013/texmf-dist/font
-s/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2013/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmtt10.pfb>
-Output written on report.pdf (9 pages, 206118 bytes).
+</usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/201
+3/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2013/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2013/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2013/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2013/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2013/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2013/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (10 pages, 217320 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 121 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

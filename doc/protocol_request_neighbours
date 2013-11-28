@@ -1,0 +1,9 @@
+# Protocol for requesting neighbours
+agent HC HCache
+agent OP OPeer
+agent SP SPeer
+message OP HC Req. Neighbours
+message HC OP Send SPeers
+backup
+message OP SP Req. Connect
+

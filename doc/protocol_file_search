@@ -1,0 +1,22 @@
+# Protocol for searching for files
+agent P Peer
+agent SP SPeer
+agent OSP SPeer
+#agent OOSP SPeer
+
+message P SP Search file
+box Found
+  message SP P File Loc.
+end Found
+box Forward
+  message SP OSP Search file
+  box Found
+    message OSP SP File loc.
+    message SP P File loc.
+  end Found
+  #box Forward
+    #message OSP OOSP Search file
+  #end Forward
+end Forward
+
+

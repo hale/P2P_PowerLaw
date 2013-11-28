@@ -7,10 +7,10 @@ message HC P  Neighbours
 backup
 box success
   message P SP Req. Connect
-  message SP P  Yes
+  message SP P  Accept
 end success
 box failure
   message P SP Req. Connect
-  message SP P No
+  message SP P Deny
 end failure
 

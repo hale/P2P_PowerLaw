@@ -1,0 +1,6 @@
+# Protocol for transferring a file between peers.
+agent P Peer
+agent OP Peer
+
+message P OP Req. File
+message OP P File
