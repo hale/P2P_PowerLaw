@@ -30,6 +30,10 @@ table of some sort in order to identify the file from the file name.
 Assumptions have been made that connections will not be lost, and that messages
 will only be sent by peers that should send them.
 
+In the following algorithms, the input for behaviours beginning with `Receive'
+include a message name.  In effect this means ``the behaviour is triggered by a
+message with this name''.
+
 \subsection{Host Cache}
 
 The Host Cache is the entry-point for the network with two responsibilities.
@@ -51,12 +55,12 @@ Request'.
   \If{peer list doesn't contain $peer$}{
     add $peer$ to $peerList$\;
   }
-  \For{$peer \in peerList$}{
-    \If{$peerList[peer] = true$}{
+  \For{$connectedPeer \in peerList$}{
+    \If{$peerList[connectedPeer] = true$ and $connectedPeer \neq peer$}{
       $neighbours \leftarrow neighbours \cup peer$\;
     }
   }
-  \SendFn{peer, `Neighbours Response', neighbours}
+  \SendFn{peer, `Neighbours Response', neighbours}\;
 \end{algorithm}
 
 \subsection{All Peers}
@@ -78,14 +82,20 @@ is sent whenever the knownPeers list is empty.  This ensures that the peer
 always has some Super Peer address to connect to, in the event that they need
 more connections.
 
+It only sends the request if the number of known peers is below a certain
+maximum. Additionally, it only sends the request if it isn't already waiting for
+a reply.
+
 \begin{algorithm}[H]
   \SetKwFunction{SendFn}{send}
   \KwData{$knownPeers$: A list of neighbours known but not connected to the
   peer}
   \KwData{$hostCache$: Address of the Host Cache}
+  \KwData{$hasRequestedPeers$: True if waiting for reply}
 
-  \If{$knownPeers = \emptyset$}{
-    \SendFn{hostCache, `Neighbours Request'}
+  \If{$knownPeers = \emptyset$ and $\neg hasRequestedPeers$}{
+    \SendFn{hostCache, `Neighbours Request'}\;
+    $hasRequestedPeer \leftarrow true$\;
   }
 \end{algorithm}
 
@@ -97,10 +107,12 @@ list of Super Peers which the peer can try and connect to.
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
   \Input{Message Name: `Neighbours Response' \\ Potential Neighbours: $peers$}
+  \KwData{$hasRequestedPeers$: True if waiting for reply}
   \KwData{$knownPeers$: A list of Super Peers known but not connected to the
   peer}
 
   $knownPeers \leftarrow knownPeers \cup  peers$\;
+  $hasRequestedPeer \leftarrow false$\;
 \end{algorithm}
 
 \subsubsection{Send `Connect Request'}
@@ -121,7 +133,7 @@ attempts are made, the count includes peers which we are waiting on for a reply.
 
   \If{$knownPeers \neq \emptyset $ {and} $\|connectPendingPeers \cup
   connectedPeers\| < minPeers$}{
-    \SendFn{$ \exists p \in knownPeers$, `Connect Request'}
+    \SendFn{$ \exists p \in knownPeers$, `Connect Request'}\;
   }
 \end{algorithm}
 
@@ -162,7 +174,7 @@ want.
 
   \If{$wantedFiles \neq \emptyset$ {and} $connectedPeers \neq \emptyset $}{
     \SendFn{$\exists p \in connectedPeers$, `Search Request', $\exists f \in
-    wantedFiles$}
+    wantedFiles$}\;
   }
 \end{algorithm}
 
@@ -179,7 +191,7 @@ check it exists before returning etc.
   \Input{Sender: $peer$ \\ Message Name: `File Request' \\ File: $file$}
   \KwData{$sharedFiles$: List of files the peer wants but does not have}
 
-  \SendFn{peer, `File Response', `Here is your file'}
+  \SendFn{peer, `File Response', `Here is your file'}\;
 \end{algorithm}
 
 \subsubsection{Receive `File Response'}
@@ -226,7 +238,7 @@ practice, this is not likely to be the case.
   \KwData{$connectedPeer$: Super Peer that this peer is connected to}
   \KwData{$sharedFiles$: List of files the peer wants but does not have}
 
-  \SendFn{connectedPeer, `File List', sharedFiled}
+  \SendFn{connectedPeer, `File List', sharedFiled}\;
 \end{algorithm}
 
 \subsubsection{Receive `Search Response'}
@@ -248,7 +260,7 @@ contact the peer directly to request they transfer the file.
   \KwData{$wantedFiles$: List of files the peer wants but doesn't have}
 
   $wantedFiles \leftarrow wantedFiles \setminus \{file\}$\;
-  \SendFn{peer, `File Request', file}
+  \SendFn{peer, `File Request', file}\;
   $transferringFiles \leftarrow transferringFiles \cup \{file\}$\;
 \end{algorithm}
 
@@ -274,9 +286,9 @@ associate itself with the Super Peer.
 
   \eIf{$\|connectedOrdinaryPeers\| < ordinaryPeerLimit$}{
     $connectedOrdinaryPeers \leftarrow connectedOrdinaryPeers \cup \{peer\}$\;
-    \SendFn{peer, `Connect Response', true}
+    \SendFn{peer, `Connect Response', true}\;
   }{
-    \SendFn{peer, `Connect Response', false}
+    \SendFn{peer, `Connect Response', false}\;
   }
 \end{algorithm}
 
@@ -322,7 +334,7 @@ argument.
     inherit the behaviour of Ordinary Peer\;
   }{
     $superPeer \leftarrow senderStack.pop()$\;
-    \SendFn{superPeer, 'Search Response', file, peer, senderStack}
+    \SendFn{superPeer, 'Search Response', file, peer, senderStack}\;
   }
 \end{algorithm}
 
@@ -360,13 +372,13 @@ system for a consistent hashing algorithm.
       \SendFn{peer, `Search Response', file, peerWithFile}
     }{
       \SendFn{$senderStack.pop()$, `Search Response', file, peerWithFile,
-      senderStack}
+      senderStack}\;
     }
   }{
     \tcc{We don't have the file; forward request to neighbour}
     $nearestNeighbour \leftarrow$ \NearestFn{senderStack, file}\;
     $senderStack \leftarrow senderStack \cup \{self\}$\;
-    \SendFn{nearestNeighbour, `Search Request', file, senderStack}
+    \SendFn{nearestNeighbour, `Search Request', file, senderStack}\;
   }
 
 \end{algorithm}

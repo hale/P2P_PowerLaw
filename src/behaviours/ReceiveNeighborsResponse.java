@@ -23,6 +23,7 @@ public class ReceiveNeighborsResponse extends BasicAgentBehaviour {
       NeighboursResponse action = (NeighboursResponse) actionFor(msg);
       String peers = action.getPeerList();
       myPeer().addKnownPeers(peers);
+      myPeer().setRequestedPeers(false); // to ensure we can receive more peers
     }
 
 

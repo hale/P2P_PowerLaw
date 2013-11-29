@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class Peer extends BasicAgent {
 
   private static final int MIN_KNOWN_PEERS = 1;
-  private static final int MAX_KNOWN_PEERS = 5;
   public static String NAME = "PEER";
   private ArrayList<AID> knownPeers = new ArrayList<AID>();
   private boolean isSuper;
@@ -30,8 +29,7 @@ public class Peer extends BasicAgent {
   }
 
   public boolean needsKnownPeers() {
-    return (knownPeers.size() < MIN_KNOWN_PEERS &&
-        knownPeers.size() <= MAX_KNOWN_PEERS);
+    return (knownPeers.size() < MIN_KNOWN_PEERS);
   }
 
   public boolean isSuper() {
