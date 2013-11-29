@@ -11,6 +11,7 @@ import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
+import jade.util.Logger;
 import ontology.actions.RequestNeighbours;
 
 /**
@@ -19,6 +20,7 @@ import ontology.actions.RequestNeighbours;
 public abstract class BasicAgentBehaviour extends SimpleBehaviour {
 
   protected boolean finished = false;
+  protected Logger logger = Logger.getJADELogger(this.getClass().getName());
 
   protected BasicAgentBehaviour(Agent a) {
     super(a);
@@ -43,6 +45,9 @@ public abstract class BasicAgentBehaviour extends SimpleBehaviour {
    */
   protected MessageTemplate templateFor(Class action) {
     return new MessageTemplate(new MessageTemplate.MatchExpression() {
+
+      private Class action;
+
       @Override
       public boolean match(ACLMessage msg) {
         ContentElement content = null;
@@ -53,10 +58,15 @@ public abstract class BasicAgentBehaviour extends SimpleBehaviour {
         } catch (OntologyException e) {
           e.printStackTrace();
         }
-        Concept action = ((Action)content).getAction();
-        return action instanceof RequestNeighbours;
+        Concept concept = ((Action)content).getAction();
+        return action.isInstance(concept);
       }
-    });
+
+      private MessageTemplate.MatchExpression init(Class aAction) {
+        action = aAction;
+        return this;
+      }
+    }.init(action));
   }
 
   /**

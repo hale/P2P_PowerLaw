@@ -31,10 +31,8 @@ public class ReceiveNeighboursRequest extends BasicAgentBehaviour {
       RequestNeighbours action = (RequestNeighbours) actionFor(msg);
       AID sender = msg.getSender();
 
-      // add the peer to the host cache peerList
-      if (!hostCache().hasPeer(sender)) {
-        hostCache().addPeer(sender, action.getIsSuper());
-      }
+      // add peer to network
+      hostCache().addPeer(sender, action.getIsSuper());
 
       // reply to the message with a list of peers from the host cache.
       NeighboursResponse response = new NeighboursResponse();

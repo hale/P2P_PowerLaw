@@ -9,6 +9,7 @@ import jade.content.onto.basic.Result;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
+import jade.util.Logger;
 import ontology.P2POntology;
 import ontology.P2PVocabulary;
 
@@ -18,6 +19,8 @@ import ontology.P2PVocabulary;
 public abstract class BasicAgent extends Agent implements P2PVocabulary {
   private Codec codec = new SLCodec();
   private Ontology ontology = P2POntology.getInstance();
+
+  protected Logger logger = Logger.getJADELogger(this.getClass().getName());
 
   @Override
   protected void setup() {
@@ -37,6 +40,5 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
     msg.addReceiver(recipient);
     send(msg);
   }
-
 
 }
