@@ -8,11 +8,8 @@ import jade.lang.acl.ACLMessage;
 import ontology.actions.RequestNeighbours;
 
 /**
- * Created with IntelliJ IDEA.
- * User: philiphale
- * Date: 28/11/2013
- * Time: 23:11
- * To change this template use File | Settings | File Templates.
+ *  When peers join the network (or need more contactable neighbours),
+ *  they request Super Peer AIDs from the Host Cache.
  */
 public class SendNeighboursRequest extends BasicAgentBehaviour {
   public SendNeighboursRequest(Peer peer) {

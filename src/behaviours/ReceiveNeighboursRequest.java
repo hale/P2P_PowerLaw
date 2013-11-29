@@ -3,13 +3,11 @@ package behaviours;
 import ontology.actions.NeighboursResponse;
 import ontology.actions.RequestNeighbours;
 import agents.HostCache;
-import jade.content.Concept;
 import jade.content.ContentElement;
 import jade.content.lang.Codec;
 import jade.content.onto.OntologyException;
 import jade.content.onto.basic.Action;
 import jade.core.AID;
-//import jade.domain.introspection.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.ACLMessage;
 
@@ -26,37 +24,14 @@ public class ReceiveNeighboursRequest extends BasicAgentBehaviour {
 
   @Override
   public void action() {
-
-    // Only match message if it is of type REQUEST_NEIGHBOURS
-    MessageTemplate mt = new MessageTemplate(new MessageTemplate.MatchExpression() {
-      @Override
-      public boolean match(ACLMessage msg) {
-        ContentElement content = null;
-        try {
-          content = myAgent.getContentManager().extractContent(msg);
-        } catch (Codec.CodecException e) {
-          e.printStackTrace();
-        } catch (OntologyException e) {
-          e.printStackTrace();
-        }
-        Concept action = ((Action)content).getAction();
-        return action instanceof RequestNeighbours;
-      }
-    });
+    MessageTemplate mt = templateFor(RequestNeighbours.class);
     ACLMessage msg = myAgent.receive(mt);
+
     if (msg != null) {
+      RequestNeighbours action = (RequestNeighbours) actionFor(msg);
+      AID sender = msg.getSender();
 
       // add the peer to the host cache peerList
-      ContentElement content = null;
-      try {
-        content = myAgent.getContentManager().extractContent(msg);
-      } catch (Codec.CodecException e) {
-        e.printStackTrace();
-      } catch (OntologyException e) {
-        e.printStackTrace();
-      }
-      RequestNeighbours action = (RequestNeighbours) ((Action)content).getAction();
-      AID sender = msg.getSender();
       if (!hostCache().hasPeer(sender)) {
         hostCache().addPeer(sender, action.getIsSuper());
       }
