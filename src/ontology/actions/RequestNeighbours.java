@@ -5,15 +5,15 @@ import jade.content.AgentAction;
 /**
  * Peers ask the Host Cache for Super Peers to connect to.
  */
-public class RequestNeighboursAction implements AgentAction {
+public class RequestNeighbours implements AgentAction {
 
   private boolean isSuper;
 
-  public boolean isSuper() {
+  public boolean getIsSuper() {
     return isSuper;
   }
 
-  public void setSuper(boolean aSuper) {
+  public void setIsSuper(boolean aSuper) {
     isSuper = aSuper;
   }
 

@@ -9,10 +9,24 @@ import jade.core.behaviours.SimpleBehaviour;
  */
 public abstract class BasicAgentBehaviour extends SimpleBehaviour {
 
+  protected boolean finished = false;
+
   protected BasicAgentBehaviour(Agent a) {
     super(a);
   }
 
-  protected BasicAgent basicAgent() { return (BasicAgent) myAgent; }
+  protected BasicAgent basicAgent() {
+    return (BasicAgent) myAgent;
+  }
+
+  @Override
+  public boolean done() {
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+    }
+    return finished;
+  }
 
 }

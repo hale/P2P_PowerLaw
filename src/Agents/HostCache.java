@@ -1,6 +1,6 @@
 package agents;
 
-import behaviours.ReceiveNeighboursRequestBehaviour;
+import behaviours.ReceiveNeighboursRequest;
 import jade.core.AID;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +20,7 @@ public class HostCache extends BasicAgent {
   @Override
   protected void setup() {
     super.setup();
-    addBehaviour(new ReceiveNeighboursRequestBehaviour(this));
+    addBehaviour(new ReceiveNeighboursRequest(this));
   }
 
   public boolean hasPeer(AID peer) {

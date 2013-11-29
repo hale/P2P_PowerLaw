@@ -1,6 +1,7 @@
 package behaviours;
 
-import ontology.actions.RequestNeighboursAction;
+import ontology.actions.NeighboursResponse;
+import ontology.actions.RequestNeighbours;
 import agents.HostCache;
 import jade.content.Concept;
 import jade.content.ContentElement;
@@ -8,23 +9,19 @@ import jade.content.lang.Codec;
 import jade.content.onto.OntologyException;
 import jade.content.onto.basic.Action;
 import jade.core.AID;
-import jade.core.Agent;
 //import jade.domain.introspection.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.ACLMessage;
-import ontology.actions.SendNeighboursResponseAction;
 
 /**
  * The Host Cache continually waits for a REQUEST_NEIGHBOURS message.
  * On receipt of such a message, it adds the sender to the list of Peers
  * in the network, and returns a list of neighbours.
  */
-public class ReceiveNeighboursRequestBehaviour extends BasicAgentBehaviour {
+public class ReceiveNeighboursRequest extends BasicAgentBehaviour {
 
-  private boolean finished = false;
-
-  public ReceiveNeighboursRequestBehaviour(Agent a) {
-    super(a);
+  public ReceiveNeighboursRequest(HostCache hc) {
+    super(hc);
   }
 
   @Override
@@ -43,7 +40,7 @@ public class ReceiveNeighboursRequestBehaviour extends BasicAgentBehaviour {
           e.printStackTrace();
         }
         Concept action = ((Action)content).getAction();
-        return action instanceof RequestNeighboursAction;
+        return action instanceof RequestNeighbours;
       }
     });
     ACLMessage msg = myAgent.receive(mt);
@@ -58,27 +55,21 @@ public class ReceiveNeighboursRequestBehaviour extends BasicAgentBehaviour {
       } catch (OntologyException e) {
         e.printStackTrace();
       }
-      RequestNeighboursAction action = (RequestNeighboursAction) ((Action)content).getAction();
-      boolean senderIsSuper = action.isSuper();
+      RequestNeighbours action = (RequestNeighbours) ((Action)content).getAction();
       AID sender = msg.getSender();
       if (!hostCache().hasPeer(sender)) {
-        hostCache().addPeer(sender, senderIsSuper);
+        hostCache().addPeer(sender, action.getIsSuper());
       }
 
       // reply to the message with a list of peers from the host cache.
+      NeighboursResponse response = new NeighboursResponse();
       String neighbours = hostCache().getNeighboursFor(sender);
-      SendNeighboursResponseAction responseAction = new SendNeighboursResponseAction();
-      responseAction.setPeerList(neighbours);
-      basicAgent().sendMessage(ACLMessage.INFORM, responseAction, sender);
+      response.setPeerList(neighbours);
+      basicAgent().sendMessage(ACLMessage.INFORM, response, sender);
     }
   }// Never finish
 
   private HostCache hostCache() {
     return (HostCache) myAgent;
-  }
-
-  @Override
-  public boolean done() {
-    return finished;
   }
 }

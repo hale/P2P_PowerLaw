@@ -1,4 +1,5 @@
 import agents.HostCache;
+import agents.Peer;
 import jade.core.Agent;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
@@ -25,19 +26,22 @@ public class Runner extends Agent {
           container.createNewAgent( HostCache.NAME, HostCache.class.getName(), null);
       hostCacheController.start();
 
+      Thread.sleep(10000);
+
       // instantiate peers
 //      int peerCount = Integer.parseInt((String) args[0]);
-//      ArrayList<String> fileList = new ArrayList<String>(Arrays.asList("Ubuntu.iso", "Fedora.iso"));
-//      Object[] peerArgs = new Object[] {fileList};
-
+      Object[] peerArgs = new Object[] {true};
 //      for (int i = 0; i < peerCount; i++) {
-
-//        AgentController peerController = container.createNewAgent( Peer.NAME + i, Peer.class.getName(), peerArgs);
-//        peerController.start();
+        AgentController peerController = container.createNewAgent(
+            Peer.NAME, Peer.class.getName(), peerArgs
+        );
+        peerController.start();
 //      }
 
     } catch (StaleProxyException e) {
       e.printStackTrace();
+    } catch (InterruptedException e) {
+      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
     }
   }
 }
