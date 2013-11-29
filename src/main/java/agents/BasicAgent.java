@@ -5,7 +5,6 @@ import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
 import jade.content.onto.basic.Action;
-import jade.content.onto.basic.Result;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;

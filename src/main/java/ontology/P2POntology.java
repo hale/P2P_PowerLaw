@@ -1,14 +1,13 @@
 package ontology;
 
-import ontology.actions.NeighboursResponse;
-import ontology.actions.RequestConnect;
-import ontology.actions.RequestNeighbours;
-import ontology.P2PVocabulary;
 import jade.content.onto.BasicOntology;
 import jade.content.onto.Ontology;
 import jade.content.onto.OntologyException;
 import jade.content.schema.AgentActionSchema;
 import jade.content.schema.PrimitiveSchema;
+import ontology.actions.NeighboursResponse;
+import ontology.actions.RequestConnect;
+import ontology.actions.RequestNeighbours;
 
 /**
  * Defines the language used for Agent communication.

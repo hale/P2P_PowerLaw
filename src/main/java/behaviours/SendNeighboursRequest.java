@@ -1,6 +1,5 @@
 package behaviours;
 
-import agents.BasicAgent;
 import agents.HostCache;
 import agents.Peer;
 import jade.core.AID;

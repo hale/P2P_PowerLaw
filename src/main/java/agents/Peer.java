@@ -8,7 +8,6 @@ import jade.util.Logger;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 /**
  * Behaviour of all peers, both Ordinary and Super

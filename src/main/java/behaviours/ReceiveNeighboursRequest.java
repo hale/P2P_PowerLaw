@@ -1,15 +1,11 @@
 package behaviours;
 
+import agents.HostCache;
+import jade.core.AID;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import ontology.actions.NeighboursResponse;
 import ontology.actions.RequestNeighbours;
-import agents.HostCache;
-import jade.content.ContentElement;
-import jade.content.lang.Codec;
-import jade.content.onto.OntologyException;
-import jade.content.onto.basic.Action;
-import jade.core.AID;
-import jade.lang.acl.MessageTemplate;
-import jade.lang.acl.ACLMessage;
 
 /**
  * The Host Cache continually waits for a REQUEST_NEIGHBOURS message.

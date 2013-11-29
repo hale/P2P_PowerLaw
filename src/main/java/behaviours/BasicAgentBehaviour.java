@@ -1,7 +1,6 @@
 package behaviours;
 
 import agents.BasicAgent;
-import jade.content.AgentAction;
 import jade.content.Concept;
 import jade.content.ContentElement;
 import jade.content.lang.Codec;
@@ -12,7 +11,6 @@ import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.util.Logger;
-import ontology.actions.RequestNeighbours;
 
 /**
  * Provides access to basicAgent().sendMessage()
