@@ -5,7 +5,7 @@ import behaviours.SendConnectRequest;
 import behaviours.SendNeighboursRequest;
 import jade.core.AID;
 import jade.util.Logger;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -46,7 +46,7 @@ public class Peer extends BasicAgent {
   }
 
   public void addKnownPeers(String peers) {
-    String[] peerList = StringUtils.split(peers,';');
+    String[] peerList = StringUtils.split(peers, ';');
     for (String peer : peerList) {
       AID knownPeer = new AID(peer, AID.ISLOCALNAME);
       knownPeers.add(knownPeer);

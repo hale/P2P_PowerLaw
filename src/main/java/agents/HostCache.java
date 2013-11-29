@@ -2,7 +2,7 @@ package agents;
 
 import behaviours.ReceiveNeighboursRequest;
 import jade.core.AID;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

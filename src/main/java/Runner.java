@@ -64,7 +64,7 @@ public class Runner extends Agent {
     } catch (InterruptedException e) {
       e.printStackTrace();
     } catch (ConfigurationException e) {
-      e.printStackTrace();
+      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
     }
   }
 }
