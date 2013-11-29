@@ -8,9 +8,6 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Runs the P2P simulation
  *
@@ -27,7 +24,7 @@ public class Runner extends Agent {
     try {
       ContainerController container = getContainerController();
 
-      Configuration config = new PropertiesConfiguration("P2PPowerLaw.properties");
+      Configuration config = new PropertiesConfiguration("src/P2PPowerLaw.properties");
       int ordinaryPeerCount = config.getInt("peers.ordinary");
       int superPeerCount = config.getInt("peers.super");
       int neighboursCount = config.getInt("host_cache.max_neighbours");
