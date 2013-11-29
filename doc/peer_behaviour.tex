@@ -92,9 +92,11 @@ a reply.
   peer}
   \KwData{$hostCache$: Address of the Host Cache}
   \KwData{$hasRequestedPeers$: True if waiting for reply}
+  \KwData{$isSuper$: True if the peer has sufficient bandwidth to be a Super
+  Peer }
 
   \If{$knownPeers = \emptyset$ and $\neg hasRequestedPeers$}{
-    \SendFn{hostCache, `Neighbours Request'}\;
+    \SendFn{hostCache, `Neighbours Request', isSuper}\;
     $hasRequestedPeer \leftarrow true$\;
   }
 \end{algorithm}

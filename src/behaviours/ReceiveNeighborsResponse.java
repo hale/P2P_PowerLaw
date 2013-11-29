@@ -8,7 +8,7 @@ import ontology.actions.NeighboursResponse;
 /**
  * Response from the Host Cache to the Neighbours Request
  */
-public class ReceiveNeighborsResponse extends BasicAgentBehaviour {
+public class ReceiveNeighborsResponse extends BasicPeerBehaviour {
 
   public ReceiveNeighborsResponse(Peer p) {
     super(p);
@@ -23,14 +23,8 @@ public class ReceiveNeighborsResponse extends BasicAgentBehaviour {
       NeighboursResponse action = (NeighboursResponse) actionFor(msg);
       String peers = action.getPeerList();
       myPeer().addKnownPeers(peers);
-      myPeer().setRequestedPeers(false); // to ensure we can receive more peers
+      myPeer().setRequestedPeers(false);
     }
-
-
-  }
-
-  private Peer myPeer() {
-    return (Peer) myAgent;
   }
 }
 

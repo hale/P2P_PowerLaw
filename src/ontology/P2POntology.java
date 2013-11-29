@@ -1,6 +1,7 @@
 package ontology;
 
 import ontology.actions.NeighboursResponse;
+import ontology.actions.RequestConnect;
 import ontology.actions.RequestNeighbours;
 import ontology.P2PVocabulary;
 import jade.content.onto.BasicOntology;
@@ -28,6 +29,8 @@ public class P2POntology extends Ontology implements P2PVocabulary {
 
       add(as = new AgentActionSchema(NEIGHBOURS_RESPONSE), NeighboursResponse.class);
       as.add(NEIGHBOURS_RESPONSE_PEER_LIST, (PrimitiveSchema) getSchema(BasicOntology.STRING));
+
+      add(as = new AgentActionSchema(REQUEST_CONNECT), RequestConnect.class);
     } catch (OntologyException e) {
       e.printStackTrace();
     }

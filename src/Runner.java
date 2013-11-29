@@ -4,6 +4,9 @@ import jade.core.Agent;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,33 +14,56 @@ import java.util.Arrays;
 /**
  * Runs the P2P simulation
  *
- * java jade.Boot -agents runner:Runner(peerCount)
+ * java jade.Boot -agents runner:Runner(options)
  *
- * The argument given to Runner specify in turn:
+ * The options order is:
+ *     ordinaryPeerCount, superPeerCount, neighboursCount
  *
- * peerCount: The number of peers to create
+ * neighboursCount defines how many peers the Host Cache returns
+ * when asked to supply the addresses of connected Super Nodes.
  */
 public class Runner extends Agent {
   protected void setup() {
     try {
-      Object[] args = getArguments();
-
       ContainerController container = getContainerController();
-      AgentController hostCacheController =
-          container.createNewAgent( HostCache.NAME, HostCache.class.getName(), null);
+
+      Configuration config = new PropertiesConfiguration("P2PPowerLaw.properties");
+      int ordinaryPeerCount = config.getInt("peers.ordinary");
+      int superPeerCount = config.getInt("peers.super");
+      int neighboursCount = config.getInt("host_cache.max_neighbours");
+
+      AgentController peerController;
+      AgentController hostCacheController;
+
+      hostCacheController = container.createNewAgent(
+        HostCache.NAME, HostCache.class.getName(), new Object[]{neighboursCount}
+      );
       hostCacheController.start();
 
-      // instantiate peers
-      int peerCount = Integer.parseInt((String) args[0]);
-      Object[] peerArgs = new Object[] {true};
-      for (int i = 0; i < peerCount; i++) {
-        AgentController peerController = container.createNewAgent(
-            Peer.NAME+i, Peer.class.getName(), peerArgs
+      // give us some time to configure the sniffer....
+      Thread.sleep(10000);
+
+      // instantiate ordinary peers
+      for (int i = 0; i < ordinaryPeerCount; i++) {
+        peerController = container.createNewAgent(
+            "O" + Peer.NAME+i, Peer.class.getName(), new Object[]{false}
+        );
+        peerController.start();
+      }
+
+      // instantiate super peers
+      for (int i = 0; i < superPeerCount; i++) {
+        peerController = container.createNewAgent(
+            "S" + Peer.NAME+i, Peer.class.getName(), new Object[]{true}
         );
         peerController.start();
       }
 
     } catch (StaleProxyException e) {
+      e.printStackTrace();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    } catch (ConfigurationException e) {
       e.printStackTrace();
     }
   }

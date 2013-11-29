@@ -23,10 +23,6 @@ public class HostCache extends BasicAgent {
     addBehaviour(new ReceiveNeighboursRequest(this));
   }
 
-  public boolean hasPeer(AID peer) {
-    return peerList.containsKey(peer);
-  }
-
   /**
    * Adds the peer to the network (but only if it isn't already present)
    */
@@ -34,15 +30,17 @@ public class HostCache extends BasicAgent {
     peerList.put(peer, isSuper);
   }
 
+  /**
+   * @param peer Requester - we want to exclude them from the list.
+   * @return semicolon delimited list of local peer names.
+   */
   public String getNeighboursFor(AID peer) {
-    ArrayList<AID> neighbours = new ArrayList<AID>();
+    ArrayList<String> neighbours = new ArrayList<String>();
     for (AID connectedPeer : peerList.keySet()) {
       if (neighbours.size() > MAX_NEIGHBOURS) { break; }
-      if (connectedPeer != peer && peerList.get(connectedPeer)) {
-        if (connectedPeer.toString().contains(";")) {
-          throw new RuntimeException("AID cannot be serialised, contains semicolon.");
-        }
-        neighbours.add(connectedPeer);
+      if (connectedPeer == peer) { continue; }
+      if (peerList.get(connectedPeer)) {
+        neighbours.add(connectedPeer.getLocalName());
       }
     }
     return StringUtils.join(neighbours, ';');

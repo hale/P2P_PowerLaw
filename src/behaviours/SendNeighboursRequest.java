@@ -25,9 +25,7 @@ public class SendNeighboursRequest extends BasicAgentBehaviour {
       AID hostCache = new AID( HostCache.NAME, AID.ISLOCALNAME);
       basicAgent().sendMessage(ACLMessage.REQUEST, action, hostCache);
       myPeer().setRequestedPeers(true);
-      logger.log(Logger.INFO, myPeer().toString() + " asks HostCache for peers");
-    } else {
-      logger.log(Logger.INFO, myPeer().toString() + " is waiting, or has enough knownPeers");
+      logger.log(Logger.INFO, myPeer().getLocalName() + " asks HostCache for peers");
     }
   }
 
