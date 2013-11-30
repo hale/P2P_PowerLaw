@@ -22,4 +22,8 @@ public interface P2PVocabulary {
 
   public static final String FILE_LIST = "FileList";
   public static final String FILE_LIST_SHARED_FILES = "sharedFiles";
+
+  public static final String REQUEST_SEARCH = "RequestSearch";
+  public static final String REQUEST_SEARCH_FILE = "file";
+  public static final String REQUEST_SEARCH_SENDER_STACK = "senderStack";
 }

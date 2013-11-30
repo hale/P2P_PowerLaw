@@ -34,6 +34,10 @@ public class P2POntology extends Ontology implements P2PVocabulary {
 
       add(as = new AgentActionSchema(FILE_LIST), FileList.class);
       as.add(FILE_LIST_SHARED_FILES, (PrimitiveSchema) getSchema(BasicOntology.STRING));
+
+      add(as = new AgentActionSchema(REQUEST_SEARCH), RequestSearch.class);
+      as.add(REQUEST_SEARCH_FILE, (PrimitiveSchema) getSchema(BasicOntology.STRING));
+      as.add(REQUEST_SEARCH_SENDER_STACK, (PrimitiveSchema) getSchema(BasicOntology.STRING));
     } catch (OntologyException e) {
       e.printStackTrace();
     }

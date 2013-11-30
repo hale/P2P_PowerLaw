@@ -5,9 +5,11 @@
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/com/tilab/jade/jade/4.3.0/jade-4.3.0-javadoc.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/jade/doc/api" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/tilab/jade/jade/4.3.0/jade-4.3.0-sources.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/jade 2/src" />
     </SOURCES>
   </library>
 </component>

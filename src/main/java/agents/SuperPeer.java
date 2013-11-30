@@ -2,6 +2,7 @@ package agents;
 
 import behaviours.ReceiveConnectRequest;
 import behaviours.ReceiveFileList;
+import behaviours.ReceiveSearchRequest;
 import jade.core.AID;
 import org.apache.commons.lang.StringUtils;
 
@@ -24,6 +25,7 @@ public class SuperPeer extends Peer {
     MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[3]; // 1 because 0,1,2 used in Peer. Sorry.
     addBehaviour(new ReceiveConnectRequest(this));
     addBehaviour(new ReceiveFileList(this));
+    addBehaviour(new ReceiveSearchRequest(this));
   }
 
   public boolean canAcceptConnectRequest() {
@@ -48,5 +50,17 @@ public class SuperPeer extends Peer {
       }
     }
     logger.log(Level.INFO, getLocalName()+" indexed "+StringUtils.split(fileList,';').length+" files for "+sender.getLocalName());
+  }
+
+  public boolean canLocate(String file) {
+    return sharedFilesIndex.containsKey(file);
+  }
+
+  public AID peerWith(String wantedFile) {
+    return sharedFilesIndex.get(wantedFile).get(0);
+  }
+
+  public AID closestConnectedPeer(AID fileID) {
+    // ??
   }
 }

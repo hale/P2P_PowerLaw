@@ -25,17 +25,19 @@ public abstract class Peer extends BasicAgent {
   protected ArrayList<String> sharedFiles;
 
   private boolean hasRequestedPeers;
+  private ArrayList<String> wantedFiles = new ArrayList<String>();
 
   @Override
   protected void setup() {
     super.setup();
     MIN_CONNECTED_PEERS = (Integer) args[0];
     MAX_CONNECTED_PEERS = (Integer) args[1];
-    sharedFiles = new ArrayList<String>(Arrays.asList( (String[]) args[2]));
+    sharedFiles = new ArrayList<String>(Arrays.asList((String[]) args[2]));
     addBehaviour(new SendNeighboursRequest(this));
     addBehaviour(new ReceiveNeighborsResponse(this));
     addBehaviour(new SendConnectRequest(this));
     addBehaviour(new ReceiveConnectResponse(this));
+    addBehaviour(new SendSearchRequest(this));
   }
 
   public void addKnownPeers(String peers) {
@@ -94,5 +96,17 @@ public abstract class Peer extends BasicAgent {
 
   public boolean isConnected() {
     return !connectedPeers.isEmpty();
+  }
+
+  public boolean hasWantedFile() {
+    return !wantedFiles.isEmpty();
+  }
+
+  public String getWantedFile() {
+    return wantedFiles.get(0);
+  }
+
+  public AID getConnectedPeer() {
+    return connectedPeers.get(0);
   }
 }

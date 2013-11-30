@@ -164,22 +164,6 @@ peers.
   }
 \end{algorithm}
 
-For this demonstration, a peer will always and continually search for files they
-want.
-
-\subsubsection{Send `Search Request'}
-
-\begin{algorithm}[H]
-  \SetKwFunction{SendFn}{send}
-  \KwData{$connectedPeers$: Super Peers that this peer is connected to}
-  \KwData{$wantedFiles$: List of files the peer wants but does not have}
-
-  \If{$wantedFiles \neq \emptyset$ {and} $connectedPeers \neq \emptyset $}{
-    \SendFn{$\exists p \in connectedPeers$, `Search Request', $\exists f \in
-    wantedFiles$}\;
-  }
-\end{algorithm}
-
 \subsubsection{Receive `File Request'}
 
 Since our simulation does not send actual files, at this point we can simply
@@ -266,6 +250,22 @@ contact the peer directly to request they transfer the file.
   $transferringFiles \leftarrow transferringFiles \cup \{file\}$\;
 \end{algorithm}
 
+\subsubsection{Send `Search Request'}
+
+For this demonstration, a peer will always and continually search for files they
+want.
+
+\begin{algorithm}[H]
+  \SetKwFunction{SendFn}{send}
+  \KwData{$connectedPeers$: Super Peers that this peer is connected to}
+  \KwData{$wantedFiles$: List of files the peer wants but does not have}
+
+  \If{$wantedFiles \neq \emptyset$ {and} $connectedPeers \neq \emptyset $}{
+    \SendFn{$\exists p \in connectedPeers$, `Search Request', $\exists f \in
+    wantedFiles$}\;
+  }
+\end{algorithm}
+
 
 \subsection{Super Peers}
 
@@ -313,6 +313,27 @@ The files are stored as a hash that maps $fileName \rightarrow peerList$.
     $ordinaryPeersFiles[file] = ordinaryPeersFiles[file] \cup \{peer\}$\;
   }
 \end{algorithm}
+
+\subsubsection{Send `Search Request'}
+
+Since a Super Peer also has a list of files, it makes sense to search these
+first before searching network.
+
+\begin{algorithm}[H]
+  \SetKwFunction{SendFn}{send}
+  \KwData{$wantedFiles$: List of files the peer wants but does not have}
+  \KwData{$ordinaryPeersFiles$: All shared files of connected Ordinary Peers}
+
+  \If{$wantedFiles \neq \emptyset$}{
+    \eIf{$\exists file,peers \in ordinaryPeersFiles where file \in wantedFiles $}{
+      `Search Response' behaviour, with input $\exists p \in peers$ and $file$\;
+    }{
+      inherit behaviour from ordinary peer\;
+    }
+  }
+\end{algorithm}
+
+
 
 \subsubsection{Receive `Search Response'}
 %input: search response; output: nothing, or pass on search response
