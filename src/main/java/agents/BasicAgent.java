@@ -21,8 +21,11 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
 
   protected Logger logger = Logger.getJADELogger(this.getClass().getName());
 
+  protected Object[] args;
+
   @Override
   protected void setup() {
+    args = getArguments();
     getContentManager().registerLanguage(codec);
     getContentManager().registerOntology(ontology);
   }

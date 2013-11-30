@@ -13,13 +13,14 @@ import java.util.HashMap;
  */
 public class HostCache extends BasicAgent {
 
-  public static final int MAX_NEIGHBOURS = 1;
+  public static int MAX_NEIGHBOURS;
   public static String NAME = "HOST_CACHE";
   private HashMap<AID,Boolean> peerList = new HashMap<AID, Boolean>();
 
   @Override
   protected void setup() {
     super.setup();
+    MAX_NEIGHBOURS = (Integer) args[0];
     addBehaviour(new ReceiveNeighboursRequest(this));
   }
 

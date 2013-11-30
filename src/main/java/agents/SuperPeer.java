@@ -10,13 +10,14 @@ import java.util.logging.Level;
  */
 public class SuperPeer extends Peer {
 
-  private static final int MAX_CONNECTED_ORDINARY_PEERS = 2;
+  private static int MAX_CONNECTED_ORDINARY_PEERS;
   public static String NAME = "SUPER PEER";
   private ArrayList<AID> connectedOrdinaryPeers = new ArrayList<AID>();
 
   @Override
   protected void setup() {
     super.setup();
+    MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[2]; // 2 because 0 and 1 used in Peer. Sorry.
     addBehaviour(new ReceiveConnectRequest(this));
   }
 
@@ -26,6 +27,7 @@ public class SuperPeer extends Peer {
 
   public void addConnectedOrdinaryPeer(AID peer) {
     connectedOrdinaryPeers.add(peer);
-    logger.log(Level.INFO, getLocalName() + " adds " + peer.getLocalName());
+//    logger.log(Level.INFO, getLocalName() + " adds " + peer.getLocalName());
+
   }
 }
