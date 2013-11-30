@@ -16,4 +16,7 @@ public interface P2PVocabulary {
   public static final String NEIGHBOURS_RESPONSE_PEER_LIST = "peerList";
 
   public static final String REQUEST_CONNECT = "RequestConnect";
+
+  public static final String CONNECT_RESPONSE = "ConnectResponse";
+  public static final String CONNECT_RESPONSE_IS_SUCCESS = "isSuccess";
 }

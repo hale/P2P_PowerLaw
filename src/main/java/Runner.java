@@ -29,13 +29,14 @@ public class Runner extends Agent {
       Configuration config = new PropertiesConfiguration("src/P2PPowerLaw.properties");
       int ordinaryPeerCount = config.getInt("peers.ordinary");
       int superPeerCount = config.getInt("peers.super");
-      int neighboursCount = config.getInt("host_cache.max_neighbours");
+      int maxNeighbours = config.getInt("max_neighbours");
+      int maxPeersForSuperPeer = config.getInt("max_peers_for_super_peer");
 
       AgentController peerController;
       AgentController hostCacheController;
 
       hostCacheController = container.createNewAgent(
-          HostCache.NAME, HostCache.class.getName(), new Object[]{neighboursCount}
+          HostCache.NAME, HostCache.class.getName(), new Object[]{maxNeighbours}
       );
       hostCacheController.start();
 
