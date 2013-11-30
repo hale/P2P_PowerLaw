@@ -12,10 +12,9 @@ import java.util.ArrayList;
 /**
  * Behaviour of all peers, both Ordinary and Super
  */
-public class Peer extends BasicAgent {
+public abstract class Peer extends BasicAgent {
 
   public static String NAME = "PEER";
-  private boolean isSuper;
 
   private static final int MIN_KNOWN_PEERS = 1;
   private static final int MIN_CONNECTED_PEERS = 1;
@@ -29,8 +28,6 @@ public class Peer extends BasicAgent {
   @Override
   protected void setup() {
     super.setup();
-    Object[] args = getArguments();
-    isSuper = (Boolean) args[0];
     addBehaviour(new SendNeighboursRequest(this));
     addBehaviour(new ReceiveNeighborsResponse(this));
     addBehaviour(new SendConnectRequest(this));
@@ -40,17 +37,13 @@ public class Peer extends BasicAgent {
     return (knownPeers.size() < MIN_KNOWN_PEERS);
   }
 
-  public boolean isSuper() {
-    return isSuper;
-  }
-
   public void addKnownPeers(String peers) {
     String[] peerList = StringUtils.split(peers, ';');
     for (String peer : peerList) {
       AID knownPeer = new AID(peer, AID.ISLOCALNAME);
       knownPeers.add(knownPeer);
     }
-    logger.log(Logger.INFO, getLocalName() + " adds " + peerList.length + " knownPeers");
+    logger.log(Logger.INFO, getLocalName() + " adds " + peerList.length + " to knownPeers");
   }
 
   public boolean hasRequestedPeers() {

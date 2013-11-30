@@ -1,5 +1,7 @@
 import agents.HostCache;
+import agents.OrdinaryPeer;
 import agents.Peer;
+import agents.SuperPeer;
 import jade.core.Agent;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
@@ -33,17 +35,19 @@ public class Runner extends Agent {
       AgentController hostCacheController;
 
       hostCacheController = container.createNewAgent(
-        HostCache.NAME, HostCache.class.getName(), new Object[]{neighboursCount}
+          HostCache.NAME, HostCache.class.getName(), new Object[]{neighboursCount}
       );
       hostCacheController.start();
 
       // give us some time to configure the sniffer....
       Thread.sleep(10000);
 
+      Object[] peerArgs = null;
+
       // instantiate ordinary peers
       for (int i = 0; i < ordinaryPeerCount; i++) {
         peerController = container.createNewAgent(
-            "O" + Peer.NAME+i, Peer.class.getName(), new Object[]{false}
+            OrdinaryPeer.NAME+i, OrdinaryPeer.class.getName(), peerArgs
         );
         peerController.start();
       }
@@ -51,7 +55,7 @@ public class Runner extends Agent {
       // instantiate super peers
       for (int i = 0; i < superPeerCount; i++) {
         peerController = container.createNewAgent(
-            "S" + Peer.NAME+i, Peer.class.getName(), new Object[]{true}
+            SuperPeer.NAME+i, SuperPeer.class.getName(), peerArgs
         );
         peerController.start();
       }
