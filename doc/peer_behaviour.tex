@@ -310,7 +310,7 @@ The files are stored as a hash that maps $fileName \rightarrow peerList$.
   \KwData{$ordinaryPeersFiles$: All shared files of connected Ordinary Peers}
 
   \For{$file \in fileList$}{
-    $ordinaryPeersFiles[file] \ peer$\;
+    $ordinaryPeersFiles[file] = ordinaryPeersFiles[file] \cup \{peer\}$\;
   }
 \end{algorithm}
 

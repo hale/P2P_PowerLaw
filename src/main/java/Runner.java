@@ -57,7 +57,7 @@ public class Runner extends Agent {
       }
 
       // give us some time to configure the sniffer....
-      Thread.sleep(15000);
+      Thread.sleep(15);
 
       // instantiate ordinary peers
       int ordinaryPeerCount = config.getInt("peers.ordinary");
