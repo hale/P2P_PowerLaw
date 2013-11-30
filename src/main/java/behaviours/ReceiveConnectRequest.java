@@ -29,7 +29,7 @@ public class ReceiveConnectRequest extends BasicPeerBehaviour {
         mySuperPeer().addConnectedOrdinaryPeer(sender);
         response.setIsSuccess(true);
       } else {
-        logger.log(Level.INFO, mySuperPeer().getLocalName()+" cannot accept new peers");
+        logger.log(Level.WARNING, mySuperPeer().getLocalName()+" cannot accept new peers");
         response.setIsSuccess(false);
       }
       basicAgent().sendMessage(ACLMessage.INFORM, response, sender);

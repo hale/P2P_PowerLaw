@@ -22,8 +22,6 @@ public class ReceiveConnectResponse extends BasicPeerBehaviour {
     if (msg != null) {
       AID sender = msg.getSender();
       ConnectResponse response = (ConnectResponse) actionFor(msg);
-      // super peer has been contacted, so is no longer known or pending
-      myPeer().removeKnownPeer(sender);
       myPeer().removePendingPeer(sender);
       if (response.getIsSuccess()) {
         myPeer().addConnectedPeer(sender);

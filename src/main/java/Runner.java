@@ -45,28 +45,26 @@ public class Runner extends Agent {
       );
       hostCacheController.start();
 
-      // give us some time to configure the sniffer....
-      Thread.sleep(1);
-
       // settings for all peers
       agentArgs = new Object[]{minConnectedPeers, maxConnectedPeers};
-
-
-
-      // instantiate ordinary peers
-      agentArgs = ArrayUtils.addAll(agentArgs, new Object[]{});
-      for (int i = 0; i < ordinaryPeerCount; i++) {
-        peerController = container.createNewAgent(
-            OrdinaryPeer.NAME+i, OrdinaryPeer.class.getName(), agentArgs
-        );
-        peerController.start();
-      }
 
       // instantiate super peers
       agentArgs = ArrayUtils.addAll(agentArgs, new Object[]{maxPeersForSuperPeer});
       for (int i = 0; i < superPeerCount; i++) {
         peerController = container.createNewAgent(
             SuperPeer.NAME+i, SuperPeer.class.getName(), agentArgs
+        );
+        peerController.start();
+      }
+
+      // give us some time to configure the sniffer....
+      Thread.sleep(15000);
+
+      // instantiate ordinary peers
+      agentArgs = ArrayUtils.addAll(agentArgs, new Object[]{});
+      for (int i = 0; i < ordinaryPeerCount; i++) {
+        peerController = container.createNewAgent(
+            OrdinaryPeer.NAME+i, OrdinaryPeer.class.getName(), agentArgs
         );
         peerController.start();
       }
