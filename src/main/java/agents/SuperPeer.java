@@ -17,7 +17,7 @@ public class SuperPeer extends Peer {
   @Override
   protected void setup() {
     super.setup();
-    MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[2]; // 1 because 0,1 used in Peer. Sorry.
+    MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[3]; // 1 because 0,1,2 used in Peer. Sorry.
     addBehaviour(new ReceiveConnectRequest(this));
   }
 

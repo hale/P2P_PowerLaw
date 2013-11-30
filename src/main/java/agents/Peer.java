@@ -1,14 +1,13 @@
 package agents;
 
-import behaviours.ReceiveConnectResponse;
-import behaviours.ReceiveNeighborsResponse;
-import behaviours.SendConnectRequest;
-import behaviours.SendNeighboursRequest;
+import behaviours.*;
 import jade.core.AID;
 import jade.util.Logger;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -20,8 +19,10 @@ public abstract class Peer extends BasicAgent {
   private static int MAX_CONNECTED_PEERS;
 
   private ArrayList<AID> knownPeers = new ArrayList<AID>();
-  private ArrayList<AID> connectedPeers = new ArrayList<AID>();
+  protected ArrayList<AID> connectedPeers = new ArrayList<AID>();
   private ArrayList<AID> connectPendingPeers = new ArrayList<AID>();
+
+  protected ArrayList<String> sharedFiles;
 
   private boolean hasRequestedPeers;
 
@@ -30,6 +31,7 @@ public abstract class Peer extends BasicAgent {
     super.setup();
     MIN_CONNECTED_PEERS = (Integer) args[0];
     MAX_CONNECTED_PEERS = (Integer) args[1];
+    sharedFiles = new ArrayList<String>(Arrays.asList( (String[]) args[2]));
     addBehaviour(new SendNeighboursRequest(this));
     addBehaviour(new ReceiveNeighborsResponse(this));
     addBehaviour(new SendConnectRequest(this));
@@ -88,5 +90,9 @@ public abstract class Peer extends BasicAgent {
     connectedPeers.add(peer);
     logger.log(Level.INFO, getLocalName() + " adds " + peer.getLocalName() + " to connectedPeers. \n" +
         getLocalName()+" now has this many connectedPeers: " + connectedPeers.size());
+  }
+
+  public boolean isConnected() {
+    return !connectedPeers.isEmpty();
   }
 }

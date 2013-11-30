@@ -19,4 +19,7 @@ public interface P2PVocabulary {
 
   public static final String CONNECT_RESPONSE = "ConnectResponse";
   public static final String CONNECT_RESPONSE_IS_SUCCESS = "isSuccess";
+
+  public static final String FILE_LIST = "FileList";
+  public static final String FILE_LIST_SHARED_FILES = "sharedFiles";
 }

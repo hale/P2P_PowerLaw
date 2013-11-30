@@ -1,5 +1,11 @@
 package agents;
 
+import behaviours.SendFileList;
+import jade.core.AID;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+
 /**
  */
 public class OrdinaryPeer extends Peer {
@@ -9,6 +15,14 @@ public class OrdinaryPeer extends Peer {
   @Override
   protected void setup() {
     super.setup();
-    // add ordinary peer specific behaviour
+    addBehaviour(new SendFileList(this));
+  }
+
+  public AID getConnectedPeer() {
+    return connectedPeers.get(0);
+  }
+
+  public String getSharedFiles() {
+    return StringUtils.join(sharedFiles, ';');
   }
 }
