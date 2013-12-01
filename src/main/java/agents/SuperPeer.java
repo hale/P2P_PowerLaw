@@ -7,6 +7,7 @@ import jade.core.AID;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -22,7 +23,7 @@ public class SuperPeer extends Peer {
   @Override
   protected void setup() {
     super.setup();
-    MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[3]; // 1 because 0,1,2 used in Peer. Sorry.
+    MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[4]; // 1 because 0,1,2 used in Peer. Sorry.
     addBehaviour(new ReceiveConnectRequest(this));
     addBehaviour(new ReceiveFileList(this));
     addBehaviour(new ReceiveSearchRequest(this));
@@ -60,7 +61,29 @@ public class SuperPeer extends Peer {
     return sharedFilesIndex.get(wantedFile).get(0);
   }
 
-  public AID closestConnectedPeer(AID fileID) {
-    // ??
+  /**
+   * Document routing
+   */
+  public AID closestConnectedPeer(String file) {
+    if (connectedPeers.size() == 1) { return connectedPeers.get(0); }
+
+    int listLength = connectedPeers.size()+1;
+    AID[] idList = new AID[listLength];
+
+    idList[0] = new AID(file, AID.ISLOCALNAME);
+    for (int i = 1; i < listLength; i++) {
+      idList[i] = connectedPeers.get(i);
+    }
+
+    Arrays.sort(idList);
+
+    int fileIndex = Arrays.binarySearch(idList, file);
+    if (fileIndex == 0) { // first element
+      return idList[1];
+    } else if(fileIndex == listLength -1) { // last element
+      return idList[listLength-2];
+    } else { // list must contain >2 elems
+      return idList[fileIndex+1];
+    }
   }
 }

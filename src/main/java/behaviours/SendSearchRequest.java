@@ -18,7 +18,7 @@ public class SendSearchRequest extends BasicPeerBehaviour {
 
   @Override
   public void action() {
-    if (myPeer().hasWantedFile()) {
+    if (myPeer().hasWantedFile() && myPeer().isConnected()) {
       String wantedFile = myPeer().getWantedFile();
       if (myAgent instanceof SuperPeer) {
         // search local index for wanted file and send file request message to peer with file.
@@ -28,10 +28,7 @@ public class SendSearchRequest extends BasicPeerBehaviour {
         action.setFile(wantedFile);
         basicAgent().sendMessage(ACLMessage.REQUEST, action, superPeer);
       }
-    } else {
-      finished = true;
     }
-
   }
 
 }

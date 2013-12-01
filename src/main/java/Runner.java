@@ -44,7 +44,8 @@ public class Runner extends Agent {
       int minConnectedPeers = config.getInt("peer.min_connected_peers");
       int maxConnectedPeers = config.getInt("peer.max_connected_peers");
       String[] sharedFiles = config.getStringArray("peer.shared_files");
-      Object[] peerArgs = new Object[]{minConnectedPeers, maxConnectedPeers, sharedFiles};
+      String[] wantedFiles = config.getStringArray("peer.wanted_files");
+      Object[] peerArgs = new Object[]{minConnectedPeers, maxConnectedPeers, sharedFiles, wantedFiles};
 
       // instantiate super peers
       int superPeerCount = config.getInt("peers.super");

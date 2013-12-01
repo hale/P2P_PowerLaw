@@ -26,4 +26,13 @@ public interface P2PVocabulary {
   public static final String REQUEST_SEARCH = "RequestSearch";
   public static final String REQUEST_SEARCH_FILE = "file";
   public static final String REQUEST_SEARCH_SENDER_STACK = "senderStack";
+
+  public static final String SEARCH_RESPONSE = "SearchResponse";
+  public static final String SEARCH_RESPONSE_FILE = "file";
+  public static final String SEARCH_RESPONSE_PEER = "peer";
+  public static final String SEARCH_RESPONSE_SENDER_STACK = "senderStack";
+
+  public static final String FILE_REQUEST = "FileRequest";
+  public static final String FILE_REQUEST_FILE = "file";
+
 }
