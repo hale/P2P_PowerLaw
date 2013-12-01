@@ -37,7 +37,8 @@ public class ReceiveSearchResponse extends BasicPeerBehaviour {
         FileRequest request = new FileRequest();
         request.setFile(wantedFile);
         basicAgent().sendMessage(ACLMessage.REQUEST, request, result);
-      } else { // we must be a super peer, and need to pass the message along
+      } else {
+        // we must be a super peer, and need to pass the message along
         AID nextPeer = new AID(senderStack.remove(senderStack.size()-1), AID.ISLOCALNAME);
         response.setSenderStack(StringUtils.join(senderStack, ';'));
         basicAgent().sendMessage(ACLMessage.INFORM, response, nextPeer);

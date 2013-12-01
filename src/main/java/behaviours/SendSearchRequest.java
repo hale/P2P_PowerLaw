@@ -1,34 +1,55 @@
 package behaviours;
 
+import agents.BasicAgent;
 import agents.Peer;
 import agents.SuperPeer;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
+import ontology.actions.FileRequest;
 import ontology.actions.RequestSearch;
 
 /**
  * Searches for file.  Encapsulation slightly breaks down here,
  * since we intervene and search the local index for Super Peers.
  */
-public class SendSearchRequest extends BasicPeerBehaviour {
+public class SendSearchRequest extends TickerBehaviour {
+
+  private static final long MS_DELAY = 1000;
+
   public SendSearchRequest(Peer p) {
-    super(p);
+    super(p, MS_DELAY);
   }
 
   @Override
-  public void action() {
+  public void onTick() {
     if (myPeer().hasWantedFile() && myPeer().isConnected()) {
       String wantedFile = myPeer().getWantedFile();
-      if (myAgent instanceof SuperPeer) {
-        // search local index for wanted file and send file request message to peer with file.
+      if (myAgent instanceof SuperPeer && mySuperPeer().canLocate(wantedFile)) {
+        String result = mySuperPeer().peerWith(wantedFile);
+        FileRequest request = new FileRequest();
+        request.setFile(wantedFile);
+        basicAgent().sendMessage(ACLMessage.REQUEST, request, new AID(result, AID.ISLOCALNAME));
       } else {
         AID superPeer = myPeer().getConnectedPeer();
         RequestSearch action = new RequestSearch();
         action.setFile(wantedFile);
-        basicAgent().sendMessage(ACLMessage.REQUEST, action, superPeer);
+        myPeer().sendMessage(ACLMessage.REQUEST, action, superPeer);
       }
     }
+  }
+
+  private BasicAgent basicAgent() {
+    return (BasicAgent) myAgent;
+  }
+
+  private Peer myPeer() {
+    return (Peer) myAgent;
+  }
+
+  private SuperPeer mySuperPeer() {
+    return (SuperPeer) myAgent;
   }
 
 }

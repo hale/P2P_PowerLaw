@@ -40,6 +40,8 @@ public abstract class Peer extends BasicAgent {
     addBehaviour(new ReceiveConnectResponse(this));
     addBehaviour(new SendSearchRequest(this));
     addBehaviour(new ReceiveSearchResponse(this));
+    addBehaviour(new ReceiveFileRequest(this));
+    addBehaviour(new ReceiveFileResponse(this));
   }
 
   public void addKnownPeers(String peers) {
@@ -100,15 +102,28 @@ public abstract class Peer extends BasicAgent {
     return !connectedPeers.isEmpty();
   }
 
-  public boolean hasWantedFile() {
-    return !wantedFiles.isEmpty();
-  }
-
   public String getWantedFile() {
     return wantedFiles.get(0);
   }
 
   public AID getConnectedPeer() {
     return connectedPeers.get(0);
+  }
+
+  public boolean hasWantedFile() {
+    return !wantedFiles.isEmpty();
+  }
+
+  /**
+   * Simulate file transfer - for these purposes, the name of the file and the file itself are the same thing.
+   */
+  public String getFile(String fileName) {
+    return sharedFiles.get(sharedFiles.indexOf(fileName));
+  }
+
+  public void receiveFile(String file) {
+    wantedFiles.remove(file);
+    sharedFiles.add(file);
+    logger.log(Level.INFO, getLocalName()+" has acquired " + file);
   }
 }

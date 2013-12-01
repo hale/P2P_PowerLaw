@@ -57,14 +57,15 @@ public class SuperPeer extends Peer {
     return sharedFilesIndex.containsKey(file);
   }
 
-  public AID peerWith(String wantedFile) {
-    return sharedFilesIndex.get(wantedFile).get(0);
+  public String peerWith(String wantedFile) {
+    return sharedFilesIndex.get(wantedFile).get(0).getLocalName();
   }
 
   /**
    * Document routing
    */
   public AID closestConnectedPeer(String file) {
+    if (connectedPeers.size() == 0) { }
     if (connectedPeers.size() == 1) { return connectedPeers.get(0); }
 
     int listLength = connectedPeers.size()+1;
@@ -72,12 +73,12 @@ public class SuperPeer extends Peer {
 
     idList[0] = new AID(file, AID.ISLOCALNAME);
     for (int i = 1; i < listLength; i++) {
-      idList[i] = connectedPeers.get(i);
+      idList[i] = connectedPeers.get(i-1);
     }
 
     Arrays.sort(idList);
 
-    int fileIndex = Arrays.binarySearch(idList, file);
+    int fileIndex = Arrays.binarySearch(idList, new AID(file, AID.ISLOCALNAME));
     if (fileIndex == 0) { // first element
       return idList[1];
     } else if(fileIndex == listLength -1) { // last element

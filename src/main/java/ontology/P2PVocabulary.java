@@ -35,4 +35,6 @@ public interface P2PVocabulary {
   public static final String FILE_REQUEST = "FileRequest";
   public static final String FILE_REQUEST_FILE = "file";
 
+  public static final String FILE_RESPONSE = "FileResponse";
+  public static final String FILE_RESPONSE_FILE = "file";
 }
