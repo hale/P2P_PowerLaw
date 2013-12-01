@@ -2,7 +2,6 @@ package behaviours;
 
 import agents.SuperPeer;
 import jade.core.AID;
-import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import ontology.actions.FileList;

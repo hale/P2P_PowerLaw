@@ -1,9 +1,7 @@
 package behaviours;
 
 import agents.Peer;
-import com.google.common.collect.Iterables;
 import jade.core.AID;
-import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import ontology.actions.FileRequest;
@@ -12,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 
 public class ReceiveSearchResponse extends BasicPeerBehaviour {

@@ -1,6 +1,5 @@
 import agents.HostCache;
 import agents.OrdinaryPeer;
-import agents.Peer;
 import agents.SuperPeer;
 import jade.core.Agent;
 import jade.wrapper.AgentController;

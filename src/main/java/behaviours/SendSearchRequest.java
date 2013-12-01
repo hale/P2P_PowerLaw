@@ -4,7 +4,6 @@ import agents.BasicAgent;
 import agents.Peer;
 import agents.SuperPeer;
 import jade.core.AID;
-import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
 import ontology.actions.FileRequest;

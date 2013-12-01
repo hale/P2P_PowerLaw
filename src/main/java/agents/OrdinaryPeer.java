@@ -4,8 +4,6 @@ import behaviours.SendFileList;
 import jade.core.AID;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.ArrayList;
-
 /**
  */
 public class OrdinaryPeer extends Peer {

@@ -5,7 +5,6 @@ import jade.core.AID;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 

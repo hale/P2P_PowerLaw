@@ -5,8 +5,6 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import ontology.actions.FileResponse;
 
-import java.awt.*;
-
 /**
  * Completes the process of acquiring files - the peer at this point has a file.
  */
