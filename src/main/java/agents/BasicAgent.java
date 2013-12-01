@@ -12,6 +12,8 @@ import jade.util.Logger;
 import ontology.P2POntology;
 import ontology.P2PVocabulary;
 
+import java.util.logging.Level;
+
 /**
  * A common set of behaviours for all agents in the system.
  */
@@ -22,6 +24,9 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
   protected Logger logger = Logger.getJADELogger(this.getClass().getName());
 
   protected Object[] args;
+
+  // cumulative count of the number of messages sent by all agents extending BasicAgent
+  private long sentMessages = 0;
 
   @Override
   protected void setup() {
@@ -41,6 +46,14 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
     }
     msg.addReceiver(recipient);
     send(msg);
+
+    sentMessages++;
+    // log every 1000 messages
+    if (sentMessages % 100 == 0) {
+      logger.log(Level.INFO, sentMessages+" messages sent");
+    }
+
+
   }
 
 }

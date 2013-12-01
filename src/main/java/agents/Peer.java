@@ -123,6 +123,5 @@ public abstract class Peer extends BasicAgent {
   public void receiveFile(String file) {
     wantedFiles.remove(file);
     sharedFiles.add(file);
-    logger.log(Level.INFO, getLocalName()+" has acquired " + file);
   }
 }
