@@ -38,7 +38,87 @@
 
 \begin{appendices}
   \section{Usage Instructions}
-  mvn clean compile exec:java
+
+  \subsection{From the command line}
+  To run the simulation from the command line:
+  \begin{enumerate}
+  \item{mvn clean compile exec:java}
+  \end{enumerate}
+
+  \subsection{Eclipse}
+  To run the simulation in Eclipse:
+  \begin{enumerate}
+  \item{Extract the zip to a folder}
+  \item{Using Eclipse, choose: File -> Import -> Maven -> Existing Maven
+  Projects.}
+  \item{Set Root Directory to be the extracted folder. It should identify the
+  pom.xml file}
+  \item{Next -> Finish.
+  \item{Run -> Run Configurations -> Maven Build -> mvn_exec_java}
+  \item{Run}
+  \end{enumerate}
+
+  The simulation will run indefinitely.  The output is a series of 
+
+  \subsubsection{Deviations and limitations}
+  Analysis of the behaviour of the system reveals certain areas which diverge in
+  some way from the required behaviour.
+
+  If a Super Peer is disconnected from the network, then there is no mechanism
+  for its connected peers to be made aware of this fact.  Nonetheless, once a
+  Peer has been told that the Super Peer is disconnected (either by a third part
+  or by the peer periodically Pinging their current connections), the simulation
+  would correctly handle the situation by adding more connections if necessary.
+  Therefore, what remains is an extra Behaviour for all peers to periodically
+  check if their connections are still connected.
+
+  Instead of reporting to the super peer all the files it requests, Peers send
+  search requests individually. The resulting behaviour is identical, although
+  it means for peers with more than 1 Super Peer connection (i.e. Super Peers),
+  each search request may go to a different connected Super Peer.
+
+  One limitation that has surfaced despite following the spec is the potential
+  for islands to form in the network. Since no guarantee is placed on which
+  peers connect to which, it's possible for the network to form into two or more
+  groups.  For example, take the case where Super Peers can have a maximum of 2
+  peers connected to them. Imagine there are 2 Super peers connected to each
+  other, leaving one connection space free for both.  This connection space
+  might be occupied by an Ordinary Peer, for both Super Peers.  This set of 4
+  peers is now unable to join any other parts of the network.  If one of these
+  peers is the peer which has a file everyone else wants (in the case of
+  Scenario 1), the rest of the network will be unable to retrieve this file.
+  This problem can be made less likely by having a smaller number of Super Peers
+  in the network (and adjusting the capacity of super peers accordingly).
+
+  It is not possible to directly change the bandwidth of individual peers or
+  groups of peers. This is largely because of difficulties in specifying
+  individual properties for peers when there are a large number of peers being
+  generated.  In order to simulate the effects of changing the bandwidth of
+  peers, you can specify the proportion of peers that should be Super Peers.
+  This is a probability; no guarantees are given to the actual number of Super
+  Peers.
+
+  \section{Configuration}
+
+  The project can be configured in a variety of ways. For example, by changing
+  the total number of peers or the proportion of Super Peers.
+
+  The configuration supplied is set to create 500 Peers, of which about 125 are
+  Super Peers. Each Super Peer is able to accept connection requests from up to
+  12 Ordinary Peers. Ordinary Peers, as per the spec, always connect to 1 Super
+  Peer.  Super peers on the other hand must connect to 3 other Super Peers. The
+  Host Cache returns the addresses of 10 Super Peers when asked.
+
+  The files shared and wanted by peers are configured to match Scenario 1 in the
+  spec, where 1 peer has a file that everyone else wants.
+
+  There are some additional 
+
+
+
+  For a full list of options and how they change the simulation, see the
+  commented P2P_PowerLaw.properties file.
+
 \end{appendices}
 
 \end{document}
