@@ -1,0 +1,1926 @@
+# the total number of peers
+total_peers = 1000
+
+# Peers with the highest bandwidth become super peers - this determines how
+# many. For example, if you have 100 total peers and set this to be 25, the
+# network will have a total of 25 super peers. No guarantees - this is statistical.
+super_peer_percentage = 2
+
+# how many Super Peer addresses sent back by the Host Cache
+host_cache.max_neighbours = 20
+
+# how many peers a super peer can manage
+super_peer.max_peers = 52
+
+# the min and max number of connected super nodes for an Ordinary Peer
+ordinary_peer.min_connections = 1
+ordinary_peer.max_connections  = 1
+
+# the min and max number of connected super nodes for a Super Peer.
+super_peer.min_connections = 1
+super_peer.max_connections = 1
+
+# the list of shared and wanted files for all peers.
+peer.shared_files =
+peer.wanted_files = Ubuntu.iso
+
+# Override an individual peer in order to represent Scenario 1, where
+# one peer has a file everyone else wants. This peer will be ordinary.
+peer.override = true
+peer.override.shared_files = Ubuntu.iso
+
+# This is how often to log the state of the network, in milliseconds
+runner.report_interval_ms = 1000
+
+# A special stats message is sent to an observer of the network whenever
+# a peer successfully connects or manages to acquire all of their wanted
+# files.
+#
+# An extra stats message can be sent every x number of messages, as below
+#
+# This determines the accuracy of the message count.  If set to 10, the
+# count for number of messages sent overall and per peer will be accurate
+# to within 10*peer_count messages.
+agent.send_stats_every = 50
+
+
+# The simulation will stop when either everyone has acquired their files,
+# or the total number of messages sent exceeds this limit
+runner.total_message_limit = 1000000
+
+# If a peer has a file in their wantedFiles list, they will request it
+# with a gap of milliseconds specified here.
+peer.search_interval_ms = 3000
+
+
+/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/bin/java -Dmaven.home=/usr/local/Cellar/maven/3.1.1/libexec -Dclassworlds.conf=/usr/local/Cellar/maven/3.1.1/libexec/bin/m2.conf -Didea.launcher.port=7537 "-Didea.launcher.bin.path=/Applications/IntelliJ IDEA 12 CE.app/bin" -Dfile.encoding=UTF-8 -classpath "/usr/local/Cellar/maven/3.1.1/libexec/boot/plexus-classworlds-2.5.1.jar:/Applications/IntelliJ IDEA 12 CE.app/lib/idea_rt.jar" com.intellij.rt.execution.application.AppMain org.codehaus.classworlds.Launcher --fail-fast --strict-checksums org.codehaus.mojo:exec-maven-plugin:1.2.1:java
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building P2P_PowerLaw 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw >>>
+[INFO] 
+[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw <<<
+[INFO] 
+[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw ---
+Dec 02, 2013 6:23:00 PM jade.core.Runtime beginContainer
+INFO: ----------------------------------
+    This is JADE 4.3.0 - revision 6664 of 2013/03/27 09:34:17
+    downloaded in Open Source, under LGPL restrictions,
+    at http://jade.tilab.com/
+----------------------------------------
+Dec 02, 2013 6:23:00 PM jade.imtp.leap.LEAPIMTPManager initialize
+INFO: Listening for intra-platform commands on address:
+- jicp://10.105.1.6:1099
+
+Dec 02, 2013 6:23:00 PM jade.core.BaseService init
+INFO: Service jade.core.management.AgentManagement initialized
+Dec 02, 2013 6:23:00 PM jade.core.BaseService init
+INFO: Service jade.core.messaging.Messaging initialized
+Dec 02, 2013 6:23:00 PM jade.core.BaseService init
+INFO: Service jade.core.resource.ResourceManagement initialized
+Dec 02, 2013 6:23:00 PM jade.core.BaseService init
+INFO: Service jade.core.mobility.AgentMobility initialized
+Dec 02, 2013 6:23:00 PM jade.core.BaseService init
+INFO: Service jade.core.event.Notification initialized
+Dec 02, 2013 6:23:01 PM jade.mtp.http.HTTPServer <init>
+INFO: HTTP-MTP Using XML parser com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser
+Dec 02, 2013 6:23:01 PM jade.core.messaging.MessagingService boot
+INFO: MTP addresses:
+http://192.168.0.50:7778/acc
+Dec 02, 2013 6:23:01 PM jade.core.AgentContainerImpl joinPlatform
+INFO: --------------------------------------
+Agent container Main-Container@10.105.1.6 is ready.
+--------------------------------------------
+Dec 02, 2013 6:23:04 PM behaviours.ReportBehaviour <init>
+INFO: 
+== BEGINNING SIMULATION ==
+Total Peers:	1001
+Super Peers:	22
+
+Dec 02, 2013 6:23:05 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	4415
+Total connected peers:	257
+Total finished peers:	0
+
+
+Dec 02, 2013 6:23:06 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	6868
+Total connected peers:	372
+Total finished peers:	0
+
+
+Dec 02, 2013 6:23:07 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	10572
+Total connected peers:	422
+Total finished peers:	0
+
+
+Dec 02, 2013 6:23:08 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	12418
+Total connected peers:	617
+Total finished peers:	2
+
+
+Dec 02, 2013 6:23:09 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	14562
+Total connected peers:	688
+Total finished peers:	3
+
+
+Dec 02, 2013 6:23:10 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	15394
+Total connected peers:	730
+Total finished peers:	15
+
+
+Dec 02, 2013 6:23:11 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	16671
+Total connected peers:	748
+Total finished peers:	32
+
+
+Dec 02, 2013 6:23:12 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	17486
+Total connected peers:	764
+Total finished peers:	37
+
+
+Dec 02, 2013 6:23:13 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	18912
+Total connected peers:	774
+Total finished peers:	38
+
+
+Dec 02, 2013 6:23:14 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	19393
+Total connected peers:	785
+Total finished peers:	43
+
+
+Dec 02, 2013 6:23:15 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	20663
+Total connected peers:	794
+Total finished peers:	43
+
+
+Dec 02, 2013 6:23:16 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	20854
+Total connected peers:	801
+Total finished peers:	43
+
+
+Dec 02, 2013 6:23:17 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	21617
+Total connected peers:	807
+Total finished peers:	47
+
+
+Dec 02, 2013 6:23:18 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	23640
+Total connected peers:	816
+Total finished peers:	47
+
+
+Dec 02, 2013 6:23:19 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	24443
+Total connected peers:	819
+Total finished peers:	47
+
+
+Dec 02, 2013 6:23:20 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	25425
+Total connected peers:	824
+Total finished peers:	49
+
+
+Dec 02, 2013 6:23:21 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	26526
+Total connected peers:	827
+Total finished peers:	49
+
+
+Dec 02, 2013 6:23:22 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	26938
+Total connected peers:	831
+Total finished peers:	50
+
+
+Dec 02, 2013 6:23:23 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	28753
+Total connected peers:	832
+Total finished peers:	62
+
+
+Dec 02, 2013 6:23:24 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	30191
+Total connected peers:	834
+Total finished peers:	97
+
+
+Dec 02, 2013 6:23:25 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	32854
+Total connected peers:	836
+Total finished peers:	163
+
+
+Dec 02, 2013 6:23:26 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	34609
+Total connected peers:	838
+Total finished peers:	212
+
+
+Dec 02, 2013 6:23:27 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	36343
+Total connected peers:	840
+Total finished peers:	283
+
+
+Dec 02, 2013 6:23:28 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	39168
+Total connected peers:	842
+Total finished peers:	349
+
+
+Dec 02, 2013 6:23:30 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	40532
+Total connected peers:	843
+Total finished peers:	368
+
+
+Dec 02, 2013 6:23:31 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	42336
+Total connected peers:	845
+Total finished peers:	395
+
+
+Dec 02, 2013 6:23:32 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	43318
+Total connected peers:	848
+Total finished peers:	416
+
+
+Dec 02, 2013 6:23:33 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	44661
+Total connected peers:	852
+Total finished peers:	427
+
+
+Dec 02, 2013 6:23:34 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	46518
+Total connected peers:	854
+Total finished peers:	443
+
+
+Dec 02, 2013 6:23:35 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	47840
+Total connected peers:	863
+Total finished peers:	453
+
+
+Dec 02, 2013 6:23:36 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	49246
+Total connected peers:	867
+Total finished peers:	473
+
+
+Dec 02, 2013 6:23:37 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	50667
+Total connected peers:	870
+Total finished peers:	495
+
+
+Dec 02, 2013 6:23:38 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	54268
+Total connected peers:	871
+Total finished peers:	518
+
+
+Dec 02, 2013 6:23:39 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	55506
+Total connected peers:	873
+Total finished peers:	530
+
+
+Dec 02, 2013 6:23:40 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	56839
+Total connected peers:	876
+Total finished peers:	546
+
+
+Dec 02, 2013 6:23:41 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	57843
+Total connected peers:	879
+Total finished peers:	555
+
+
+Dec 02, 2013 6:23:42 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	59590
+Total connected peers:	882
+Total finished peers:	572
+
+
+Dec 02, 2013 6:23:43 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	62137
+Total connected peers:	886
+Total finished peers:	580
+
+
+Dec 02, 2013 6:23:44 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	64639
+Total connected peers:	889
+Total finished peers:	592
+
+
+Dec 02, 2013 6:23:45 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	66728
+Total connected peers:	892
+Total finished peers:	608
+
+
+Dec 02, 2013 6:23:46 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	69278
+Total connected peers:	896
+Total finished peers:	619
+
+
+Dec 02, 2013 6:23:47 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	70637
+Total connected peers:	904
+Total finished peers:	626
+
+
+Dec 02, 2013 6:23:48 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	72281
+Total connected peers:	912
+Total finished peers:	647
+
+
+Dec 02, 2013 6:23:49 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	74003
+Total connected peers:	919
+Total finished peers:	662
+
+
+Dec 02, 2013 6:23:50 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	77410
+Total connected peers:	927
+Total finished peers:	681
+
+
+Dec 02, 2013 6:23:52 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	80125
+Total connected peers:	928
+Total finished peers:	707
+
+
+Dec 02, 2013 6:23:53 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	82864
+Total connected peers:	929
+Total finished peers:	722
+
+
+Dec 02, 2013 6:23:54 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	86677
+Total connected peers:	932
+Total finished peers:	742
+
+
+Dec 02, 2013 6:23:55 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	88511
+Total connected peers:	934
+Total finished peers:	748
+
+
+Dec 02, 2013 6:23:56 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	89548
+Total connected peers:	937
+Total finished peers:	767
+
+
+Dec 02, 2013 6:23:57 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	90601
+Total connected peers:	940
+Total finished peers:	777
+
+
+Dec 02, 2013 6:23:58 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	92934
+Total connected peers:	944
+Total finished peers:	792
+
+
+Dec 02, 2013 6:23:59 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	94920
+Total connected peers:	948
+Total finished peers:	809
+
+
+Dec 02, 2013 6:24:00 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	97611
+Total connected peers:	952
+Total finished peers:	819
+
+
+Dec 02, 2013 6:24:01 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	98796
+Total connected peers:	953
+Total finished peers:	831
+
+
+Dec 02, 2013 6:24:02 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	100749
+Total connected peers:	953
+Total finished peers:	843
+
+
+Dec 02, 2013 6:24:03 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	101575
+Total connected peers:	958
+Total finished peers:	848
+
+
+Dec 02, 2013 6:24:04 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	104988
+Total connected peers:	960
+Total finished peers:	856
+
+
+Dec 02, 2013 6:24:05 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	107144
+Total connected peers:	964
+Total finished peers:	861
+
+
+Dec 02, 2013 6:24:06 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	108567
+Total connected peers:	965
+Total finished peers:	863
+
+
+Dec 02, 2013 6:24:07 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	112137
+Total connected peers:	968
+Total finished peers:	869
+
+
+Dec 02, 2013 6:24:08 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	113406
+Total connected peers:	971
+Total finished peers:	873
+
+
+Dec 02, 2013 6:24:09 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	114616
+Total connected peers:	971
+Total finished peers:	874
+
+
+Dec 02, 2013 6:24:10 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	116386
+Total connected peers:	975
+Total finished peers:	879
+
+
+Dec 02, 2013 6:24:11 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	117935
+Total connected peers:	977
+Total finished peers:	879
+
+
+Dec 02, 2013 6:24:12 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	119425
+Total connected peers:	978
+Total finished peers:	880
+
+
+Dec 02, 2013 6:24:13 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	122689
+Total connected peers:	980
+Total finished peers:	888
+
+
+Dec 02, 2013 6:24:14 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	125066
+Total connected peers:	981
+Total finished peers:	891
+
+
+Dec 02, 2013 6:24:15 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	127209
+Total connected peers:	983
+Total finished peers:	894
+
+
+Dec 02, 2013 6:24:16 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	129071
+Total connected peers:	984
+Total finished peers:	897
+
+
+Dec 02, 2013 6:24:17 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	132924
+Total connected peers:	986
+Total finished peers:	901
+
+
+Dec 02, 2013 6:24:18 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	133822
+Total connected peers:	988
+Total finished peers:	903
+
+
+Dec 02, 2013 6:24:19 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	136149
+Total connected peers:	989
+Total finished peers:	905
+
+
+Dec 02, 2013 6:24:20 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	137972
+Total connected peers:	989
+Total finished peers:	913
+
+
+Dec 02, 2013 6:24:21 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	140357
+Total connected peers:	993
+Total finished peers:	915
+
+
+Dec 02, 2013 6:24:23 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	143327
+Total connected peers:	993
+Total finished peers:	917
+
+
+Dec 02, 2013 6:24:24 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	145802
+Total connected peers:	995
+Total finished peers:	919
+
+
+Dec 02, 2013 6:24:25 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	148739
+Total connected peers:	998
+Total finished peers:	922
+
+
+Dec 02, 2013 6:24:26 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	149748
+Total connected peers:	999
+Total finished peers:	926
+
+
+Dec 02, 2013 6:24:27 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	153550
+Total connected peers:	999
+Total finished peers:	931
+
+
+Dec 02, 2013 6:24:28 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	156686
+Total connected peers:	1000
+Total finished peers:	931
+
+
+Dec 02, 2013 6:24:29 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	157906
+Total connected peers:	1000
+Total finished peers:	932
+
+
+Dec 02, 2013 6:24:30 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	161332
+Total connected peers:	1000
+Total finished peers:	932
+
+
+Dec 02, 2013 6:24:31 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	163366
+Total connected peers:	1000
+Total finished peers:	933
+
+
+Dec 02, 2013 6:24:32 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	164100
+Total connected peers:	1000
+Total finished peers:	933
+
+
+Dec 02, 2013 6:24:33 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	168068
+Total connected peers:	1000
+Total finished peers:	933
+
+
+Dec 02, 2013 6:24:34 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	169449
+Total connected peers:	1000
+Total finished peers:	934
+
+
+Dec 02, 2013 6:24:35 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	171750
+Total connected peers:	1000
+Total finished peers:	937
+
+
+Dec 02, 2013 6:24:36 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	173007
+Total connected peers:	1000
+Total finished peers:	939
+
+
+Dec 02, 2013 6:24:37 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	176000
+Total connected peers:	1000
+Total finished peers:	942
+
+
+Dec 02, 2013 6:24:38 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	178232
+Total connected peers:	1000
+Total finished peers:	946
+
+
+Dec 02, 2013 6:24:39 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	180716
+Total connected peers:	1000
+Total finished peers:	949
+
+
+Dec 02, 2013 6:24:40 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	183898
+Total connected peers:	1000
+Total finished peers:	950
+
+
+Dec 02, 2013 6:24:41 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	187156
+Total connected peers:	1000
+Total finished peers:	954
+
+
+Dec 02, 2013 6:24:42 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	191134
+Total connected peers:	1000
+Total finished peers:	957
+
+
+Dec 02, 2013 6:24:43 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	193958
+Total connected peers:	1000
+Total finished peers:	960
+
+
+Dec 02, 2013 6:24:44 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	197012
+Total connected peers:	1000
+Total finished peers:	963
+
+
+Dec 02, 2013 6:24:46 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	199025
+Total connected peers:	1000
+Total finished peers:	964
+
+
+Dec 02, 2013 6:24:47 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	201395
+Total connected peers:	1000
+Total finished peers:	966
+
+
+Dec 02, 2013 6:24:48 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	204923
+Total connected peers:	1000
+Total finished peers:	969
+
+
+Dec 02, 2013 6:24:49 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	207513
+Total connected peers:	1000
+Total finished peers:	970
+
+
+Dec 02, 2013 6:24:50 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	210655
+Total connected peers:	1000
+Total finished peers:	972
+
+
+Dec 02, 2013 6:24:51 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	211926
+Total connected peers:	1000
+Total finished peers:	975
+
+
+Dec 02, 2013 6:24:52 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	215397
+Total connected peers:	1000
+Total finished peers:	977
+
+
+Dec 02, 2013 6:24:53 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	218261
+Total connected peers:	1000
+Total finished peers:	978
+
+
+Dec 02, 2013 6:24:54 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	220542
+Total connected peers:	1000
+Total finished peers:	980
+
+
+Dec 02, 2013 6:24:55 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	222755
+Total connected peers:	1000
+Total finished peers:	981
+
+
+Dec 02, 2013 6:24:56 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	224847
+Total connected peers:	1000
+Total finished peers:	984
+
+
+Dec 02, 2013 6:24:57 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	229123
+Total connected peers:	1000
+Total finished peers:	986
+
+
+Dec 02, 2013 6:24:58 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	230535
+Total connected peers:	1000
+Total finished peers:	988
+
+
+Dec 02, 2013 6:24:59 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	232625
+Total connected peers:	1000
+Total finished peers:	989
+
+
+Dec 02, 2013 6:25:00 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	234878
+Total connected peers:	1000
+Total finished peers:	991
+
+
+Dec 02, 2013 6:25:01 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	237155
+Total connected peers:	1000
+Total finished peers:	992
+
+
+Dec 02, 2013 6:25:02 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	243451
+Total connected peers:	1000
+Total finished peers:	994
+
+
+Dec 02, 2013 6:25:03 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	250328
+Total connected peers:	1000
+Total finished peers:	996
+
+
+Dec 02, 2013 6:25:04 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	253589
+Total connected peers:	1000
+Total finished peers:	998
+
+
+Dec 02, 2013 6:25:05 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	256192
+Total connected peers:	1000
+Total finished peers:	1000
+
+
+Dec 02, 2013 6:25:05 PM behaviours.ReportBehaviour logEndSummary
+INFO: == SIMULATION FINISHED ==
+PEER	MESSAGES SENT
+HOST_CACHE	17225
+SP278	15896
+SP249	15368
+SP554	12800
+SP224	11360
+SP640	11008
+SP715	10058
+SP578	7044
+SP308	6982
+SP20	5581
+OP704	3800
+SP171	3597
+OP479	3480
+OP427	3181
+OP291	3172
+SP792	3030
+OP779	2782
+SP219	2479
+SP857	2459
+SP877	2438
+OP135	2367
+SP136	2329
+SP829	2314
+OP663	1355
+OP956	1278
+SP997	1259
+SP895	1256
+SP905	1214
+SP891	883
+OP54	870
+OP327	828
+OP400	658
+OP839	477
+OP236	451
+OP828	433
+OP803	433
+OP639	433
+OP855	432
+OP846	432
+OP748	432
+OP859	418
+OP755	418
+OP794	406
+OP583	378
+OP600	376
+OP352	373
+OP795	364
+OP698	364
+OP773	364
+OP783	364
+OP708	352
+OP222	349
+OP538	349
+OP643	339
+OP635	311
+OP707	305
+OP875	294
+OP101	293
+OP270	291
+OP552	289
+OP692	289
+OP515	289
+OP499	288
+OP526	288
+OP613	288
+OP424	288
+OP584	288
+OP501	288
+OP579	288
+OP518	288
+OP628	288
+OP604	287
+OP732	277
+OP625	277
+OP734	277
+OP768	276
+OP466	273
+OP340	272
+OP342	272
+OP303	272
+OP505	272
+OP860	265
+OP504	264
+OP687	264
+OP372	263
+OP374	263
+OP490	263
+OP343	263
+OP344	263
+OP458	263
+OP307	263
+OP531	254
+OP525	254
+OP530	254
+OP258	254
+OP575	254
+OP529	254
+OP555	254
+OP422	253
+OP717	251
+OP653	245
+OP658	245
+OP65	245
+OP599	245
+OP69	245
+OP722	243
+OP633	243
+OP532	242
+OP450	242
+OP589	242
+OP425	242
+OP562	242
+OP388	242
+OP521	242
+OP334	242
+OP383	242
+OP448	242
+OP500	242
+OP683	242
+OP292	242
+OP330	242
+OP496	242
+OP540	242
+OP497	242
+OP433	242
+OP669	242
+OP426	242
+OP328	242
+OP556	242
+OP509	242
+OP519	242
+OP317	242
+OP641	242
+OP721	242
+OP299	242
+OP318	242
+OP223	240
+OP153	238
+OP92	237
+OP436	235
+OP338	235
+OP419	235
+OP399	235
+OP688	234
+OP300	234
+OP656	234
+OP495	234
+OP408	234
+OP677	234
+OP618	234
+OP737	232
+OP535	232
+OP777	232
+OP730	231
+OP845	231
+OP912	230
+OP98	228
+OP87	228
+OP107	228
+OP954	227
+OP364	227
+OP256	226
+OP451	226
+OP444	226
+OP164	221
+SP784	219
+OP105	217
+OP77	217
+OP563	210
+OP718	210
+OP809	210
+OP590	210
+OP542	210
+OP449	209
+OP447	209
+OP367	209
+OP498	209
+OP488	209
+OP811	204
+OP614	202
+OP723	201
+OP711	201
+OP802	201
+OP511	201
+OP758	201
+OP546	200
+OP313	200
+OP287	200
+OP729	200
+OP650	200
+OP304	200
+OP350	200
+OP363	200
+OP370	200
+OP815	200
+OP786	200
+OP229	197
+OP778	191
+OP793	191
+OP543	191
+OP861	191
+OP117	186
+OP834	185
+OP994	185
+OP927	185
+OP995	185
+OP933	184
+OP908	184
+OP975	184
+OP882	184
+OP596	181
+OP878	177
+OP900	177
+OP749	171
+OP776	171
+OP455	170
+OP476	170
+OP390	170
+OP493	170
+OP465	170
+OP401	170
+OP316	170
+OP822	163
+OP72	163
+OP753	163
+OP750	162
+OP378	162
+OP353	162
+OP297	162
+OP293	162
+OP539	162
+OP381	162
+OP746	162
+OP301	162
+OP738	162
+OP524	162
+OP406	162
+OP385	162
+OP70	161
+OP158	156
+OP310	155
+OP434	155
+OP323	155
+OP120	155
+OP838	154
+OP68	154
+OP831	154
+OP690	148
+OP853	148
+OP85	148
+OP74	148
+OP887	147
+OP842	147
+OP868	147
+OP976	147
+OP787	147
+OP686	146
+OP220	145
+OP187	144
+OP391	143
+OP110	142
+OP757	141
+OP642	141
+OP835	140
+OP848	140
+OP679	140
+OP836	140
+OP514	139
+OP769	137
+OP123	136
+OP133	136
+OP413	136
+OP728	136
+OP937	135
+OP326	135
+OP331	135
+OP682	135
+OP938	135
+OP332	135
+OP678	134
+OP825	134
+OP764	134
+OP797	134
+OP667	134
+OP982	129
+OP978	129
+OP703	129
+OP580	129
+OP873	129
+OP740	129
+OP356	129
+OP290	128
+OP371	128
+OP281	128
+OP576	128
+OP914	128
+OP713	128
+OP918	128
+OP710	128
+OP766	128
+OP570	128
+OP421	128
+OP320	128
+OP95	127
+OP785	124
+OP712	123
+OP888	122
+OP910	122
+OP934	122
+OP884	122
+OP693	122
+OP649	122
+OP890	122
+OP955	121
+OP731	121
+OP909	121
+OP83	120
+OP10	120
+OP652	116
+OP742	116
+OP949	113
+OP18	113
+OP16	113
+OP968	113
+OP11	113
+OP674	112
+OP714	111
+OP49	110
+OP29	110
+OP41	110
+OP440	110
+OP733	110
+OP646	110
+OP952	107
+OP102	106
+OP82	106
+OP770	106
+OP435	106
+OP837	106
+OP63	106
+OP80	106
+OP989	106
+OP863	105
+OP268	104
+OP396	104
+OP314	104
+OP55	104
+OP45	104
+OP988	103
+OP387	102
+OP953	100
+OP886	99
+OP841	99
+OP980	99
+OP885	99
+OP894	99
+OP361	99
+OP962	99
+OP987	99
+OP856	99
+OP945	99
+OP840	99
+OP854	99
+OP238	99
+OP869	99
+OP351	98
+OP517	98
+OP255	98
+OP991	98
+OP259	98
+OP598	98
+OP358	98
+OP573	98
+OP904	98
+OP9	98
+OP375	98
+OP977	98
+OP558	98
+OP50	98
+OP959	98
+OP601	98
+OP253	98
+OP564	98
+OP876	98
+OP972	98
+OP389	98
+OP930	98
+OP864	98
+OP271	98
+OP322	98
+OP948	98
+OP75	97
+OP557	95
+OP384	94
+OP315	94
+OP874	93
+OP772	92
+OP983	92
+OP866	92
+OP823	92
+OP676	92
+OP981	92
+OP916	92
+OP549	92
+OP919	92
+OP631	92
+OP926	92
+OP893	92
+OP537	92
+OP999	92
+OP759	92
+OP660	92
+OP964	92
+OP931	92
+OP858	92
+OP889	92
+OP622	92
+OP548	92
+OP647	92
+OP638	92
+OP347	91
+OP417	90
+OP551	89
+OP654	89
+OP569	89
+OP533	89
+OP3	88
+OP507	87
+OP591	86
+OP586	86
+OP630	86
+OP870	85
+OP78	84
+OP64	84
+OP67	84
+OP582	83
+OP559	83
+OP6	83
+OP616	83
+OP626	83
+OP606	83
+OP37	82
+OP26	82
+OP52	82
+OP39	82
+OP585	80
+OP431	80
+OP547	80
+OP471	80
+OP487	80
+OP830	80
+OP474	80
+OP99	79
+OP109	79
+OP90	79
+OP114	79
+OP125	79
+OP121	79
+OP103	79
+OP726	78
+OP665	78
+OP691	78
+OP684	78
+OP423	78
+OP12	78
+OP38	77
+OP477	77
+OP416	77
+OP43	77
+OP194	76
+OP745	75
+OP88	74
+OP19	74
+OP632	74
+OP335	74
+OP492	74
+OP407	74
+OP460	74
+OP725	74
+OP478	74
+OP571	72
+OP935	72
+OP824	72
+OP403	72
+OP651	72
+OP56	72
+OP57	72
+OP58	72
+OP932	71
+OP369	71
+OP4	71
+OP366	71
+OP1	71
+OP104	71
+OP963	71
+OP161	71
+OP827	70
+OP94	70
+OP917	69
+OP990	69
+OP901	69
+OP966	69
+SP903	69
+OP974	69
+OP942	68
+OP907	68
+OP923	67
+OP747	67
+OP925	67
+OP672	67
+OP727	67
+OP985	67
+OP602	67
+OP865	67
+OP965	67
+OP360	66
+OP594	66
+OP35	66
+OP146	66
+OP23	66
+OP34	66
+OP93	65
+OP341	65
+OP984	65
+OP472	65
+OP377	65
+OP112	65
+OP76	65
+OP84	64
+OP832	64
+OP2	63
+OP814	63
+OP5	63
+OP17	63
+OP7	63
+OP33	62
+OP359	62
+OP272	62
+OP319	62
+OP348	62
+OP42	62
+OP610	62
+OP661	62
+OP527	62
+OP409	62
+OP24	62
+OP534	62
+OP849	62
+OP523	62
+OP147	61
+OP843	60
+OP587	60
+OP736	60
+OP816	59
+OP8	59
+OP911	59
+OP951	59
+OP788	59
+OP936	59
+OP27	58
+OP664	58
+OP36	58
+OP961	58
+OP47	58
+OP950	58
+OP898	58
+OP40	58
+OP680	58
+OP694	58
+OP906	58
+OP675	57
+OP700	57
+OP536	56
+OPX	56
+OP774	56
+OP15	55
+OP66	55
+OP897	54
+OP800	54
+OP818	54
+OP51	54
+OP867	54
+OP60	54
+OP941	54
+OP645	54
+OP48	54
+OP709	54
+OP871	54
+OP820	54
+OP798	54
+OP46	54
+OP166	53
+OP808	53
+OP826	53
+OP771	53
+OP659	52
+OP141	52
+OP662	52
+OP666	51
+OP805	50
+OP767	50
+OP14	50
+OP61	50
+OP59	50
+OP53	50
+OP716	49
+OP670	49
+OP142	48
+OP696	48
+OP921	48
+OP634	48
+OP207	47
+OP178	47
+OP754	47
+OP623	47
+OP617	47
+OP100	47
+OP228	47
+OP106	47
+OP208	47
+OP202	47
+OP212	47
+OP612	47
+OP211	47
+OP173	47
+OP508	46
+OP957	46
+OP185	45
+OP179	45
+OP188	45
+OP412	44
+OP432	44
+OP442	44
+OP410	44
+OP506	44
+OP127	44
+OP512	44
+OP480	44
+OP237	44
+OP274	44
+OP195	44
+OP241	44
+OP131	44
+OP242	44
+OP629	44
+OP213	44
+OP467	44
+OP216	44
+OP513	44
+OP402	44
+OP201	43
+OP116	43
+OP744	43
+OP221	43
+OP218	43
+OP73	43
+OP197	43
+OP79	43
+OP13	42
+OP193	42
+OP190	42
+OP183	42
+OP206	42
+OP225	42
+OP243	41
+OP973	41
+OP28	41
+OP275	41
+OP25	41
+OP200	41
+OP325	41
+OP150	41
+OP233	41
+OP250	41
+OP970	41
+OP701	41
+OP263	41
+OP186	41
+OP462	41
+OP685	41
+OP264	41
+OP143	41
+OP321	41
+OP170	41
+OP32	41
+OP169	41
+OP302	41
+OP365	41
+OP286	41
+OP246	41
+OP215	41
+OP30	41
+OP879	41
+OP175	40
+OP115	40
+OP162	40
+OP128	40
+OP126	40
+OP395	39
+OP177	39
+OP689	39
+OP724	39
+OP159	39
+OP156	39
+OP176	39
+OP296	39
+OP702	39
+OP165	39
+OP791	39
+OP775	39
+OP763	39
+OP182	39
+OP345	39
+OP756	39
+OP644	39
+OP181	38
+OP261	38
+OP922	38
+OP44	38
+OP31	38
+OP168	38
+OP137	38
+OP355	38
+OP285	38
+OP992	38
+OP354	38
+OP140	38
+OP362	38
+OP144	37
+OP148	37
+OP572	37
+OP657	37
+OP373	37
+OP295	37
+OP762	37
+OP180	37
+OP782	37
+OP379	37
+OP152	37
+OP155	37
+OP309	37
+OP567	37
+OP157	36
+OP267	36
+OP266	36
+OP151	36
+OP280	36
+OP283	36
+OP265	36
+OP305	36
+OP720	35
+OP376	35
+OP735	35
+OP695	35
+OP743	35
+OP553	35
+OP619	35
+OP624	35
+OP577	35
+OP620	35
+OP761	35
+OP603	35
+OP739	35
+OP719	35
+OP592	35
+OP699	35
+OP108	34
+OP252	34
+OP232	34
+OP760	33
+OP705	33
+OP648	33
+OP706	33
+OP781	33
+OP752	33
+OP418	33
+OP655	33
+OP231	33
+OP765	33
+OP339	33
+OP636	33
+OP227	33
+OP239	33
+OP751	33
+OP780	33
+OP605	33
+OP234	33
+OP463	33
+OP741	33
+OP230	32
+OP482	32
+OP520	32
+OP502	32
+OP681	31
+OP469	31
+OP516	31
+OP697	31
+OP565	31
+OP671	31
+OP608	31
+OP611	31
+OP673	31
+OP668	31
+OP429	31
+OP397	30
+OP145	30
+OP191	30
+OP119	30
+OP494	30
+OP134	30
+OP138	30
+OP129	30
+OP615	29
+OP566	29
+OP357	29
+OP311	29
+OP581	29
+OP607	29
+OP545	29
+OP621	29
+OP796	29
+OP609	29
+OP593	29
+OP561	29
+OP124	29
+OP420	29
+OP189	28
+OP205	28
+OP920	28
+OP457	28
+OP172	28
+OP192	28
+OP174	28
+OP456	28
+OP199	28
+OP453	28
+OP473	28
+OP439	27
+OP560	27
+OP336	27
+OP454	27
+OP446	27
+OP568	27
+OP333	27
+OP414	27
+OP550	27
+OP807	27
+OP464	27
+OP541	27
+OP461	27
+OP452	27
+OP380	27
+OP574	27
+OP459	27
+OP160	27
+OP415	27
+OP96	26
+OP382	26
+OP346	26
+OP282	26
+OP484	26
+OP337	26
+OP491	26
+OP510	26
+OP428	26
+OP437	26
+OP217	26
+OP486	26
+OP405	26
+OP443	26
+OP398	26
+OP430	25
+OP269	25
+OP438	25
+OP445	25
+OP489	25
+OP899	25
+OP404	25
+OP483	25
+OP254	25
+OP441	25
+OP470	25
+OP349	25
+OP386	25
+OP475	25
+OP522	25
+OP368	25
+OP411	25
+OP394	25
+OP481	25
+OP485	25
+OP503	25
+OP324	25
+OP468	25
+OP130	24
+OP312	24
+OP122	24
+OP279	24
+OP329	24
+OP294	24
+OP393	24
+OP392	24
+OP273	23
+OP289	23
+OP284	23
+OP251	23
+OP245	23
+OP262	23
+OP257	23
+OP288	23
+OP306	23
+OP277	22
+OP298	22
+OP276	22
+OP240	21
+OP627	21
+OP244	21
+OP637	21
+OP260	21
+OP139	21
+OP226	21
+OP595	20
+OP528	20
+OP588	20
+OP209	19
+OP203	19
+OP248	19
+OP196	19
+OP597	19
+OP958	19
+OP247	19
+OP833	19
+OP198	19
+OP544	19
+OP235	19
+OP204	18
+OP118	17
+OP862	17
+OP86	17
+OP154	17
+OP210	16
+OP184	16
+OP163	15
+OP111	15
+OP924	15
+OP214	15
+OP22	13
+OP892	13
+OP801	13
+OP97	13
+OP167	13
+OP21	13
+OP149	13
+OP132	13
+OP81	13
+OP844	13
+OP810	13
+OP996	13
+OP986	11
+OP62	11
+OP91	11
+OP113	11
+OP902	11
+OP852	11
+OP89	11
+OP71	11
+OP847	11
+OP789	11
+OP851	11
+OP943	9
+OP940	9
+OP946	9
+OP944	9
+OP880	9
+OP960	9
+OP913	9
+OP850	9
+OP928	9
+OP817	9
+OP872	9
+OP967	9
+OP883	9
+OP998	8
+OP804	7
+OP812	7
+OP821	7
+OP939	7
+OP979	7
+OP993	7
+OP790	7
+OP819	7
+OP929	7
+OP947	7
+OP915	7
+OP799	7
+OP813	7
+OP896	7
+OP971	7
+OP969	7
+OP806	7
+OP881	7
+

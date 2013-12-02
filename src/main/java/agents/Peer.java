@@ -35,7 +35,7 @@ public abstract class Peer extends BasicAgent {
     addBehaviour(new ReceiveNeighborsResponse(this));
     addBehaviour(new SendConnectRequest(this));
     addBehaviour(new ReceiveConnectResponse(this));
-    addBehaviour(new SendSearchRequest(this));
+    addBehaviour(new SendSearchRequest(this, (Integer) args[5]));
     addBehaviour(new ReceiveSearchResponse(this));
     addBehaviour(new ReceiveFileRequest(this));
     addBehaviour(new ReceiveFileResponse(this));

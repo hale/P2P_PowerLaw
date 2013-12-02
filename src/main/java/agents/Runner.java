@@ -2,12 +2,18 @@ package agents;
 
 import behaviours.ReceiveNetworkStats;
 import behaviours.ReportBehaviour;
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.*;
+import jade.content.ContentException;
 import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
+import jade.content.onto.basic.Action;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.domain.FIPANames;
+import jade.domain.JADEAgentManagement.JADEManagementOntology;
+import jade.domain.JADEAgentManagement.ShutdownPlatform;
+import jade.lang.acl.ACLMessage;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
@@ -31,10 +37,11 @@ public class Runner extends Agent {
 
   ArrayList<AID> peers = new ArrayList<AID>();
   private HashMultimap<String, AID> peerGroups = HashMultimap.create();
-  private HashMap<AID, Long> messageCounts = new HashMap<AID, Long>();
+  private HashMultiset<AID> messageCounts = HashMultiset.create();
 
   private static final String CONNECTED_PEERS = "Connected Peers";
   private static final String HAS_FOUND_FILES = "Peers that have found all their files.";
+  private int totalMessageLimit;
 
   @Override
   protected void setup() {
@@ -42,6 +49,7 @@ public class Runner extends Agent {
     getContentManager().registerOntology(ontology);
     try {
       Configuration config = new PropertiesConfiguration("P2PPowerLaw.properties");
+      totalMessageLimit = config.getInt("runner.total_message_limit", Integer.MAX_VALUE);
 
       // instantiate host cache
       Object[] hcArgs = new Object[]{
@@ -50,8 +58,6 @@ public class Runner extends Agent {
       };
       newPeer(HostCache.NAME, HostCache.class.getName(), hcArgs);
 
-      Thread.sleep(20);
-
       // super peers
       Object[] sPeerArgs = new Object[] {
           config.getInt("agent.send_stats_every"),
@@ -59,6 +65,7 @@ public class Runner extends Agent {
           config.getInt("super_peer.max_connections"),
           config.getStringArray("peer.shared_files"),
           config.getStringArray("peer.wanted_files"),
+          config.getInt("peer.search_interval_ms"),
           config.getInt("super_peer.max_peers")
       };
 
@@ -68,7 +75,8 @@ public class Runner extends Agent {
           config.getInt("ordinary_peer.min_connections"),
           config.getInt("ordinary_peer.max_connections"),
           config.getStringArray("peer.shared_files"),
-          config.getStringArray("peer.wanted_files")
+          config.getStringArray("peer.wanted_files"),
+          config.getInt("peer.search_interval_ms")
 
       };
       Random rand = new Random();
@@ -80,7 +88,8 @@ public class Runner extends Agent {
             config.getInt("ordinary_peer.min_connections"),
             config.getInt("ordinary_peer.max_connections"),
             config.getStringArray("peer.override.shared_files"),
-            config.getStringArray("peer.wanted_files")
+            config.getStringArray("peer.wanted_files"),
+            config.getInt("peer.search_interval_ms")
         };
         newPeer(OrdinaryPeer.NAME + "X", OrdinaryPeer.class.getName(), overriddenArgs);
       }
@@ -102,8 +111,6 @@ public class Runner extends Agent {
       e.printStackTrace();
     } catch (ConfigurationException e) {
       e.printStackTrace();
-    } catch (InterruptedException e) {
-      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
     }
   }
 
@@ -123,7 +130,7 @@ public class Runner extends Agent {
         peerGroups.put(HAS_FOUND_FILES, sender);
       }
     }
-    messageCounts.put(sender, Long.valueOf(cumMsgCount));
+    messageCounts.add(sender, cumMsgCount);
   }
 
   public int totalPeersSize() {
@@ -142,11 +149,7 @@ public class Runner extends Agent {
   }
 
   public long totalMessagesSent() {
-    long total = 0;
-    for (long count : messageCounts.values()) {
-      total += count;
-    }
-    return total;
+    return messageCounts.size();
   }
 
   public int totalConnectedPeers() {
@@ -158,4 +161,20 @@ public class Runner extends Agent {
     return peerGroups.get(HAS_FOUND_FILES).size();
   }
 
+  /**
+   * Determines when to 'stop'.
+   *
+   * @return True if either everyone has acquired their files, or message limit reached.
+   */
+  public boolean simulationComplete() {
+    return ((totalConnectedPeers() == totalFinishedPeers()) || (totalMessagesSent() > totalMessageLimit));
+  }
+
+  public ArrayList<AID> getPeers() {
+    return peers;
+  }
+
+  public ImmutableMultiset<AID> getOrderedMsgCounts() {
+    return Multisets.copyHighestCountFirst(messageCounts);
+  }
 }

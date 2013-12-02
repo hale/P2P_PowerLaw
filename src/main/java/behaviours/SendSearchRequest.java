@@ -15,10 +15,8 @@ import ontology.actions.RequestSearch;
  */
 public class SendSearchRequest extends TickerBehaviour {
 
-  private static final long MS_DELAY = 1000;
-
-  public SendSearchRequest(Peer p) {
-    super(p, MS_DELAY);
+  public SendSearchRequest(Peer p, int delay) {
+    super(p, delay);
   }
 
   @Override

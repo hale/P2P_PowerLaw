@@ -1,0 +1,228 @@
+Dec 02, 2013 3:33:46 AM behaviours.ReportBehaviour <init>
+INFO: 
+== BEGINNING SIMULATION ==
+Total Peers:	1001
+Super Peers:	189
+
+Dec 02, 2013 3:33:47 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	33
+Total connected peers:	9
+Total finished peers:	0
+
+
+Dec 02, 2013 3:33:48 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	534
+Total connected peers:	68
+Total finished peers:	0
+
+
+Dec 02, 2013 3:33:49 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	1051
+Total connected peers:	108
+Total finished peers:	0
+
+
+Dec 02, 2013 3:33:50 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	1460
+Total connected peers:	157
+Total finished peers:	2
+
+
+Dec 02, 2013 3:33:51 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	1868
+Total connected peers:	171
+Total finished peers:	4
+
+
+Dec 02, 2013 3:33:52 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	2179
+Total connected peers:	193
+Total finished peers:	4
+
+
+Dec 02, 2013 3:33:53 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	2431
+Total connected peers:	203
+Total finished peers:	4
+
+
+Dec 02, 2013 3:33:54 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	2634
+Total connected peers:	212
+Total finished peers:	4
+
+
+Dec 02, 2013 3:33:55 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	3166
+Total connected peers:	226
+Total finished peers:	8
+
+
+Dec 02, 2013 3:33:56 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	3721
+Total connected peers:	244
+Total finished peers:	11
+
+
+Dec 02, 2013 3:33:57 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	3915
+Total connected peers:	276
+Total finished peers:	12
+
+
+Dec 02, 2013 3:33:58 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	4562
+Total connected peers:	385
+Total finished peers:	16
+
+
+Dec 02, 2013 3:34:00 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	5021
+Total connected peers:	452
+Total finished peers:	23
+
+
+Dec 02, 2013 3:34:01 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	6525
+Total connected peers:	570
+Total finished peers:	74
+
+
+Dec 02, 2013 3:34:02 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	7420
+Total connected peers:	635
+Total finished peers:	101
+
+
+Dec 02, 2013 3:34:03 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	8370
+Total connected peers:	701
+Total finished peers:	130
+
+
+Dec 02, 2013 3:34:04 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	9808
+Total connected peers:	768
+Total finished peers:	175
+
+
+Dec 02, 2013 3:34:05 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	11891
+Total connected peers:	853
+Total finished peers:	300
+
+
+Dec 02, 2013 3:34:06 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	13545
+Total connected peers:	912
+Total finished peers:	427
+
+
+Dec 02, 2013 3:34:07 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	15812
+Total connected peers:	960
+Total finished peers:	599
+
+
+Dec 02, 2013 3:34:08 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	18846
+Total connected peers:	971
+Total finished peers:	802
+
+
+Dec 02, 2013 3:34:09 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	22394
+Total connected peers:	978
+Total finished peers:	906
+
+
+Dec 02, 2013 3:34:10 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	26685
+Total connected peers:	987
+Total finished peers:	974
+
+
+Dec 02, 2013 3:34:11 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	31416
+Total connected peers:	996
+Total finished peers:	993
+
+
+Dec 02, 2013 3:34:12 AM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	34981
+Total connected peers:	1000
+Total finished peers:	1000# the total number of peers
+total_peers = 1000
+
+# Peers with the highest bandwidth become super peers - this determines how
+# many. For example, if you have 100 total peers and set this to be 25, the
+# network will have a total of 25 super peers. No guarantees - this is statistical.
+super_peer_percentage = 20
+
+# how many Super Peer addresses sent back by the Host Cache
+host_cache.max_neighbours = 10
+
+# how many peers a super peer can manage
+super_peer.max_peers = 25
+
+# the min and max number of connected super nodes for an Ordinary Peer
+ordinary_peer.min_connections = 2
+ordinary_peer.max_connections  = 2
+
+# the min and max number of connected super nodes for a Super Peer.
+super_peer.min_connections = 4
+super_peer.max_connections = 4
+
+# SCENARIO 1
+
+
+# the list of shared and wanted files for all peers.
+peer.shared_files = Ubuntu.iso
+peer.wanted_files = Fedora.iso
+
+# Override an individual peer in order to represent Scenario 1, where
+# one peer has a file everyone else wants. This peer will be ordinary.
+peer.override = true
+peer.override.shared_files = Ubuntu.iso, Fedora.iso
+
+# This is how often to log the state of the network, in milliseconds
+runner.report_interval_ms = 1000
+
+# A special stats message is sent to an observer of the network whenever
+# a peer successfully connects or manages to acquire all of their wanted
+# files.
+#
+# An extra stats message can be sent every x number of messages, as below
+#
+# This determines the accuracy of the message count.  If set to 10, the
+# count for number of messages sent overall and per peer will be accurate
+# to within 10 messages.
+agent.send_stats_every = 100
+
+
+

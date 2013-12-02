@@ -10,19 +10,35 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage[export]{adjustbox}
+\usepackage[titletoc,title,header,page]{appendix}
 
 \author{Philip Hale}
 \title{CS3017 Assessment: A Power-Law Peer-to-Peer System}
 
 \begin{document}
 
-\maketitle
-
-\dosecttoc
-\tableofcontents
+\begin{titlepage}
+  \maketitle
+  %\vfill
+  \begin{abstract}
+  A peer-to-peer system consisting of Super Peers and Ordinary Peers, operating
+  in a power-law topology. The peers interact to exchange files using the
+  document routing P2P model. The application is implemented in the Java Agent
+  DEvelopment Framework (JADE), and ships with a default configuration that
+  simulates `Scenario 1', where one peer has a file which all other peers want.
+  See Appendix 1 For details on configuration and running the simulation.
+  \end{abstract}
+  \dosecttoc
+  \tableofcontents
+\end{titlepage}
 
 \include{peer_behaviour}
 \include{protocols}
 \include{messages}
+
+\begin{appendices}
+  \section{Usage Instructions}
+  mvn clean compile exec:java
+\end{appendices}
 
 \end{document}

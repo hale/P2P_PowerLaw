@@ -21,7 +21,7 @@ public class SuperPeer extends Peer {
   @Override
   protected void setup() {
     super.setup();
-    MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[5]; // 1 because 0,1,2,3 used in Peer. Sorry.
+    MAX_CONNECTED_ORDINARY_PEERS = (Integer) args[6];
     addBehaviour(new ReceiveConnectRequest(this));
     addBehaviour(new ReceiveFileList(this));
     addBehaviour(new ReceiveSearchRequest(this));

@@ -41,7 +41,6 @@ public abstract class BasicAgentBehaviour extends SimpleBehaviour {
 
       private Class action;
 
-      @Override
       public boolean match(ACLMessage msg) {
         ContentElement content = null;
         try {

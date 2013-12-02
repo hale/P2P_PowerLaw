@@ -1,11 +1,81 @@
+# AUML generation
+*.tk
+
+# LaTeX
+*.pdf
+*.eps
+*.log
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.dvi
+# *.ps
+# *.eps
+# *.pdf
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+*.fdb_latexmk
+*.synctex.gz
+*.pdfsync
+*.alg
+*.loa
+*.thm
+*.nav
+*.snm
+*.vrb
+*.acn
+*.acr
+*.glg
+*.glo
+*.gls
+*.brf
+*.lol
+*.idx
+*.ilg
+*.ind
+*.ist
+*.maf
+*.mtc
+*.mtc0
+*.pyg
+*.nlo
+*.tdo
+*.xdy
+
+
+# IntelliJ
 .idea/workspace.xml
 .idea/tasks.xml
 out
 APDescription.txt
 MTPs-Main-Container.txt
-*.tk
-*.pdf
-*.eps
-*.log
 lib
 target
+
+# Eclipse
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# Java
+*.class
+*.jar
+*.war
+*.ear

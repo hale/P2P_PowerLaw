@@ -12,3 +12,4 @@ wish protocol_file_search.tk
 wish protocol_acquire_file.tk
 
 pdflatex -shell-escape report.tex
+open report.pdf

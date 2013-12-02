@@ -1,10 +1,22 @@
 package behaviours;
 
 import agents.Runner;
+import com.google.common.collect.ImmutableMultiset;
+import com.google.common.collect.Multiset;
+import jade.content.lang.Codec;
+import jade.content.lang.sl.SLCodec;
+import jade.content.onto.Ontology;
+import jade.content.onto.basic.Action;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
+import jade.domain.JADEAgentManagement.JADEManagementOntology;
+import jade.domain.JADEAgentManagement.ShutdownPlatform;
+import jade.lang.acl.ACLMessage;
 import jade.util.Logger;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 
 public class ReportBehaviour extends TickerBehaviour {
@@ -40,18 +52,26 @@ public class ReportBehaviour extends TickerBehaviour {
     sb.append("\n");
     logger.log(Level.INFO, sb.toString());
 
-//    if (runner.allHaveFoundFiles()) {
-//      logEndSummary();
-//    }
+    if (runner.simulationComplete()) {
+      logEndSummary();
+      stop();
+    }
   }
 
   private void logEndSummary() {
     sb = new StringBuilder();
-    sb.append("== STATS ==");
-//    HashMap<AID, NetworkStats>runner.getAllStats();
-
-
+    sb.append("== SIMULATION FINISHED ==");
     sb.append("\n");
+    sb.append("PEER\tMESSAGES SENT");
+    sb.append("\n");
+    ImmutableMultiset<AID> msgCounts = runner.getOrderedMsgCounts();
+    for (Multiset.Entry<AID> count : msgCounts.entrySet()) {
+      String name = count.getElement().getLocalName();
+      sb.append(name);
+      sb.append("\t");
+      sb.append(count.getCount());
+      sb.append("\n");
+    }
     logger.log(Level.INFO, sb.toString());
   }
 

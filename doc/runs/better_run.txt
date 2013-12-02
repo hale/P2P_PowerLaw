@@ -1,0 +1,722 @@
+# the total number of peers
+total_peers = 500
+
+# Peers with the highest bandwidth become super peers - this determines how
+# many. For example, if you have 100 total peers and set this to be 25, the
+# network will have a total of 25 super peers. No guarantees - this is statistical.
+super_peer_percentage = 25
+
+# how many Super Peer addresses sent back by the Host Cache
+host_cache.max_neighbours = 10
+
+# how many peers a super peer can manage
+super_peer.max_peers = 10
+
+# the min and max number of connected super nodes for an Ordinary Peer
+ordinary_peer.min_connections = 1
+ordinary_peer.max_connections  = 1
+
+# the min and max number of connected super nodes for a Super Peer.
+super_peer.min_connections = 3
+super_peer.max_connections = 3
+
+# the list of shared and wanted files for all peers.
+peer.shared_files =
+peer.wanted_files = Ubuntu.iso
+
+# Override an individual peer in order to represent Scenario 1, where
+# one peer has a file everyone else wants. This peer will be ordinary.
+peer.override = true
+peer.override.shared_files = Ubuntu.iso
+
+# This is how often to log the state of the network, in milliseconds
+runner.report_interval_ms = 1000
+
+# A special stats message is sent to an observer of the network whenever
+# a peer successfully connects or manages to acquire all of their wanted
+# files.
+#
+# An extra stats message can be sent every x number of messages, as below
+#
+# This determines the accuracy of the message count.  If set to 10, the
+# count for number of messages sent overall and per peer will be accurate
+# to within 10*peer_count messages.
+agent.send_stats_every = 50
+
+
+# The simulation will stop when either everyone has acquired their files,
+# or the total number of messages sent exceeds this limit
+runner.total_message_limit = 100000
+
+
+/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/bin/java -Dmaven.home=/usr/local/Cellar/maven/3.1.1/libexec -Dclassworlds.conf=/usr/local/Cellar/maven/3.1.1/libexec/bin/m2.conf -Didea.launcher.port=7539 "-Didea.launcher.bin.path=/Applications/IntelliJ IDEA 12 CE.app/bin" -Dfile.encoding=UTF-8 -classpath "/usr/local/Cellar/maven/3.1.1/libexec/boot/plexus-classworlds-2.5.1.jar:/Applications/IntelliJ IDEA 12 CE.app/lib/idea_rt.jar" com.intellij.rt.execution.application.AppMain org.codehaus.classworlds.Launcher --fail-fast --strict-checksums org.codehaus.mojo:exec-maven-plugin:1.2.1:java
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building P2P_PowerLaw 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw >>>
+[INFO] 
+[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw <<<
+[INFO] 
+[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw ---
+Dec 02, 2013 4:54:40 PM jade.core.Runtime beginContainer
+INFO: ----------------------------------
+    This is JADE 4.3.0 - revision 6664 of 2013/03/27 09:34:17
+    downloaded in Open Source, under LGPL restrictions,
+    at http://jade.tilab.com/
+----------------------------------------
+Dec 02, 2013 4:54:40 PM jade.imtp.leap.LEAPIMTPManager initialize
+INFO: Listening for intra-platform commands on address:
+- jicp://10.105.1.6:1099
+
+Dec 02, 2013 4:54:40 PM jade.core.BaseService init
+INFO: Service jade.core.management.AgentManagement initialized
+Dec 02, 2013 4:54:40 PM jade.core.BaseService init
+INFO: Service jade.core.messaging.Messaging initialized
+Dec 02, 2013 4:54:40 PM jade.core.BaseService init
+INFO: Service jade.core.resource.ResourceManagement initialized
+Dec 02, 2013 4:54:40 PM jade.core.BaseService init
+INFO: Service jade.core.mobility.AgentMobility initialized
+Dec 02, 2013 4:54:40 PM jade.core.BaseService init
+INFO: Service jade.core.event.Notification initialized
+Dec 02, 2013 4:54:40 PM jade.mtp.http.HTTPServer <init>
+INFO: HTTP-MTP Using XML parser com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser
+Dec 02, 2013 4:54:40 PM jade.core.messaging.MessagingService boot
+INFO: MTP addresses:
+http://192.168.0.50:7778/acc
+Dec 02, 2013 4:54:40 PM jade.core.AgentContainerImpl joinPlatform
+INFO: --------------------------------------
+Agent container Main-Container@10.105.1.6 is ready.
+--------------------------------------------
+Dec 02, 2013 4:54:42 PM behaviours.ReportBehaviour <init>
+INFO: 
+== BEGINNING SIMULATION ==
+Total Peers:	501
+Super Peers:	130
+
+Dec 02, 2013 4:54:43 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	2383
+Total connected peers:	190
+Total finished peers:	2
+
+
+Dec 02, 2013 4:54:45 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	3142
+Total connected peers:	226
+Total finished peers:	6
+
+
+Dec 02, 2013 4:54:46 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	3338
+Total connected peers:	240
+Total finished peers:	6
+
+
+Dec 02, 2013 4:54:47 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	4137
+Total connected peers:	261
+Total finished peers:	8
+
+
+Dec 02, 2013 4:54:48 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	4687
+Total connected peers:	268
+Total finished peers:	9
+
+
+Dec 02, 2013 4:54:49 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	7271
+Total connected peers:	378
+Total finished peers:	24
+
+
+Dec 02, 2013 4:54:50 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	9954
+Total connected peers:	476
+Total finished peers:	43
+
+
+Dec 02, 2013 4:54:51 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	17413
+Total connected peers:	494
+Total finished peers:	106
+
+
+Dec 02, 2013 4:54:52 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	20698
+Total connected peers:	497
+Total finished peers:	164
+
+
+Dec 02, 2013 4:54:53 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	25878
+Total connected peers:	498
+Total finished peers:	222
+
+
+Dec 02, 2013 4:54:54 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	28976
+Total connected peers:	498
+Total finished peers:	255
+
+
+Dec 02, 2013 4:54:55 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	38479
+Total connected peers:	499
+Total finished peers:	360
+
+
+Dec 02, 2013 4:54:56 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	60611
+Total connected peers:	500
+Total finished peers:	448
+
+
+Dec 02, 2013 4:54:57 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	69824
+Total connected peers:	500
+Total finished peers:	467
+
+
+Dec 02, 2013 4:54:58 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	76642
+Total connected peers:	500
+Total finished peers:	475
+
+
+Dec 02, 2013 4:54:59 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	92276
+Total connected peers:	500
+Total finished peers:	481
+
+
+Dec 02, 2013 4:55:00 PM behaviours.ReportBehaviour onTick
+INFO: == STATS ==
+Total messages sent:	104908
+Total connected peers:	500
+Total finished peers:	488
+
+
+Dec 02, 2013 4:55:00 PM behaviours.ReportBehaviour logEndSummary
+INFO: == SIMULATION FINISHED ==
+PEER	MESSAGES SENT
+HOST_CACHE	2705
+SP72	1582
+SP92	1562
+SP58	1559
+SP80	1467
+SP94	1386
+SP63	1298
+SP66	1298
+SP95	1268
+SP225	1201
+SP77	1175
+SP59	1171
+SP25	1116
+SP99	1115
+SP28	1053
+SP236	1042
+SP76	1041
+SP98	1034
+SP125	1029
+SP70	1013
+SP190	961
+SP164	936
+SP62	921
+SP47	914
+SP208	912
+SP78	886
+SP83	866
+SP35	852
+SP54	840
+SP150	834
+SP49	831
+SP230	829
+SP186	825
+SP243	821
+SP210	816
+SP114	812
+SP209	781
+SP214	768
+SP65	760
+SP165	728
+SP184	716
+SP147	673
+SP115	667
+SP245	643
+OP176	626
+SP161	605
+SP20	591
+SP272	586
+SP134	560
+SP42	556
+SP38	547
+SP173	544
+SP203	530
+OP113	525
+OP87	464
+OP232	464
+OP67	459
+SP135	457
+SP102	453
+OP212	446
+SP327	421
+OP89	406
+OP110	404
+SP219	403
+SP90	399
+SP241	397
+OP235	397
+SP40	392
+OP266	387
+SP244	385
+OP68	377
+OP262	373
+SP112	372
+OP201	371
+SP202	364
+OP108	362
+SP233	355
+OP51	353
+SP302	351
+OP193	351
+SP8	346
+OP74	345
+OP1	340
+SP309	335
+SP116	321
+SP285	319
+OP143	318
+SP349	312
+OP60	312
+SP109	311
+SP140	305
+SP118	304
+OP218	295
+SP251	291
+OP32	286
+SP174	282
+SP308	280
+OP224	270
+OP146	269
+OP93	267
+OP269	257
+OP119	254
+OP178	253
+SP370	253
+OP69	252
+OP179	249
+OP106	246
+OP311	244
+OP320	243
+SP56	241
+OP5	232
+OP226	232
+OP133	227
+SP335	225
+SP344	223
+OP132	222
+SP46	221
+SP358	221
+OP213	220
+OP84	218
+OP61	218
+SP407	217
+SP338	216
+OP36	213
+OP27	212
+OP181	209
+OP153	209
+OP195	206
+OP64	205
+OP141	203
+OP144	202
+OP137	201
+OP252	200
+OP33	198
+OP239	198
+OP121	198
+OP97	196
+OP101	195
+OP120	195
+OP71	193
+OP34	193
+SP332	190
+OP41	190
+OP138	190
+OP207	189
+SP15	189
+OP39	189
+OP86	189
+SP157	186
+OP246	186
+OP131	184
+OP26	184
+OP127	183
+OP145	183
+OP268	180
+OP79	180
+OP82	179
+OP249	178
+OP52	178
+OP189	176
+OP180	175
+SP9	175
+OP204	173
+OP286	173
+OP156	171
+OP122	166
+OP130	165
+OP182	163
+OP183	160
+OP88	160
+OP167	160
+OP103	160
+OP273	159
+OP139	159
+OP31	158
+OP215	157
+SP310	156
+OP234	154
+OP126	154
+SP256	153
+OP24	151
+OP160	151
+OP43	150
+OP172	149
+OP23	149
+OP247	149
+OP265	149
+OP57	147
+OP240	146
+OP169	146
+OP100	144
+OP259	143
+OP105	143
+SP375	142
+OP175	140
+OP163	140
+OP188	140
+OP192	138
+OP152	138
+SP301	137
+OP242	137
+OP250	137
+OP124	136
+OP227	135
+OP248	135
+OP191	135
+OP166	134
+SP258	133
+OP117	132
+OP211	131
+OP229	130
+OP330	130
+OP326	128
+OP324	128
+OP171	127
+OP37	125
+OP264	124
+SP280	124
+OP376	124
+OP354	122
+OP199	122
+OP397	122
+SP341	121
+OP254	121
+OP159	121
+OP44	120
+OP158	120
+OP331	119
+OP223	118
+OP104	118
+OP307	118
+OP350	117
+OP337	117
+OP255	116
+SP417	114
+OP170	114
+OP312	112
+OP187	112
+OP363	111
+OP162	111
+OP278	111
+OP403	111
+OP270	109
+OP222	109
+OP390	106
+OP391	106
+OP343	106
+OP231	105
+OP198	103
+OP196	102
+OP206	101
+OP492	100
+OP347	100
+OP290	99
+OP194	99
+OP274	99
+OP238	98
+SP404	97
+SP453	97
+OP107	97
+OP177	96
+OP289	95
+OP369	94
+OP253	94
+OP318	94
+OP287	94
+OP228	93
+OP382	93
+OP346	93
+OP328	93
+OP197	92
+OP340	91
+OP220	90
+SP445	89
+OP339	88
+OP200	88
+OP298	88
+OP154	88
+OP55	88
+OP336	87
+OP360	87
+OP261	87
+OP185	86
+OP237	86
+OP400	86
+OP342	85
+OP437	85
+OP348	85
+OP263	84
+OP48	83
+OP361	83
+OP295	82
+OP378	82
+OP334	82
+OP276	82
+OP443	81
+OP319	80
+OP73	80
+SP385	80
+OP351	79
+OP148	79
+OP291	78
+OP365	78
+OP297	77
+SP466	76
+OPX	76
+SP321	75
+OP136	75
+OP111	73
+OP410	73
+OP217	73
+OP387	73
+SP282	72
+OP168	71
+OP281	71
+OP221	71
+OP260	68
+OP91	68
+OP271	68
+OP323	67
+OP389	67
+OP292	67
+OP303	66
+OP413	66
+OP288	65
+OP45	65
+OP123	64
+OP388	64
+OP267	64
+OP306	63
+OP85	63
+OP364	63
+OP322	63
+OP53	63
+OP216	62
+OP257	61
+OP362	61
+OP14	60
+OP329	59
+OP477	59
+OP22	59
+OP377	59
+OP384	59
+OP394	59
+OP422	58
+OP371	56
+OP473	56
+OP465	56
+OP434	55
+OP151	55
+OP50	55
+OP425	54
+OP421	54
+OP469	54
+OP155	54
+OP386	54
+OP16	53
+OP345	53
+SP305	52
+SP355	52
+OP304	52
+OP128	52
+OP420	51
+OP475	51
+OP75	50
+SP418	50
+OP474	50
+OP468	50
+OP149	49
+SP470	49
+OP205	48
+OP379	48
+OP21	47
+OP314	47
+OP406	47
+OP405	47
+OP129	47
+OP464	46
+OP81	46
+OP481	46
+OP433	45
+OP401	45
+OP277	45
+OP333	45
+OP444	45
+OP294	44
+SP454	44
+OP487	44
+OP356	44
+OP11	44
+SP498	43
+OP29	43
+SP414	42
+OP142	42
+OP359	41
+OP490	41
+SP396	41
+OP279	41
+OP299	41
+SP439	41
+OP412	40
+OP460	39
+OP4	39
+OP478	39
+OP315	39
+OP429	39
+OP293	38
+OP357	38
+OP440	38
+SP380	37
+OP2	35
+OP455	35
+OP17	35
+OP7	35
+SP374	35
+OP10	35
+OP283	35
+OP471	35
+OP325	34
+OP366	34
+SP486	33
+OP284	32
+OP442	32
+OP482	32
+OP467	32
+OP485	32
+OP30	32
+OP18	30
+SP499	30
+SP448	30
+OP381	30
+OP398	30
+OP96	29
+OP436	29
+OP479	29
+OP300	29
+SP449	29
+SP416	29
+OP367	28
+SP415	27
+SP431	27
+OP353	26
+OP393	26
+SP428	26
+OP488	25
+OP316	25
+OP352	24
+OP19	24
+OP435	24
+OP13	23
+OP275	22
+OP372	21
+OP461	20
+OP447	20
+OP6	20
+OP3	20
+OP457	20
+OP373	19
+SP452	18
+OP489	18
+OP419	17
+OP450	17
+OP438	17
+OP411	17
+OP12	17
+OP296	16
+SP480	16
+SP441	16
+OP424	15
+OP483	15
+OP427	15
+OP313	15
+OP462	15
+OP408	14
+OP472	14
+OP495	13
+SP494	13
+OP496	13
+OP463	13
+OP491	13
+OP432	12
+OP317	12
+OP476	12
+OP458	11
+OP497	10
+OP423	10
+SP426	10
+SP395	10
+SP493	10
+SP459	10
+OP456	9
+OP368	7
+OP383	6
+OP430	3
+OP446	3
+OP399	3
+OP402	3
+SP392	3
+OP409	2
+SP451	2
+OP484	2
+
