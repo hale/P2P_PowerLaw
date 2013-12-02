@@ -63,9 +63,9 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
     String messageName = action.getClass().getSimpleName();
     messageStats.add(messageName, 1);
 
-    if (messageStats.count(messageName) > 1000) {
-      logger.log(Level.WARNING, getLocalName()+" is sending this a lot: "+messageName);
-    }
+//    if (messageStats.count(messageName) > 1000) {
+//      logger.log(Level.WARNING, getLocalName()+" is sending this a lot: "+messageName);
+//    }
   }
 
   public void sendStats() {
