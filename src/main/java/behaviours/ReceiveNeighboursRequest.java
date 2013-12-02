@@ -36,7 +36,7 @@ public class ReceiveNeighboursRequest extends BasicAgentBehaviour {
       response.setPeerList(neighbours);
       basicAgent().sendMessage(ACLMessage.INFORM, response, sender);
     }
-  }// Never finish
+  }
 
   private HostCache hostCache() {
     return (HostCache) myAgent;

@@ -2,12 +2,10 @@ package agents;
 
 import behaviours.*;
 import jade.core.AID;
-import jade.util.Logger;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
 
 /**
  * Behaviour of all peers, both Ordinary and Super
@@ -29,10 +27,10 @@ public abstract class Peer extends BasicAgent {
   @Override
   protected void setup() {
     super.setup();
-    MIN_CONNECTED_PEERS = (Integer) args[0];
-    MAX_CONNECTED_PEERS = (Integer) args[1];
-    sharedFiles = new ArrayList<String>(Arrays.asList((String[]) args[2]));
-    wantedFiles = new ArrayList<String>(Arrays.asList((String[]) args[3]));
+    MIN_CONNECTED_PEERS = (Integer) args[1];
+    MAX_CONNECTED_PEERS = (Integer) args[2];
+    sharedFiles = new ArrayList<String>(Arrays.asList((String[]) args[3]));
+    wantedFiles = new ArrayList<String>(Arrays.asList((String[]) args[4]));
     addBehaviour(new SendNeighboursRequest(this));
     addBehaviour(new ReceiveNeighborsResponse(this));
     addBehaviour(new SendConnectRequest(this));
@@ -51,7 +49,6 @@ public abstract class Peer extends BasicAgent {
       if (connectedPeers.contains(knownPeer) || connectPendingPeers.contains(knownPeer)) { continue; }
       knownPeers.add(knownPeer);
     }
-    logger.log(Logger.INFO, getLocalName() + " now has  " + knownPeers.size() + " knownPeers");
   }
 
   public boolean hasRequestedPeers() {
@@ -93,8 +90,6 @@ public abstract class Peer extends BasicAgent {
 
   public void addConnectedPeer(AID peer) {
     connectedPeers.add(peer);
-    logger.log(Level.INFO, getLocalName() + " adds " + peer.getLocalName() + " to connectedPeers. \n" +
-        getLocalName()+" now has this many connectedPeers: " + connectedPeers.size());
   }
 
   public boolean isConnected() {
@@ -124,4 +119,31 @@ public abstract class Peer extends BasicAgent {
     wantedFiles.remove(file);
     sharedFiles.add(file);
   }
-}
+
+  /**
+   * Document routing
+   */
+  public AID closestConnectedPeer(String file) {
+    if (connectedPeers.size() == 0) { }
+    if (connectedPeers.size() == 1) { return connectedPeers.get(0); }
+
+    int listLength = connectedPeers.size()+1;
+    AID[] idList = new AID[listLength];
+
+    idList[0] = new AID(file, AID.ISLOCALNAME);
+    for (int i = 1; i < listLength; i++) {
+      idList[i] = connectedPeers.get(i-1);
+    }
+
+    Arrays.sort(idList);
+
+    int fileIndex = Arrays.binarySearch(idList, new AID(file, AID.ISLOCALNAME));
+    if (fileIndex == 0) { // first element
+      return idList[1];
+    } else if(fileIndex == listLength -1) { // last element
+      return idList[listLength-2];
+    } else { // list must contain >2 elems
+      return idList[fileIndex+1];
+    }
+  }
+ }

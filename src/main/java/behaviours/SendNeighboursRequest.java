@@ -5,7 +5,6 @@ import agents.Peer;
 import agents.SuperPeer;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
-import jade.util.Logger;
 import ontology.actions.RequestNeighbours;
 
 /**
@@ -25,7 +24,6 @@ public class SendNeighboursRequest extends BasicAgentBehaviour {
       AID hostCache = new AID( HostCache.NAME, AID.ISLOCALNAME);
       basicAgent().sendMessage(ACLMessage.REQUEST, action, hostCache);
       myPeer().setRequestedPeers(true);
-      logger.log(Logger.INFO, myPeer().getLocalName() + " asks HostCache for peers");
     }
   }
 

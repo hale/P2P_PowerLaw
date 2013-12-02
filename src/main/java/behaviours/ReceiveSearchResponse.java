@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
 
 public class ReceiveSearchResponse extends BasicPeerBehaviour {
 
@@ -27,7 +26,7 @@ public class ReceiveSearchResponse extends BasicPeerBehaviour {
       // if the sender stack is empty, this message is for us
       ArrayList<String> senderStack = new ArrayList<String>(Arrays.asList(StringUtils.split(response.getSenderStack(), ';')));
       if (senderStack.isEmpty()) {
-        logger.log(Level.INFO, myPeer().getLocalName()+" has found someone who has file they want");
+//        logger.log(Level.INFO, myPeer().getLocalName()+" has found someone who has file they want");
         AID result = new AID(response.getPeer(), AID.ISLOCALNAME);
         String wantedFile = response.getFile();
         // ask for the file

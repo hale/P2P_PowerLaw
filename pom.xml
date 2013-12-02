@@ -30,7 +30,7 @@
                     <mainClass>jade.Boot</mainClass>
                     <arguments>
                         <argument>-gui</argument>
-                        <argument>runner:Runner</argument>
+                        <argument>runner:agents.Runner</argument>
                     </arguments>
                 </configuration>
             </plugin>

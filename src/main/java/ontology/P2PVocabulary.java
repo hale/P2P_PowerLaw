@@ -37,4 +37,9 @@ public interface P2PVocabulary {
 
   public static final String FILE_RESPONSE = "FileResponse";
   public static final String FILE_RESPONSE_FILE = "file";
+
+  public static final String NETWORK_STATS = "NetworkStats";
+  public static final String NETWORK_STATS_CUM_MSG_COUNT = "cumMsgCount";
+  public static final String NETWORK_STATS_IS_CONNECTED = "isConnected";
+  public static final String NETWORK_STATS_HAS_FOUND_FILES = "hasFoundFiles";
 }

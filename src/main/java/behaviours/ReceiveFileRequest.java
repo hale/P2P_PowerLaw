@@ -27,6 +27,5 @@ public class ReceiveFileRequest extends BasicPeerBehaviour {
       response.setFile(file);
       basicAgent().sendMessage(ACLMessage.INFORM, response, msg.getSender());
     }
-
   }
 }

@@ -7,7 +7,7 @@ import jade.lang.acl.ACLMessage;
 import ontology.actions.FileList;
 
 /**
- * Assumes no disconnection. Once we have a connected peer, send the file list and finish.
+ * Ordinary peers send a file list whenever their sharedFiled list changes
  */
 public class SendFileList extends BasicPeerBehaviour {
 
@@ -17,13 +17,13 @@ public class SendFileList extends BasicPeerBehaviour {
 
   @Override
   public void action() {
-    if (myPeer().isConnected()) {
+    if (myPeer().isConnected() && myOrdinaryPeer().needsToSendFileList()) {
       AID connectedPeer = myOrdinaryPeer().getConnectedPeer();
       String fileList = myOrdinaryPeer().getSharedFiles();
       FileList action = new FileList();
       action.setSharedFiles(fileList);
       basicAgent().sendMessage(ACLMessage.INFORM, action, connectedPeer);
-      finished = true;
+      myOrdinaryPeer().setNeedsToSendFileList(false);
     }
   }
 

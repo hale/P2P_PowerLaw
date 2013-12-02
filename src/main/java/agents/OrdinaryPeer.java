@@ -8,7 +8,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public class OrdinaryPeer extends Peer {
 
-  public static String NAME = "ORDINARY PEER";
+  public static String NAME = "OP";
+  private boolean needsToSendFileList = true;
 
   @Override
   protected void setup() {
@@ -23,4 +24,20 @@ public class OrdinaryPeer extends Peer {
   public String getSharedFiles() {
     return StringUtils.join(sharedFiles, ';');
   }
+
+  public boolean needsToSendFileList() {
+    return needsToSendFileList;
+  }
+
+  public void setNeedsToSendFileList(boolean needsToSendFileList) {
+    this.needsToSendFileList = needsToSendFileList;
+  }
+
+  @Override
+  public void receiveFile(String file) {
+    super.receiveFile(file);
+    setNeedsToSendFileList(true);
+
+  }
 }
+

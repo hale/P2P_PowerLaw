@@ -31,7 +31,7 @@ public class SendSearchRequest extends TickerBehaviour {
         request.setFile(wantedFile);
         basicAgent().sendMessage(ACLMessage.REQUEST, request, new AID(result, AID.ISLOCALNAME));
       } else {
-        AID superPeer = myPeer().getConnectedPeer();
+        AID superPeer = myPeer().closestConnectedPeer(wantedFile);
         RequestSearch action = new RequestSearch();
         action.setFile(wantedFile);
         myPeer().sendMessage(ACLMessage.REQUEST, action, superPeer);

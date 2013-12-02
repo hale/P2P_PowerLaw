@@ -4,6 +4,7 @@ import jade.content.onto.BasicOntology;
 import jade.content.onto.Ontology;
 import jade.content.onto.OntologyException;
 import jade.content.schema.AgentActionSchema;
+import jade.content.schema.ObjectSchema;
 import jade.content.schema.PrimitiveSchema;
 import ontology.actions.*;
 
@@ -49,6 +50,11 @@ public class P2POntology extends Ontology implements P2PVocabulary {
 
       add(as = new AgentActionSchema(FILE_RESPONSE), FileResponse.class);
       as.add(FILE_RESPONSE_FILE, (PrimitiveSchema) getSchema(BasicOntology.STRING));
+
+      add(as = new AgentActionSchema(NETWORK_STATS), NetworkStats.class);
+      as.add(NETWORK_STATS_CUM_MSG_COUNT, (PrimitiveSchema) getSchema(BasicOntology.INTEGER));
+      as.add(NETWORK_STATS_IS_CONNECTED, (PrimitiveSchema) getSchema(BasicOntology.BOOLEAN), ObjectSchema.OPTIONAL);
+      as.add(NETWORK_STATS_HAS_FOUND_FILES, (PrimitiveSchema) getSchema(BasicOntology.BOOLEAN), ObjectSchema.OPTIONAL);
     } catch (OntologyException e) {
       e.printStackTrace();
     }

@@ -5,7 +5,9 @@ import jade.core.AID;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -37,7 +39,9 @@ public class HostCache extends BasicAgent {
    */
   public String getNeighboursFor(AID peer) {
     ArrayList<String> neighbours = new ArrayList<String>();
-    for (AID connectedPeer : peerList.keySet()) {
+    List<AID> randomised = new ArrayList<AID>(peerList.keySet());
+    Collections.shuffle(randomised);
+    for (AID connectedPeer : randomised) {
       if (neighbours.size() > MAX_NEIGHBOURS) { break; }
       if (connectedPeer == peer) { continue; }
       if (peerList.get(connectedPeer)) {

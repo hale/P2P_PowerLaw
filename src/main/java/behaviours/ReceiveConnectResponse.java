@@ -25,6 +25,7 @@ public class ReceiveConnectResponse extends BasicPeerBehaviour {
       myPeer().removePendingPeer(sender);
       if (response.getIsSuccess()) {
         myPeer().addConnectedPeer(sender);
+        myPeer().sendStats();
       }
     }
   }

@@ -7,8 +7,6 @@ import jade.lang.acl.MessageTemplate;
 import ontology.actions.ConnectResponse;
 import ontology.actions.RequestConnect;
 
-import java.util.logging.Level;
-
 /**
  * SuperPeers manage OrdinaryPeers - they forward search requests and have a list of their shared files.
  */
@@ -29,7 +27,7 @@ public class ReceiveConnectRequest extends BasicPeerBehaviour {
         mySuperPeer().addConnectedOrdinaryPeer(sender);
         response.setIsSuccess(true);
       } else {
-        logger.log(Level.WARNING, mySuperPeer().getLocalName()+" cannot accept new peers");
+//        logger.log(Level.WARNING, mySuperPeer().getLocalName()+" cannot accept new peers");
         response.setIsSuccess(false);
       }
       basicAgent().sendMessage(ACLMessage.INFORM, response, sender);

@@ -35,20 +35,20 @@ public class ReceiveSearchRequest extends BasicPeerBehaviour {
         response.setFile(wantedFile);
         response.setPeer(mySuperPeer().peerWith(wantedFile));
         response.setSenderStack(request.getSenderStack());
-        logger.log(Level.INFO, mySuperPeer().getLocalName()+" found "+wantedFile+" for "+msg.getSender().getLocalName());
         basicAgent().sendMessage(ACLMessage.INFORM, response, msg.getSender());
       } else if (myPeer().isConnected()) { // forward to closest peer, but only if we can
-
         // add the sender to the senderStack, so the message can find its way home.
         ArrayList<String> senderStack = new ArrayList<String>(Arrays.asList(StringUtils.split(request.getSenderStack(), ';')));
         senderStack.add(msg.getSender().getLocalName());
         request.setSenderStack(StringUtils.join(senderStack, ';'));
 
         AID superPeer = mySuperPeer().closestConnectedPeer(wantedFile);
+        if (senderStack.contains(superPeer)) {
+          logger.log(Level.WARNING, "OOPS LOL");
+        }
         basicAgent().sendMessage(ACLMessage.REQUEST, request, superPeer);
 
       }
-
     }
   }
 
