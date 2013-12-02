@@ -27,20 +27,34 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- * Runs the P2P simulation. Required a config file.
+ * Runs the simulation, and keeps track of information about the network.
+ *
+ * Run the simulation by launching JADE with this agent as a command line paramater.  E.g.:
+ *
+ *     java jade.Boot -gui runner:agents.Runner
+ *
+ * Will fail unless a file called P2PPowerLaw.properties is found in the top level directory
+ * of the project. This specifies required options for the Runner and the Agents in the system.
  */
 public class Runner extends Agent {
-  private Codec codec = new SLCodec();
-  private Ontology ontology = P2POntology.getInstance();
+  private final Codec codec = new SLCodec();
+  private final Ontology ontology = P2POntology.getInstance();
 
   public static final String NAME = "RUNNER";
 
-  ArrayList<AID> peers = new ArrayList<AID>();
-  private HashMultimap<String, AID> peerGroups = HashMultimap.create();
-  private HashMultiset<AID> messageCounts = HashMultiset.create();
+  // All peers in the network
+  private final ArrayList<AID> peers = new ArrayList<AID>();
 
+  // Group peers by connected, finished.
   private static final String CONNECTED_PEERS = "Connected Peers";
   private static final String HAS_FOUND_FILES = "Peers that have found all their files.";
+  private final HashMultimap<String, AID> peerGroups = HashMultimap.create();
+
+  // A cumulative count of the number of messages each peer has sent. This is an
+  // estimate, the precision of which can be controlled in the config gile.
+  private final HashMultiset<AID> messageCounts = HashMultiset.create();
+
+  // The simulation will stop when this limit is reached.
   private int totalMessageLimit;
 
   @Override
@@ -58,7 +72,7 @@ public class Runner extends Agent {
       };
       newPeer(HostCache.NAME, HostCache.class.getName(), hcArgs);
 
-      // super peers
+      // super peer arguments
       Object[] sPeerArgs = new Object[] {
           config.getInt("agent.send_stats_every"),
           config.getInt("super_peer.min_connections"),
@@ -69,7 +83,7 @@ public class Runner extends Agent {
           config.getInt("super_peer.max_peers")
       };
 
-      // ordinary peers
+      // ordinary peer arguments
       Object[] oPeerArgs = new Object[] {
           config.getInt("agent.send_stats_every"),
           config.getInt("ordinary_peer.min_connections"),
@@ -81,20 +95,21 @@ public class Runner extends Agent {
       };
       Random rand = new Random();
 
-      // support for overriding an individual peer.
-      if (config.getBoolean("peer.override")) {
+      // Create a one-off Ordinary peer as defined in the properties file.
+      if (config.getBoolean("custom_peer")) {
         Object[] overriddenArgs = new Object[]{
             config.getInt("agent.send_stats_every"),
             config.getInt("ordinary_peer.min_connections"),
             config.getInt("ordinary_peer.max_connections"),
-            config.getStringArray("peer.override.shared_files"),
+            config.getStringArray("custom_peer.shared_files"),
             config.getStringArray("peer.wanted_files"),
             config.getInt("peer.search_interval_ms")
         };
         newPeer(OrdinaryPeer.NAME + "X", OrdinaryPeer.class.getName(), overriddenArgs);
       }
 
-      int i = config.getBoolean("peer.override") ? 1 : 0; // stick to the total_peers arg.
+      // Create a number of Ordinary and Super peers, depending on their bandwidth
+      int i = config.getBoolean("custom_peer") ? 1 : 0; // one less peer if custom_peer
       for ( ; i < config.getInt("total_peers"); i++) {
         int peerBandwidth = rand.nextInt(100);
         if (peerBandwidth >= (100 - config.getInt("super_peer_percentage"))) {
@@ -104,6 +119,7 @@ public class Runner extends Agent {
         }
       }
 
+      // Report on the network state based on info sent from the peers.
       addBehaviour(new ReportBehaviour(this, config.getLong("runner.report_interval_ms")));
       addBehaviour(new ReceiveNetworkStats(this));
 
@@ -114,6 +130,14 @@ public class Runner extends Agent {
     }
   }
 
+  /**
+   * Spawn a new Peer and start the thread.
+   *
+   * @param name Unique name for the agent. Used to generate AID.
+   * @param klass Type of Peer to create
+   * @param args Any arguments to pass along to the Peer
+   * @throws StaleProxyException
+   */
   private void newPeer(String name, String klass, Object[] args) throws StaleProxyException {
     ContainerController container = getContainerController();
     AgentController agentController = container.createNewAgent(name, klass, args);
@@ -121,6 +145,13 @@ public class Runner extends Agent {
     peers.add(new AID(name, AID.ISLOCALNAME));
   }
 
+  /**
+   * Stats messages are sent from Peers - add this information to the peer stats and message counts.
+   * @param sender Peer that's sending the stats
+   * @param isConnected If the Peer has at least (min_connections) connected super peers
+   * @param hasFoundFiles If the Peer has 'finished', i.e. transferred all their wanted files.
+   * @param cumMsgCount Total number of messages sent by the Peer
+   */
   public void updateStats(AID sender, boolean isConnected, boolean hasFoundFiles, int cumMsgCount) {
     if (!(sender == new AID(HostCache.NAME, AID.ISLOCALNAME))) {
       if (isConnected) {
@@ -133,10 +164,16 @@ public class Runner extends Agent {
     messageCounts.add(sender, cumMsgCount);
   }
 
+  /**
+   * @return size of the network, including the Host Cache
+   */
   public int totalPeersSize() {
     return peers.size();
   }
 
+  /**
+   * @return total number of Super Peers in the network.
+   */
   public int totalSuperPeersSize() {
     ArrayList<AID> superPeers = new ArrayList<AID>();
     for (AID peer : peers) {
@@ -145,18 +182,26 @@ public class Runner extends Agent {
       }
     }
     return superPeers.size();
-
   }
 
+  /**
+   * @return Unique messages sent by all peers, including the Host Cache
+   */
   public long totalMessagesSent() {
     return messageCounts.size();
   }
 
+  /**
+   * @return The subset of all peers which have at least (min_connections) connected Super Peers
+   */
   public int totalConnectedPeers() {
     return peerGroups.get(CONNECTED_PEERS).size();
   }
 
 
+  /**
+   * @return The subset of peers who have no wanted files left.
+   */
   public int totalFinishedPeers() {
     return peerGroups.get(HAS_FOUND_FILES).size();
   }
@@ -170,10 +215,9 @@ public class Runner extends Agent {
     return ((totalConnectedPeers() == totalFinishedPeers()) || (totalMessagesSent() > totalMessageLimit));
   }
 
-  public ArrayList<AID> getPeers() {
-    return peers;
-  }
-
+  /**
+   * @return A sorted copy of the messageCounts map.
+   */
   public ImmutableMultiset<AID> getOrderedMsgCounts() {
     return Multisets.copyHighestCountFirst(messageCounts);
   }

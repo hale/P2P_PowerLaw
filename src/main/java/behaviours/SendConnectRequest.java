@@ -6,7 +6,8 @@ import jade.lang.acl.ACLMessage;
 import ontology.actions.RequestConnect;
 
 /**
- * Establishes a connection with a Super Peer
+ * Asks a Super Peer to connect. Sends whenever the peer has uncontacted
+ * peers, and needs to establsh more connections.
  */
 public class SendConnectRequest extends BasicPeerBehaviour {
 

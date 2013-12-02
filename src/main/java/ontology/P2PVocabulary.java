@@ -3,8 +3,7 @@ package ontology;
 /**
  * Part of the P2P Ontology
  *
- * Defines the constructs of messages between peers.
- *
+ * Defines the language used to send messages in the network.
  */
 public interface P2PVocabulary {
 

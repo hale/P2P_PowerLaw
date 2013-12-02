@@ -7,6 +7,7 @@ import jade.lang.acl.MessageTemplate;
 import ontology.actions.NetworkStats;
 
 /**
+ * Runner receives stats package from peers and adds the data to the stats collections
  */
 public class ReceiveNetworkStats extends BasicAgentBehaviour {
 

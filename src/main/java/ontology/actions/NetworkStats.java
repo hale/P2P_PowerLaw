@@ -3,7 +3,7 @@ package ontology.actions;
 import jade.content.AgentAction;
 
 /**
- * A message send to the Runner with a bunch of information about the peer,
+ * A message sent to the Runner with a bunch of information about the peer,
  * for statistics collection.
  */
 public class NetworkStats implements AgentAction {

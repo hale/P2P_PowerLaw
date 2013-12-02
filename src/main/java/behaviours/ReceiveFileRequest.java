@@ -7,7 +7,7 @@ import ontology.actions.FileRequest;
 import ontology.actions.FileResponse;
 
 /**
- * Peers should never get requests for files they do not have.
+ * Responds by sending the file back.
  */
 public class ReceiveFileRequest extends BasicPeerBehaviour {
 

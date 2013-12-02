@@ -7,7 +7,8 @@ import jade.lang.acl.ACLMessage;
 import ontology.actions.FileList;
 
 /**
- * Ordinary peers send a file list whenever their sharedFiled list changes
+ * Ordinary peers send a file list when they join the network, and thereafter
+ * whenever their sharedFiled list changes
  */
 public class SendFileList extends BasicPeerBehaviour {
 

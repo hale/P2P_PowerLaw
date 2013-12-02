@@ -13,8 +13,8 @@ import ontology.actions.*;
  */
 public class P2POntology extends Ontology implements P2PVocabulary {
 
-  public static final String ONTOLOGY_NAME = "P2P-Ontology";
-  private static Ontology instance = new P2POntology();
+  private static final String ONTOLOGY_NAME = "P2P-Ontology";
+  private static final Ontology instance = new P2POntology();
   public static Ontology getInstance() { return instance; }
 
   private P2POntology() {

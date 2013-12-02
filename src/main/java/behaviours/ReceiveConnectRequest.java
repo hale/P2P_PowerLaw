@@ -8,7 +8,8 @@ import ontology.actions.ConnectResponse;
 import ontology.actions.RequestConnect;
 
 /**
- * SuperPeers manage OrdinaryPeers - they forward search requests and have a list of their shared files.
+ * Responds to Connect Requests from other peers with either yes or no - if yes, add them
+ * to a list of peers connected to the Super Peer
  */
 public class ReceiveConnectRequest extends BasicPeerBehaviour {
 
@@ -24,17 +25,16 @@ public class ReceiveConnectRequest extends BasicPeerBehaviour {
       AID sender = msg.getSender();
       ConnectResponse response = new ConnectResponse();
       if (mySuperPeer().canAcceptConnectRequest()) {
-        mySuperPeer().addConnectedOrdinaryPeer(sender);
+        mySuperPeer().acceptNewConnection(sender);
         response.setIsSuccess(true);
       } else {
-//        logger.log(Level.WARNING, mySuperPeer().getLocalName()+" cannot accept new peers");
         response.setIsSuccess(false);
       }
       basicAgent().sendMessage(ACLMessage.INFORM, response, sender);
     }
   }
 
-  public SuperPeer mySuperPeer() {
+  SuperPeer mySuperPeer() {
     return (SuperPeer) myPeer();
   }
 }

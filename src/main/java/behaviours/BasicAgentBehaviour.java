@@ -13,18 +13,29 @@ import jade.lang.acl.MessageTemplate;
 import jade.util.Logger;
 
 /**
- * Provides access to basicAgent().sendMessage()
+ * Wrapper class for most behaviours in the network. Provides ease-of-use utility
+ * methods for the slighty verbose Ontology features in JADE. (Trading flexibility
+ * in the process).
  */
-public abstract class BasicAgentBehaviour extends SimpleBehaviour {
+abstract class BasicAgentBehaviour extends SimpleBehaviour {
 
+  // set this to true in any subclass, and the behaviour will terminate.
   protected boolean finished = false;
-  protected Logger logger = Logger.getJADELogger(this.getClass().getName());
 
-  protected BasicAgentBehaviour(Agent a) {
+  // provides a logger for all behaviours
+  final Logger logger = Logger.getJADELogger(this.getClass().getName());
+
+  /**
+   * Delegate to SimpleBehaviour
+   */
+  BasicAgentBehaviour(Agent a) {
     super(a);
   }
 
-  protected BasicAgent basicAgent() {
+  /**
+   * Shortcut to cast myAgent to a BasicAgent
+   */
+  BasicAgent basicAgent() {
     return (BasicAgent) myAgent;
   }
 
@@ -34,9 +45,13 @@ public abstract class BasicAgentBehaviour extends SimpleBehaviour {
   }
 
   /**
-   * Only match message if it is of type action
+   * Provides a template which can be used to only receive messages of a
+   * given type.
+   *
+   * @param action Class of the action to match against.
+   * @return A MessageTemplate matcher to pass to receive() in behaviours.
    */
-  protected MessageTemplate templateFor(Class action) {
+  MessageTemplate templateFor(Class action) {
     return new MessageTemplate(new MessageTemplate.MatchExpression() {
 
       private Class action;
@@ -62,9 +77,9 @@ public abstract class BasicAgentBehaviour extends SimpleBehaviour {
   }
 
   /**
-   * Given a message, returns the Action in its contents payload.
+   * Given a message, returns the Action in its body.
    */
-  protected Concept actionFor(ACLMessage msg) {
+  Concept actionFor(ACLMessage msg) {
     ContentElement content = null;
     try {
       content = myAgent.getContentManager().extractContent(msg);

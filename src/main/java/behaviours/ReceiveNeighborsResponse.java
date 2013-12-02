@@ -6,7 +6,7 @@ import jade.lang.acl.MessageTemplate;
 import ontology.actions.NeighboursResponse;
 
 /**
- * Response from the Host Cache to the Neighbours Request
+ * Adds to knownPeers the response from the Host Cache
  */
 public class ReceiveNeighborsResponse extends BasicPeerBehaviour {
 

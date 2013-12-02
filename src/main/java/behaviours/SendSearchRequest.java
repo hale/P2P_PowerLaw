@@ -10,8 +10,7 @@ import ontology.actions.FileRequest;
 import ontology.actions.RequestSearch;
 
 /**
- * Searches for file.  Encapsulation slightly breaks down here,
- * since we intervene and search the local index for Super Peers.
+ * Searches for file.  If this peer is a Super Peer, look first in their own index.
  */
 public class SendSearchRequest extends TickerBehaviour {
 

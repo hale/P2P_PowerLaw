@@ -17,21 +17,36 @@ import ontology.actions.NetworkStats;
 import java.util.logging.Level;
 
 /**
- * A common set of behaviours for all agents in the system.
+ * A common set of behaviours for all agents in the system. Abstracts details like
+ * setting the Ontology, and provides a single location for sending messages.
+ *
+ * Classes extending BasicAgent will also periodically send statistical information
+ * to the Runner.
  */
 public abstract class BasicAgent extends Agent implements P2PVocabulary {
-  private Codec codec = new SLCodec();
-  private Ontology ontology = P2POntology.getInstance();
 
+  // All peers must be associated with the Ontology files in order
+  // to send and receive messages.
+  private final Codec codec = new SLCodec();
+  private final Ontology ontology = P2POntology.getInstance();
+
+  // Boilerplate for logging.
   protected Logger logger = Logger.getJADELogger(this.getClass().getName());
 
-  protected Object[] args;
 
   // cumulative count of the number of messages sent by this agent
-  private HashMultiset<String> messageStats = HashMultiset.create();
+  private final HashMultiset<String> messageStats = HashMultiset.create();
+
+  // cumulative count of the messages sent to the Runner - must be excluded from the
+  // main count.
   private int sentStatsMessages = 0;
 
+  // Every sendStatsEvery number of messages send by this agent, send
+  // an additional message to the Runner with info about this peer.
   private int sendStatsEvery;
+
+  // On creation, peers can be assigned optional args.
+  Object[] args;
 
   @Override
   protected void setup() {
@@ -41,6 +56,13 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
     getContentManager().registerOntology(ontology);
   }
 
+  /**
+   * Wraps send(), making it slightly easier for peers to send messages.
+   *
+   * @param performative Integer representing the FIPA name of this message.
+   * @param action Messages are filled with an action from the Ontology.
+   * @param recipient Who to send the message to.
+   */
   public void sendMessage(int performative, AgentAction action, AID recipient) {
     ACLMessage msg = new ACLMessage(performative);
     msg.setLanguage(codec.getName());
@@ -53,25 +75,20 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
     msg.addReceiver(recipient);
     send(msg);
 
-    computeStatsFor(action);
+    // keep a simple count of how many messages this peer has sent
+    messageStats.add(action.getClass().getSimpleName(), 1);
 
-    // every e.g. 100 messages, tell the inspector how many messages we've sent + other stats
+    // periodically inform the Runner about how many messages have been sent
     if (messageStats.size() % sendStatsEvery == 0) { sendStats(); }
   }
 
-  private void computeStatsFor(AgentAction action) {
-    String messageName = action.getClass().getSimpleName();
-    messageStats.add(messageName, 1);
-
-//    if (messageStats.count(messageName) > 1000) {
-//      logger.log(Level.WARNING, getLocalName()+" is sending this a lot: "+messageName);
-//    }
-  }
-
+  /**
+   * Sends statistical information to the Runner.
+   */
   public void sendStats() {
     NetworkStats stats = new NetworkStats();
     stats.setCumMsgCount(messageStats.size() - sentStatsMessages);
-    if (this instanceof Peer) {
+    if (this instanceof Peer) { // Host Cache doesn't count here
       stats.setHasFoundFiles(!myPeer().hasWantedFile());
       stats.setIsConnected(myPeer().isConnected());
     }
@@ -79,6 +96,9 @@ public abstract class BasicAgent extends Agent implements P2PVocabulary {
     sentStatsMessages++;
   }
 
+  /**
+   * Shortcut for casting to a Peer
+   */
   private Peer myPeer() {
     return (Peer) this;
   }

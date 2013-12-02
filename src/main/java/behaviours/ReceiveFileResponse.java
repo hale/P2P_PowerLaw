@@ -7,6 +7,8 @@ import ontology.actions.FileResponse;
 
 /**
  * Completes the process of acquiring files - the peer at this point has a file.
+ * Additionally, sends a stats message to the Runner so that it knows the peer
+ * has the file.
  */
 public class ReceiveFileResponse extends BasicPeerBehaviour {
 

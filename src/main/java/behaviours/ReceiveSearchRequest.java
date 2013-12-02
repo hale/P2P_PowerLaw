@@ -43,9 +43,6 @@ public class ReceiveSearchRequest extends BasicPeerBehaviour {
         request.setSenderStack(StringUtils.join(senderStack, ';'));
 
         AID superPeer = mySuperPeer().closestConnectedPeer(wantedFile);
-        if (senderStack.contains(superPeer)) {
-          logger.log(Level.WARNING, "OOPS LOL");
-        }
         basicAgent().sendMessage(ACLMessage.REQUEST, request, superPeer);
 
       }

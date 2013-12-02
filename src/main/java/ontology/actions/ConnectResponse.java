@@ -3,7 +3,7 @@ package ontology.actions;
 import jade.content.AgentAction;
 
 /**
- * YES or NO
+ * YES or NO from the Super Peer
  */
 public class ConnectResponse implements AgentAction {
 

@@ -4,15 +4,18 @@ import agents.Peer;
 import jade.core.Agent;
 
 /**
- * Common behaviour amongst all peer behaviours.
+ * Methods for all Peers
  */
-public abstract class BasicPeerBehaviour extends BasicAgentBehaviour {
+abstract class BasicPeerBehaviour extends BasicAgentBehaviour {
 
-  protected BasicPeerBehaviour(Agent a) {
+  BasicPeerBehaviour(Agent a) {
     super(a);
   }
 
-  protected Peer myPeer() {
+  /**
+   * Sugar for casting myAgent to Peer. Isolates errors and forces ClassCastException
+   */
+  Peer myPeer() {
     return (Peer) myAgent;
   }
 }

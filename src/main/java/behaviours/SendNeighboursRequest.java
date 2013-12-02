@@ -9,7 +9,7 @@ import ontology.actions.RequestNeighbours;
 
 /**
  *  When peers join the network (or need more contactable neighbours),
- *  they request Super Peer AIDs from the Host Cache.
+ *  they request Super Peer addresses from the Host Cache.
  */
 public class SendNeighboursRequest extends BasicAgentBehaviour {
   public SendNeighboursRequest(Peer peer) {

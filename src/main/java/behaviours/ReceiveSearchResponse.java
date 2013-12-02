@@ -11,6 +11,12 @@ import org.apache.commons.lang.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Receives a Search Response message, and responds in one of several ways. If there
+ * is an empty senderStack, then the message must be intended for us so we send a FileRequest message
+ * to the peer with the file. On the other hand, if there is a senderStack then we need to
+ * pass this message along to the next person in the chain.
+ */
 public class ReceiveSearchResponse extends BasicPeerBehaviour {
 
   public ReceiveSearchResponse(Peer p) {
@@ -23,22 +29,16 @@ public class ReceiveSearchResponse extends BasicPeerBehaviour {
     ACLMessage msg = myAgent.receive(mt);
     if (msg != null) {
       SearchResponse response = (SearchResponse) actionFor(msg);
-      // if the sender stack is empty, this message is for us
       ArrayList<String> senderStack = new ArrayList<String>(Arrays.asList(StringUtils.split(response.getSenderStack(), ';')));
       if (senderStack.isEmpty()) {
-//        logger.log(Level.INFO, myPeer().getLocalName()+" has found someone who has file they want");
-        AID result = new AID(response.getPeer(), AID.ISLOCALNAME);
-        String wantedFile = response.getFile();
-        // ask for the file
         FileRequest request = new FileRequest();
-        request.setFile(wantedFile);
+        request.setFile(response.getFile());
+        AID result = new AID(response.getPeer(), AID.ISLOCALNAME);
         basicAgent().sendMessage(ACLMessage.REQUEST, request, result);
       } else {
-        // we must be a super peer, and need to pass the message along
         AID nextPeer = new AID(senderStack.remove(senderStack.size()-1), AID.ISLOCALNAME);
         response.setSenderStack(StringUtils.join(senderStack, ';'));
         basicAgent().sendMessage(ACLMessage.INFORM, response, nextPeer);
-
       }
     }
   }

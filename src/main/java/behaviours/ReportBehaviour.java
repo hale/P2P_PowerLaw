@@ -19,21 +19,32 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Print some information every interval about the state of the network.
+ * Additionaly, when the runner determines that the simulation has finished,
+ * print a summary of the messages sent by all peers so far.
+ *
+ * Due to challenged with informing all agents to exit cleanly, the simulation
+ * still runs and must be interrupted externally.
+ */
 public class ReportBehaviour extends TickerBehaviour {
 
-  Runner runner;
-  private Logger logger = Logger.getJADELogger(this.getClass().getName());
-  StringBuilder sb = new StringBuilder();
+  private final Runner runner;
+  private final Logger logger = Logger.getJADELogger(this.getClass().getName());
+  private StringBuilder sb = new StringBuilder();
 
+  /**
+   * Start by printing how many peers are in the network, and how many are Super Peers
+   */
   public ReportBehaviour(Agent a, long period) {
     super(a, period);
     runner = (Runner) a;
     sb.append("\n");
     sb.append("== BEGINNING SIMULATION ==");
     sb.append("\n");
-    sb.append("Total Peers:\t" + runner.totalPeersSize());
+    sb.append("Total Peers:\t").append(runner.totalPeersSize());
     sb.append("\n");
-    sb.append("Super Peers:\t" + runner.totalSuperPeersSize());
+    sb.append("Super Peers:\t").append(runner.totalSuperPeersSize());
     sb.append("\n");
     logger.log(Level.INFO, sb.toString());
   }
@@ -43,11 +54,11 @@ public class ReportBehaviour extends TickerBehaviour {
     sb = new StringBuilder();
     sb.append("== STATS ==");
     sb.append("\n");
-    sb.append("Total messages sent:\t" + runner.totalMessagesSent());
+    sb.append("Total messages sent:\t").append(runner.totalMessagesSent());
     sb.append("\n");
-    sb.append("Total connected peers:\t" + runner.totalConnectedPeers());
+    sb.append("Total connected peers:\t").append(runner.totalConnectedPeers());
     sb.append("\n");
-    sb.append("Total finished peers:\t" + runner.totalFinishedPeers());
+    sb.append("Total finished peers:\t").append(runner.totalFinishedPeers());
     sb.append("\n");
     sb.append("\n");
     logger.log(Level.INFO, sb.toString());
