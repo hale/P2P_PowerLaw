@@ -2,61 +2,68 @@
 
 \secttoc
 
-The system consists of three types of agent: Super Peers, Ordinary Peers and a
-single Host Cache.  The Host Cache is implemented as an agent in order to unify
-the connection behaviour between elements of the system.  In other words, peers
-can connect to the Host Cache using the same mechanisms that are required to
-connect to each other.
+The system consists of three main types of agent: Super Peers, Ordinary Peers and a
+single Host Cache.
 
 It can be helpful to think of the identity of an agent as defined by the kinds
-of behaviours it can support. What we mean here by a behaviour is the ability to
-respond in some way to a particular situation or event.  Some behaviours
-continually monitor the state of the agent in the network, whereas others
-are triggered by incoming messages from other agents.
+of behaviours it can support. A behaviour is the ability to respond in some way
+to a particular situation or event.  Some behaviours continually monitor the
+state of the agent in the network, whereas others are triggered by incoming
+messages from other agents.
 
-The process of specifying and identifying different messages is explained in
-another section.
+Thinking of the agents in this way makes it easier to describe their
+functionality.  The algorithms listed in this section describe isolated pieces
+of functionality that agents implement.  behaviours under the heading `Peer'
+are implemented by both Ordinary Peers and Super Peers.
 
-Super Peers and Ordinary Peers implement a common set of behaviours. For
-the sake of simplicity, the designation of peers into Super and Ordinary sets
-will occur during initialization of the system.
+It is also constructive to split the behaviours of the peers in this way, since
+this is how the Peers must be described in JADE. The algorithms were developed
+in advance of the implementation, and refined when problems were found with the
+logical procedure.
 
-In these examples, some simplifications have been made.  For example, we ignore
-the difference between a file and hash of the file which identifies it. When an
-algorithm states that it sends a file, it can be assumed that it is sending a
-hash of the file.  In addition, this masks the fact that a peer will have a hash
-table of some sort in order to identify the file from the file name.
+Several simplifications have been made in these descriptions.  These are as
+follows:
 
-Assumptions have been made that connections will not be lost, and that messages
-will only be sent by peers that should send them.
+\begin{itemize}
+\item{No distinction is made between the name of a file and the file itself.}
+\item{The \verb!send()! function will send a named message to the specified
+peer}
+\item{The system is well-behaved: we do not account for messages to be sent
+erroneously, or by the wrong agent.}
+\item{For some of the `Send...' actions, it will be necessary to either
+introduce a delay or store additional state about e.g. if the peer has already
+made the request. This issue has been ignored for the purposes of this
+section.}
+\end{itemize}
 
 In the following algorithms, the input for behaviours beginning with `Receive'
-include a message name.  In effect this means ``the behaviour is triggered by a
+include a message name.  In effect this means ``the procedure is triggered by a
 message with this name''.
 
 \subsection{Host Cache}
 
 The Host Cache is the entry-point for the network with two responsibilities.
 Firstly, to maintain a list of connected peers. Secondly, to supply peers with a
-list of Super Peers which they can attempt to connect to
-
-Theses behaviours can be summarised by the following piece of pseudocode. It
-will run when the Host Cache receives a message identified as `Neighbours
-Request'.
+list of Super Peers which they can attempt to connect to.
 
 \subsubsection{Receive `Neighbours Request`}
+
+Note: In this description, the Host Cache would return every Super Peer
+registered on the network. In practice, we need to define a limit on the total
+size of the response.
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
   \SetKwFunction{SendFn}{send}
-  \Input{Sender: $peer$ \\ Message Name: `Neighbours Request'}
+  \Input{Sender: $peer$ \\ Message Name: `Neighbours Request' \\ $isSuper$ True
+  if the peer is a Super Peer}
   \KwData{$peerList$: A hash of peers with value true if peer is super}
 
-  \If{peer list doesn't contain $peer$}{
-    add $peer$ to $peerList$\;
+  \If{$peer \notin peerList$}{
+    add $peer$,$isSuper$ to $peerList$\;
   }
   \For{$connectedPeer \in peerList$}{
-    \If{$peerList[connectedPeer] = true$ and $connectedPeer \neq peer$}{
+    \If{$connectedPeer$ is super and $connectedPeer \neq peer$}{
       $neighbours \leftarrow neighbours \cup peer$\;
     }
   }
@@ -65,39 +72,29 @@ Request'.
 
 \subsection{All Peers}
 
-Here we will explain the different types of behaviours implemented by both Super
-and Ordinary Peers. Some of these behaviours are shared between all peers, but
-their effects will differ depending on whether the peer is Super or Ordinary.
-This is a design decision which compromises simplicity of the described
-behaviours with simplicity of the system as a whole.\footnote{The idea is
-analogous to the contradiction between two rules of software engineering: The
-Law of Demeter which aims to minimise method chaining, and the idea of class
-cohesion which gives an object well-bounded behaviour.}
+Here we will explain the functionality common to both Super and Ordinary Peers.
+Some of these behaviours are shared between all peers, but their effects will
+differ depending on whether the peer is Super or Ordinary.  This is a design
+decision which compromises simplicity of the described behaviours with
+simplicity of the system as a whole.
 
 \subsubsection{Send `Neighbours Request'}
 
 The first message a peer will send: asks the Host Cache for a list of peers
 which it can connect to in order to join the network. In addition, this message
-is sent whenever the knownPeers list is empty.  This ensures that the peer
-always has some Super Peer address to connect to, in the event that they need
-more connections.
-
-It only sends the request if the number of known peers is below a certain
-maximum. Additionally, it only sends the request if it isn't already waiting for
-a reply.
+is sent whenever the peer runs out of known peers, and still needs more
+connections.
 
 \begin{algorithm}[H]
   \SetKwFunction{SendFn}{send}
   \KwData{$knownPeers$: A list of neighbours known but not connected to the
   peer}
   \KwData{$hostCache$: Address of the Host Cache}
-  \KwData{$hasRequestedPeers$: True if waiting for reply}
   \KwData{$isSuper$: True if the peer has sufficient bandwidth to be a Super
   Peer }
 
   \If{$knownPeers = \emptyset$ and $\neg hasRequestedPeers$}{
     \SendFn{hostCache, `Neighbours Request', isSuper}\;
-    $hasRequestedPeer \leftarrow true$\;
   }
 \end{algorithm}
 
@@ -108,23 +105,22 @@ list of Super Peers which the peer can try and connect to.
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
-  \Input{Message Name: `Neighbours Response' \\ Potential Neighbours: $peers$}
-  \KwData{$hasRequestedPeers$: True if waiting for reply}
+  \Input{Message Name: `Neighbours Response' \\ Potential Connections: $peers$}
   \KwData{$knownPeers$: A list of Super Peers known but not connected to the
   peer}
 
   $knownPeers \leftarrow knownPeers \cup  peers$\;
-  $hasRequestedPeer \leftarrow false$\;
 \end{algorithm}
 
 \subsubsection{Send `Connect Request'}
 
-Asks a Super Peer to be a connection. In order to prevent blocking, the
-contacted Super Peer is placed in a list while we wait for a response. 
+Asks a Super Peer to be a connection. The contacted Super Peer is placed in a
+list while we wait for a response.
 
-The peer will keep trying to connect to more peers until the number of connected
-peers is greater than a given minimum. In order to limit on how many connection
-attempts are made, the count includes peers which we are waiting on for a reply.
+The peer will keep trying to connect to more peers until the number of
+connected peers is greater than a given minimum. In order to limit how many
+connection attempts are made at once, the count includes peers which we are
+waiting on for a reply.
 
 \begin{algorithm}[H]
   \SetKwFunction{SendFn}{send}
@@ -141,13 +137,11 @@ attempts are made, the count includes peers which we are waiting on for a reply.
 
 \subsubsection{Receive `Connect Response'}
 
-A connection response is either successful or unsuccessful.  An alternative
-approach would only send a response to the request if it is successful, but this
-increases the complexity of the behaviour and so has not been adopted.
+A connection response is either successful or unsuccessful.
 
-A connection response from a peer removes that peer from the known peers list.
-If the connection is successful, the peer is also added to the list of connected
-peers.
+Upon receipt of this response, the contacted Super Peer is removed from the
+known peers list and the pending peers list. If the connection is successful,
+the peer is added to the list of connected peers.
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
@@ -167,9 +161,7 @@ peers.
 \subsubsection{Receive `File Request'}
 
 Since our simulation does not send actual files, at this point we can simply
-return a token response to indicate that we are transferring the file. In
-practice, we would have to identify the file from the given identifier, and
-check it exists before returning etc.
+send the filename back to the message sender, to acknowledge a file transfer.
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
@@ -177,7 +169,7 @@ check it exists before returning etc.
   \Input{Sender: $peer$ \\ Message Name: `File Request' \\ File: $file$}
   \KwData{$sharedFiles$: List of files the peer wants but does not have}
 
-  \SendFn{peer, `File Response', `Here is your file'}\;
+  \SendFn{peer, `File Response', $file \in sharedFiles$}\;
 \end{algorithm}
 
 \subsubsection{Receive `File Response'}
@@ -193,11 +185,9 @@ This completes the procedure for acquiring files in the network.
   peer.}
   \KwData{$wantedFiles$: List of files the peer wants but doesn't have}
 
-  \If{$file \in transferringFiles$}{
-    $transferringFiles \leftarrow transferringFiles \setminus \{file\}$\;
-    $wantedFiles \leftarrow wantedFiles \setminus \{file\}$\;
-    $sharedFiles \leftarrow sharedFiles \cup \{file\}$\;
-  }
+  $transferringFiles \leftarrow transferringFiles \setminus \{file\}$\;
+  $wantedFiles \leftarrow wantedFiles \setminus \{file\}$\;
+  $sharedFiles \leftarrow sharedFiles \cup \{file\}$\;
 \end{algorithm}
 
 \subsection{Ordinary Peers}
@@ -206,35 +196,30 @@ These behaviours are exclusively implemented by Ordinary Peers.
 
 \subsubsection{Send `File List'}
 
-An Ordinary Peer is required to submit its list of shared files to its connected
-Super Peer.  This is so that other peers can search for files.
+An Ordinary Peer is required to submit its list of shared files to a connected
+Super Peer.  This is so that other peers can search for their files.
 
 Since this behaviour only applies to Ordinary Peers, we can make the simplifying
 assumption that the list of connected peers only contains a single peer.
 
-We also ignore the possibility that a SuperPeer can become disconnected, which
-is not a requirement at this stage.
-
-One further assumption is made.  We presume that the list of file hashes that
-are sent to the Super Peer is small enough to fit in a single message. In
-practice, this is not likely to be the case.
+One further assumption is made.  We presume that the list of files that is sent
+to the Super Peer is small enough to fit in a single message. In practice, this
+is not likely to be the case.
 
 \begin{algorithm}[H]
   \SetKwFunction{SendFn}{send}
   \KwData{$connectedPeer$: Super Peer that this peer is connected to}
   \KwData{$sharedFiles$: List of files the peer wants but does not have}
 
-  \SendFn{connectedPeer, `File List', sharedFiled}\;
+  \SendFn{connectedPeer, `File List', sharedFiles}\;
 \end{algorithm}
 
 \subsubsection{Receive `Search Response'}
 
 When a peer receives a search result, the nature of the protocol means that this
-must be a successful result. If there is no results found, then there is simply
+must be a successful result. If there are no results found, then there is simply
 no message returned.  The payload of the message includes the particular file
-that was found and the ID of the peer who owns it.  Since in our simulation we
-do not need to present results in any way, once the result is found we can
-contact the peer directly to request they transfer the file.
+that was found and the ID of the peer who owns it.
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
@@ -265,7 +250,6 @@ want.
     wantedFiles$}\;
   }
 \end{algorithm}
-
 
 \subsection{Super Peers}
 
@@ -336,16 +320,11 @@ first before searching network.
 
 
 \subsubsection{Receive `Search Response'}
-%input: search response; output: nothing, or pass on search response
 
 Super Peers must behave slightly differently when receiving a Search Response
 message. Unlike for Ordinary Peers, sometimes this response may not be for them.
 This is because search results do not get delivered directly: they are passed
 back through intermediary peers using the Document Routing system.
-
-It is worth noting that in our $send()$ function we pass as many arguments as we
-have attributes. In practice, the attributes would be wrapped into a single
-argument.
 
 \begin{algorithm}[H]
   \SetKwInOut{Input}{input}
@@ -363,9 +342,6 @@ argument.
 
 \subsubsection{Receive `Search Request'}
 
-%input: a file search request; output: either a search response, or a further
-%search request (document routing).
-
 When a Super Peer receives a Search Request for a file, it first checks its list
 of files. If the file is found, it replies with a Search Response. 
 
@@ -377,7 +353,7 @@ it adds itself to the $senderStack$ and passes on the message to $\exists peer
 The peer chosen to receive this message is picked based on the proximity of
 their ID when compared to the file ID.  The details of this operation are not
 explained in this section, but it introduces a requirement of the implemented
-system for a consistent hashing algorithm.
+system for the constructed IDs to have the property of total ordering.
 
 \begin{algorithm}[H]
   \SetKwFunction{SendFn}{send}
@@ -405,10 +381,3 @@ system for a consistent hashing algorithm.
   }
 
 \end{algorithm}
-
-
-
-
-
-
-
