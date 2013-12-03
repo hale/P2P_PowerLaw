@@ -1,4 +1,0 @@
-# Protocol for sending Super Peer the file list.
-agent P Peer
-agent SP Super Peer
-message P SP Send File-list

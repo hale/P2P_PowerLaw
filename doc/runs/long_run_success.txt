@@ -1,925 +1,726 @@
-# the total number of peers
 total_peers = 1000
-
-# Peers with the highest bandwidth become super peers - this determines how
-# many. For example, if you have 100 total peers and set this to be 25, the
-# network will have a total of 25 super peers. No guarantees - this is statistical.
 super_peer_percentage = 2
-
-# how many Super Peer addresses sent back by the Host Cache
 host_cache.max_neighbours = 20
-
-# how many peers a super peer can manage
 super_peer.max_peers = 52
-
-# the min and max number of connected super nodes for an Ordinary Peer
 ordinary_peer.min_connections = 1
 ordinary_peer.max_connections  = 1
-
-# the min and max number of connected super nodes for a Super Peer.
 super_peer.min_connections = 1
 super_peer.max_connections = 1
-
-# the list of shared and wanted files for all peers.
 peer.shared_files =
 peer.wanted_files = Ubuntu.iso
-
-# Override an individual peer in order to represent Scenario 1, where
-# one peer has a file everyone else wants. This peer will be ordinary.
 peer.override = true
 peer.override.shared_files = Ubuntu.iso
-
-# This is how often to log the state of the network, in milliseconds
 runner.report_interval_ms = 1000
-
-# A special stats message is sent to an observer of the network whenever
-# a peer successfully connects or manages to acquire all of their wanted
-# files.
-#
-# An extra stats message can be sent every x number of messages, as below
-#
-# This determines the accuracy of the message count.  If set to 10, the
-# count for number of messages sent overall and per peer will be accurate
-# to within 10*peer_count messages.
 agent.send_stats_every = 50
-
-
-# The simulation will stop when either everyone has acquired their files,
-# or the total number of messages sent exceeds this limit
 runner.total_message_limit = 1000000
-
-# If a peer has a file in their wantedFiles list, they will request it
-# with a gap of milliseconds specified here.
 peer.search_interval_ms = 3000
 
-
-/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/bin/java -Dmaven.home=/usr/local/Cellar/maven/3.1.1/libexec -Dclassworlds.conf=/usr/local/Cellar/maven/3.1.1/libexec/bin/m2.conf -Didea.launcher.port=7537 "-Didea.launcher.bin.path=/Applications/IntelliJ IDEA 12 CE.app/bin" -Dfile.encoding=UTF-8 -classpath "/usr/local/Cellar/maven/3.1.1/libexec/boot/plexus-classworlds-2.5.1.jar:/Applications/IntelliJ IDEA 12 CE.app/lib/idea_rt.jar" com.intellij.rt.execution.application.AppMain org.codehaus.classworlds.Launcher --fail-fast --strict-checksums org.codehaus.mojo:exec-maven-plugin:1.2.1:java
-[INFO] Scanning for projects...
-[INFO]                                                                         
-[INFO] ------------------------------------------------------------------------
-[INFO] Building P2P_PowerLaw 1.0-SNAPSHOT
-[INFO] ------------------------------------------------------------------------
-[INFO] 
-[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw >>>
-[INFO] 
-[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw <<<
-[INFO] 
-[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ P2P_PowerLaw ---
-Dec 02, 2013 6:23:00 PM jade.core.Runtime beginContainer
-INFO: ----------------------------------
-    This is JADE 4.3.0 - revision 6664 of 2013/03/27 09:34:17
-    downloaded in Open Source, under LGPL restrictions,
-    at http://jade.tilab.com/
-----------------------------------------
-Dec 02, 2013 6:23:00 PM jade.imtp.leap.LEAPIMTPManager initialize
-INFO: Listening for intra-platform commands on address:
-- jicp://10.105.1.6:1099
-
-Dec 02, 2013 6:23:00 PM jade.core.BaseService init
-INFO: Service jade.core.management.AgentManagement initialized
-Dec 02, 2013 6:23:00 PM jade.core.BaseService init
-INFO: Service jade.core.messaging.Messaging initialized
-Dec 02, 2013 6:23:00 PM jade.core.BaseService init
-INFO: Service jade.core.resource.ResourceManagement initialized
-Dec 02, 2013 6:23:00 PM jade.core.BaseService init
-INFO: Service jade.core.mobility.AgentMobility initialized
-Dec 02, 2013 6:23:00 PM jade.core.BaseService init
-INFO: Service jade.core.event.Notification initialized
-Dec 02, 2013 6:23:01 PM jade.mtp.http.HTTPServer <init>
-INFO: HTTP-MTP Using XML parser com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser
-Dec 02, 2013 6:23:01 PM jade.core.messaging.MessagingService boot
-INFO: MTP addresses:
-http://192.168.0.50:7778/acc
-Dec 02, 2013 6:23:01 PM jade.core.AgentContainerImpl joinPlatform
-INFO: --------------------------------------
-Agent container Main-Container@10.105.1.6 is ready.
---------------------------------------------
-Dec 02, 2013 6:23:04 PM behaviours.ReportBehaviour <init>
-INFO: 
 == BEGINNING SIMULATION ==
 Total Peers:	1001
 Super Peers:	22
 
-Dec 02, 2013 6:23:05 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	4415
 Total connected peers:	257
 Total finished peers:	0
 
 
-Dec 02, 2013 6:23:06 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	6868
 Total connected peers:	372
 Total finished peers:	0
 
 
-Dec 02, 2013 6:23:07 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	10572
 Total connected peers:	422
 Total finished peers:	0
 
 
-Dec 02, 2013 6:23:08 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	12418
 Total connected peers:	617
 Total finished peers:	2
 
 
-Dec 02, 2013 6:23:09 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	14562
 Total connected peers:	688
 Total finished peers:	3
 
 
-Dec 02, 2013 6:23:10 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	15394
 Total connected peers:	730
 Total finished peers:	15
 
 
-Dec 02, 2013 6:23:11 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	16671
 Total connected peers:	748
 Total finished peers:	32
 
 
-Dec 02, 2013 6:23:12 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	17486
 Total connected peers:	764
 Total finished peers:	37
 
 
-Dec 02, 2013 6:23:13 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	18912
 Total connected peers:	774
 Total finished peers:	38
 
 
-Dec 02, 2013 6:23:14 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	19393
 Total connected peers:	785
 Total finished peers:	43
 
 
-Dec 02, 2013 6:23:15 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	20663
 Total connected peers:	794
 Total finished peers:	43
 
 
-Dec 02, 2013 6:23:16 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	20854
 Total connected peers:	801
 Total finished peers:	43
 
 
-Dec 02, 2013 6:23:17 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	21617
 Total connected peers:	807
 Total finished peers:	47
 
 
-Dec 02, 2013 6:23:18 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	23640
 Total connected peers:	816
 Total finished peers:	47
 
 
-Dec 02, 2013 6:23:19 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	24443
 Total connected peers:	819
 Total finished peers:	47
 
 
-Dec 02, 2013 6:23:20 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	25425
 Total connected peers:	824
 Total finished peers:	49
 
 
-Dec 02, 2013 6:23:21 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	26526
 Total connected peers:	827
 Total finished peers:	49
 
 
-Dec 02, 2013 6:23:22 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	26938
 Total connected peers:	831
 Total finished peers:	50
 
 
-Dec 02, 2013 6:23:23 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	28753
 Total connected peers:	832
 Total finished peers:	62
 
 
-Dec 02, 2013 6:23:24 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	30191
 Total connected peers:	834
 Total finished peers:	97
 
 
-Dec 02, 2013 6:23:25 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	32854
 Total connected peers:	836
 Total finished peers:	163
 
 
-Dec 02, 2013 6:23:26 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	34609
 Total connected peers:	838
 Total finished peers:	212
 
 
-Dec 02, 2013 6:23:27 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	36343
 Total connected peers:	840
 Total finished peers:	283
 
 
-Dec 02, 2013 6:23:28 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	39168
 Total connected peers:	842
 Total finished peers:	349
 
 
-Dec 02, 2013 6:23:30 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	40532
 Total connected peers:	843
 Total finished peers:	368
 
 
-Dec 02, 2013 6:23:31 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	42336
 Total connected peers:	845
 Total finished peers:	395
 
 
-Dec 02, 2013 6:23:32 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	43318
 Total connected peers:	848
 Total finished peers:	416
 
 
-Dec 02, 2013 6:23:33 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	44661
 Total connected peers:	852
 Total finished peers:	427
 
 
-Dec 02, 2013 6:23:34 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	46518
 Total connected peers:	854
 Total finished peers:	443
 
 
-Dec 02, 2013 6:23:35 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	47840
 Total connected peers:	863
 Total finished peers:	453
 
 
-Dec 02, 2013 6:23:36 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	49246
 Total connected peers:	867
 Total finished peers:	473
 
 
-Dec 02, 2013 6:23:37 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	50667
 Total connected peers:	870
 Total finished peers:	495
 
 
-Dec 02, 2013 6:23:38 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	54268
 Total connected peers:	871
 Total finished peers:	518
 
 
-Dec 02, 2013 6:23:39 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	55506
 Total connected peers:	873
 Total finished peers:	530
 
 
-Dec 02, 2013 6:23:40 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	56839
 Total connected peers:	876
 Total finished peers:	546
 
 
-Dec 02, 2013 6:23:41 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	57843
 Total connected peers:	879
 Total finished peers:	555
 
 
-Dec 02, 2013 6:23:42 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	59590
 Total connected peers:	882
 Total finished peers:	572
 
 
-Dec 02, 2013 6:23:43 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	62137
 Total connected peers:	886
 Total finished peers:	580
 
 
-Dec 02, 2013 6:23:44 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	64639
 Total connected peers:	889
 Total finished peers:	592
 
 
-Dec 02, 2013 6:23:45 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	66728
 Total connected peers:	892
 Total finished peers:	608
 
 
-Dec 02, 2013 6:23:46 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	69278
 Total connected peers:	896
 Total finished peers:	619
 
 
-Dec 02, 2013 6:23:47 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	70637
 Total connected peers:	904
 Total finished peers:	626
 
 
-Dec 02, 2013 6:23:48 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	72281
 Total connected peers:	912
 Total finished peers:	647
 
 
-Dec 02, 2013 6:23:49 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	74003
 Total connected peers:	919
 Total finished peers:	662
 
 
-Dec 02, 2013 6:23:50 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	77410
 Total connected peers:	927
 Total finished peers:	681
 
 
-Dec 02, 2013 6:23:52 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	80125
 Total connected peers:	928
 Total finished peers:	707
 
 
-Dec 02, 2013 6:23:53 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	82864
 Total connected peers:	929
 Total finished peers:	722
 
 
-Dec 02, 2013 6:23:54 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	86677
 Total connected peers:	932
 Total finished peers:	742
 
 
-Dec 02, 2013 6:23:55 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	88511
 Total connected peers:	934
 Total finished peers:	748
 
 
-Dec 02, 2013 6:23:56 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	89548
 Total connected peers:	937
 Total finished peers:	767
 
 
-Dec 02, 2013 6:23:57 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	90601
 Total connected peers:	940
 Total finished peers:	777
 
 
-Dec 02, 2013 6:23:58 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	92934
 Total connected peers:	944
 Total finished peers:	792
 
 
-Dec 02, 2013 6:23:59 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	94920
 Total connected peers:	948
 Total finished peers:	809
 
 
-Dec 02, 2013 6:24:00 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	97611
 Total connected peers:	952
 Total finished peers:	819
 
 
-Dec 02, 2013 6:24:01 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	98796
 Total connected peers:	953
 Total finished peers:	831
 
 
-Dec 02, 2013 6:24:02 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	100749
 Total connected peers:	953
 Total finished peers:	843
 
 
-Dec 02, 2013 6:24:03 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	101575
 Total connected peers:	958
 Total finished peers:	848
 
 
-Dec 02, 2013 6:24:04 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	104988
 Total connected peers:	960
 Total finished peers:	856
 
 
-Dec 02, 2013 6:24:05 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	107144
 Total connected peers:	964
 Total finished peers:	861
 
 
-Dec 02, 2013 6:24:06 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	108567
 Total connected peers:	965
 Total finished peers:	863
 
 
-Dec 02, 2013 6:24:07 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	112137
 Total connected peers:	968
 Total finished peers:	869
 
 
-Dec 02, 2013 6:24:08 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	113406
 Total connected peers:	971
 Total finished peers:	873
 
 
-Dec 02, 2013 6:24:09 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	114616
 Total connected peers:	971
 Total finished peers:	874
 
 
-Dec 02, 2013 6:24:10 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	116386
 Total connected peers:	975
 Total finished peers:	879
 
 
-Dec 02, 2013 6:24:11 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	117935
 Total connected peers:	977
 Total finished peers:	879
 
 
-Dec 02, 2013 6:24:12 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	119425
 Total connected peers:	978
 Total finished peers:	880
 
 
-Dec 02, 2013 6:24:13 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	122689
 Total connected peers:	980
 Total finished peers:	888
 
 
-Dec 02, 2013 6:24:14 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	125066
 Total connected peers:	981
 Total finished peers:	891
 
 
-Dec 02, 2013 6:24:15 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	127209
 Total connected peers:	983
 Total finished peers:	894
 
 
-Dec 02, 2013 6:24:16 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	129071
 Total connected peers:	984
 Total finished peers:	897
 
 
-Dec 02, 2013 6:24:17 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	132924
 Total connected peers:	986
 Total finished peers:	901
 
 
-Dec 02, 2013 6:24:18 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	133822
 Total connected peers:	988
 Total finished peers:	903
 
 
-Dec 02, 2013 6:24:19 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	136149
 Total connected peers:	989
 Total finished peers:	905
 
 
-Dec 02, 2013 6:24:20 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	137972
 Total connected peers:	989
 Total finished peers:	913
 
 
-Dec 02, 2013 6:24:21 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	140357
 Total connected peers:	993
 Total finished peers:	915
 
 
-Dec 02, 2013 6:24:23 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	143327
 Total connected peers:	993
 Total finished peers:	917
 
 
-Dec 02, 2013 6:24:24 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	145802
 Total connected peers:	995
 Total finished peers:	919
 
 
-Dec 02, 2013 6:24:25 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	148739
 Total connected peers:	998
 Total finished peers:	922
 
 
-Dec 02, 2013 6:24:26 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	149748
 Total connected peers:	999
 Total finished peers:	926
 
 
-Dec 02, 2013 6:24:27 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	153550
 Total connected peers:	999
 Total finished peers:	931
 
 
-Dec 02, 2013 6:24:28 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	156686
 Total connected peers:	1000
 Total finished peers:	931
 
 
-Dec 02, 2013 6:24:29 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	157906
 Total connected peers:	1000
 Total finished peers:	932
 
 
-Dec 02, 2013 6:24:30 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	161332
 Total connected peers:	1000
 Total finished peers:	932
 
 
-Dec 02, 2013 6:24:31 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	163366
 Total connected peers:	1000
 Total finished peers:	933
 
 
-Dec 02, 2013 6:24:32 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	164100
 Total connected peers:	1000
 Total finished peers:	933
 
 
-Dec 02, 2013 6:24:33 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	168068
 Total connected peers:	1000
 Total finished peers:	933
 
 
-Dec 02, 2013 6:24:34 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	169449
 Total connected peers:	1000
 Total finished peers:	934
 
 
-Dec 02, 2013 6:24:35 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	171750
 Total connected peers:	1000
 Total finished peers:	937
 
 
-Dec 02, 2013 6:24:36 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	173007
 Total connected peers:	1000
 Total finished peers:	939
 
 
-Dec 02, 2013 6:24:37 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	176000
 Total connected peers:	1000
 Total finished peers:	942
 
 
-Dec 02, 2013 6:24:38 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	178232
 Total connected peers:	1000
 Total finished peers:	946
 
 
-Dec 02, 2013 6:24:39 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	180716
 Total connected peers:	1000
 Total finished peers:	949
 
 
-Dec 02, 2013 6:24:40 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	183898
 Total connected peers:	1000
 Total finished peers:	950
 
 
-Dec 02, 2013 6:24:41 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	187156
 Total connected peers:	1000
 Total finished peers:	954
 
 
-Dec 02, 2013 6:24:42 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	191134
 Total connected peers:	1000
 Total finished peers:	957
 
 
-Dec 02, 2013 6:24:43 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	193958
 Total connected peers:	1000
 Total finished peers:	960
 
 
-Dec 02, 2013 6:24:44 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	197012
 Total connected peers:	1000
 Total finished peers:	963
 
 
-Dec 02, 2013 6:24:46 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	199025
 Total connected peers:	1000
 Total finished peers:	964
 
 
-Dec 02, 2013 6:24:47 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	201395
 Total connected peers:	1000
 Total finished peers:	966
 
 
-Dec 02, 2013 6:24:48 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	204923
 Total connected peers:	1000
 Total finished peers:	969
 
 
-Dec 02, 2013 6:24:49 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	207513
 Total connected peers:	1000
 Total finished peers:	970
 
 
-Dec 02, 2013 6:24:50 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	210655
 Total connected peers:	1000
 Total finished peers:	972
 
 
-Dec 02, 2013 6:24:51 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	211926
 Total connected peers:	1000
 Total finished peers:	975
 
 
-Dec 02, 2013 6:24:52 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	215397
 Total connected peers:	1000
 Total finished peers:	977
 
 
-Dec 02, 2013 6:24:53 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	218261
 Total connected peers:	1000
 Total finished peers:	978
 
 
-Dec 02, 2013 6:24:54 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	220542
 Total connected peers:	1000
 Total finished peers:	980
 
 
-Dec 02, 2013 6:24:55 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	222755
 Total connected peers:	1000
 Total finished peers:	981
 
 
-Dec 02, 2013 6:24:56 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	224847
 Total connected peers:	1000
 Total finished peers:	984
 
 
-Dec 02, 2013 6:24:57 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	229123
 Total connected peers:	1000
 Total finished peers:	986
 
 
-Dec 02, 2013 6:24:58 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	230535
 Total connected peers:	1000
 Total finished peers:	988
 
 
-Dec 02, 2013 6:24:59 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	232625
 Total connected peers:	1000
 Total finished peers:	989
 
 
-Dec 02, 2013 6:25:00 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	234878
 Total connected peers:	1000
 Total finished peers:	991
 
 
-Dec 02, 2013 6:25:01 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	237155
 Total connected peers:	1000
 Total finished peers:	992
 
 
-Dec 02, 2013 6:25:02 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	243451
 Total connected peers:	1000
 Total finished peers:	994
 
 
-Dec 02, 2013 6:25:03 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	250328
 Total connected peers:	1000
 Total finished peers:	996
 
 
-Dec 02, 2013 6:25:04 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	253589
 Total connected peers:	1000
 Total finished peers:	998
 
 
-Dec 02, 2013 6:25:05 PM behaviours.ReportBehaviour onTick
 INFO: == STATS ==
 Total messages sent:	256192
 Total connected peers:	1000
 Total finished peers:	1000
 
 
-Dec 02, 2013 6:25:05 PM behaviours.ReportBehaviour logEndSummary
 INFO: == SIMULATION FINISHED ==
 PEER	MESSAGES SENT
 HOST_CACHE	17225

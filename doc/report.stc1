@@ -1,19 +1,19 @@
-{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {1.1}Host Cache}{\reset@font\stcSSfont 2}}
+{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {1.1}Host Cache}{\reset@font\stcSSfont 1}}
 {\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.1.1}Receive `Neighbours Request`}{\reset@font\stcSSSfont 2}}
 {\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {1.2}All Peers}{\reset@font\stcSSfont 2}}
 {\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.1}Send `Neighbours Request'}{\reset@font\stcSSSfont 2}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.2}Receive `Neighbours Response'}{\reset@font\stcSSSfont 3}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.3}Send `Connect Request'}{\reset@font\stcSSSfont 3}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.2}Receive `Neighbours Response'}{\reset@font\stcSSSfont 2}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.3}Send `Connect Request'}{\reset@font\stcSSSfont 2}}
 {\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.4}Receive `Connect Response'}{\reset@font\stcSSSfont 3}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.5}Receive `File Request'}{\reset@font\stcSSSfont 4}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.6}Receive `File Response'}{\reset@font\stcSSSfont 4}}
-{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {1.3}Ordinary Peers}{\reset@font\stcSSfont 4}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.3.1}Send `File List'}{\reset@font\stcSSSfont 4}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.3.2}Receive `Search Response'}{\reset@font\stcSSSfont 5}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.3.3}Send `Search Request'}{\reset@font\stcSSSfont 5}}
-{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {1.4}Super Peers}{\reset@font\stcSSfont 5}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.1}Receive `Connection Request'}{\reset@font\stcSSSfont 5}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.2}Receive `File list'}{\reset@font\stcSSSfont 6}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.3}Send `Search Request'}{\reset@font\stcSSSfont 6}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.4}Receive `Search Response'}{\reset@font\stcSSSfont 6}}
-{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.5}Receive `Search Request'}{\reset@font\stcSSSfont 7}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.5}Receive `File Request'}{\reset@font\stcSSSfont 3}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.2.6}Receive `File Response'}{\reset@font\stcSSSfont 3}}
+{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {1.3}Ordinary Peers}{\reset@font\stcSSfont 3}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.3.1}Send `File List'}{\reset@font\stcSSSfont 3}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.3.2}Receive `Search Response'}{\reset@font\stcSSSfont 4}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.3.3}Send `Search Request'}{\reset@font\stcSSSfont 4}}
+{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {1.4}Super Peers}{\reset@font\stcSSfont 4}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.1}Receive `Connection Request'}{\reset@font\stcSSSfont 4}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.2}Receive `File list'}{\reset@font\stcSSSfont 4}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.3}Send `Search Request'}{\reset@font\stcSSSfont 5}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.4}Receive `Search Response'}{\reset@font\stcSSSfont 5}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {1.4.5}Receive `Search Request'}{\reset@font\stcSSSfont 5}}

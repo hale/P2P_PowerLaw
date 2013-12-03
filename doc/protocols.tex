@@ -2,12 +2,14 @@
 
 \secttoc
 
-The following abbreviations are used:
+The following abbreviations are used so the labels fit:
 
 \begin{description}
   \item[OPeer] An Ordinary Peer
   \item[SPeer] A Super Peer
-  \item[Req.] Send a request message
+  \item[HCache] The Host Cache
+  \item[Req] Request
+  \item[Resp] Response
 \end{description}
 
 \subsection{Joining the network}
@@ -19,14 +21,6 @@ connected Super Peer.
 
 \noindent\makebox[\textwidth]{
   \includegraphics[max width=\textwidth]{protocol_connect.eps}
-}
-
-\subsection{Send file-list}
-
-Only ordinary Peers send a file list.
-
-\noindent\makebox[\textwidth]{
-  \includegraphics[max width=\textwidth]{protocol_send_file_list.eps}
 }
 
 \subsection{Searching for Files}
@@ -47,4 +41,15 @@ communication between two peers.
 
 \noindent\makebox[\textwidth]{
   \includegraphics[max width=\textwidth]{protocol_acquire_file.eps}
+}
+
+\subsection{Reporting Stats}
+
+In order to gain insight into the state of the network, peers periodically (and
+in response to certain conditions) send statistical information to a Runner
+agent, which is also responsible for starting up all the peers in the
+simulation.
+
+\noindent\makebox[\textwidth]{
+  \includegraphics[max width=\textwidth]{protocol_send_stats.eps}
 }

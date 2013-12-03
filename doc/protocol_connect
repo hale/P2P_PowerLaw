@@ -2,15 +2,16 @@
 agent HC HCache
 agent P Peer
 agent SP SPeer
-message P HC Req. Neighbours
-message HC P  Neighbours
+message P HC ReqNeighbours
+message HC P  NeighboursResp
 backup
 box success
-  message P SP Req. Connect
-  message SP P  Accept
+  message P SP ReqConnect
+  message SP P  ConnectResp(Y)
+  message P SP FileList
 end success
 box failure
-  message P SP Req. Connect
-  message SP P Deny
+  message P SP ReqConnect
+  message SP P ConnectResp(N)
 end failure
 

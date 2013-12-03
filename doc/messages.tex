@@ -1,15 +1,107 @@
 \section{Message Definitions}
 
+Every message contains two fields: Ontology and Vocabulary. These are required
+in order for Peers to understand the contents of messages. The contents of
+these constructs are ommitted here, but can be viewed in the implementation in
+the \verb!ontology! package.
+
+
+Every message also contains a Performative, which indicates the type of
+message. For this application, we only use two FIPA types: INFORM and REQUEST.
+
+\begin{multicols}{2}
+
 \begin{itemize}
-  \item{Neighbours Request}
-  \item{Neighbours Response}
-  \item{Search Request}
-  \item{Search Response}
-  \item{File Request}
-  \item{File Response}
-  \item{File List}
-  \item{Connect Request}
-  \item{Connect Response}
+  \item{RequestNeighbours}
+    \begin{description}
+      \item[(Integer) performative] REQUEST
+      \item[(String) sender] Peer ID who needs neighbours
+      \item[(String) recipient] Host Cache ID
+      \item[(Boolean) isSuper] Whether or not sender is a Super Peer.
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{NeighboursResponse}
+    \begin{description}
+      \item[(Integer) performative] INFORM
+      \item[(String) recipient] Sender of Neighbours Request
+      \item[(String) peerList] List of Super Peer IDs
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{RequestConnect}
+    \begin{description}
+      \item[(Integer) performative] REQUEST
+      \item[(String) sender] Peer that needs a new connection
+      \item[(String) recipient] Super Peer ID
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{ConnectResponse}
+    \begin{description}
+      \item[(Integer) performative] INFORM
+      \item[(String) sender] Contacted Super Peer
+      \item[(String) recipient] Sender of Connect Request
+      \item[(Boolean) isSuccess] Whether the connection was accepted
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{FileList}
+    \begin{description}
+      \item[(Integer) performative] INFORM
+      \item[(String) sender] Ordinary Peer ID
+      \item[(String) recipient] Super Peer ID (connection of the sender)
+      \item[(String) fileList] A list of files shared by the Ordinary Peer
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{RequestSearch }
+    \begin{description}
+      \item[(Integer) performative] REQUEST
+      \item[(String) recipient] Super Peer ID
+      \item[(String) file] File name to look for.
+      \item[(String) senderStack] List of previous senders for this request.
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{SearchResponse}
+    \begin{description}
+      \item[(Integer) performative] INFORM
+      \item[(String) recipient] Next peer in the senderStack
+      \item[(String) senderStack] List of senders for the Search Request
+      \item[(String) file] File name that is being looked for
+      \item[(String) peer] Peer that has the requested file
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{FileRequest}
+    \begin{description}
+      \item[(Integer) performative] REQUEST
+      \item[(String) sender] Peer who wants the file
+      \item[(String) recipient] Peer who has the file
+      \item[(String) file] The wanted file
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{FileResponse}
+    \begin{description}
+      \item[(Integer) performative] INFORM
+      \item[(String) recipient] Peer who wants the file
+      \item[(String) file] The sent file (simulated file transfer)
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
+  \item{NetworkStats}
+    \begin{description}
+      \item[(Integer) performative] INFORM
+      \item[(String) sender] Peer thats reporting stats
+      \item[(Integer) cumMsgCount] Total messages sent by this peer so far.
+      \item[(Boolean) isConnected] True if the peer has 1+ connection
+      \item[(Boolean) hasFoundFiles] True if the peer has acquired all wanted
+      files
+      \item[(String) ontology] P2POntology
+      \item[(String) vocabulary] P2PVocabulary
+    \end{description}
 \end{itemize}
 
-
+\end{multicols}
